@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import * as ROUTES from '../../constants/routes';
 
 function SignUpForm({ handleChange, handleSignUp, errorMessage }) {
   return (
@@ -35,6 +37,12 @@ function SignUpForm({ handleChange, handleSignUp, errorMessage }) {
             className="rounded w-full bg-textbox-grey p-2"
           />
         </div>
+        <p className="text-sm">
+          Have an Account?
+          <Link to={ROUTES.LOG_IN} className="text-orange-500 font-semibold ml-1">
+            Sign In
+          </Link>
+        </p>
         <div className="flex justify-end mt-16">
           <button type="submit" className="rounded-full bg-orange-500 text-white py-3 px-10">Sign Up</button>
         </div>

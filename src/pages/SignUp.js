@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/SignUp/Header';
+import AuthHeader from '../components/common/AuthHeader';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import FireBaseContext from '../context/FireBaseContext';
 import setUserProfile from '../firebase/services';
@@ -10,7 +10,7 @@ import * as ROUTES from '../constants/routes';
 
 function SignUp() {
   const navigate = useNavigate();
-  const { auth, db } = useContext(FireBaseContext);
+  const { auth } = useContext(FireBaseContext);
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     username: '',
@@ -32,7 +32,7 @@ function SignUp() {
     event.preventDefault();
     await createUserWithEmailAndPassword(auth, signUpInfo.email, signUpInfo.password)
       .then(async (createdCredentials) => {
-      // Signed In
+        // Signed up successfully
         const { user } = createdCredentials;
         await updateProfile(user, {
           displayName: signUpInfo.username,
@@ -54,7 +54,7 @@ function SignUp() {
 
   return (
     <div className="container py-8 px-5">
-      <Header />
+      <AuthHeader />
       <SignUpForm
         errorMessage={errorMessage}
         handleSignUp={handleSignUp}

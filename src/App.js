@@ -4,6 +4,7 @@ import * as ROUTES from './constants/routes';
 
 const Welcome = lazy(() => import('./pages/Welcome'));
 const SignUp = lazy(() => import('./pages/SignUp'));
+const Login = lazy(() => import('./pages/Login'));
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path={ROUTES.WELCOME} element={<Welcome />} />
           <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+          <Route path={ROUTES.LOG_IN} element={<Login />} />
         </Routes>
       </Suspense>
 
