@@ -5,11 +5,11 @@ import AuthContext from '../../context/AuthContext';
 import toggleLike from '../../firebase/services';
 
 function Actions({
-  totalComments, totalLikes, userLikedPhoto, id,
+  totalComments, totalLikes, userLikedPost, id,
 }) {
   const { user } = useContext(AuthContext);
   const [likes, setTotalLikes] = useState(totalLikes);
-  const [likedStatus, setLikedStatus] = useState(userLikedPhoto);
+  const [likedStatus, setLikedStatus] = useState(userLikedPost);
 
   useEffect(() => {
     toggleLike(user.id, id, likedStatus);
@@ -68,7 +68,7 @@ Actions.propTypes = {
   id: PropTypes.string.isRequired,
   totalComments: PropTypes.number.isRequired,
   totalLikes: PropTypes.number.isRequired,
-  userLikedPhoto: PropTypes.bool.isRequired,
+  userLikedPost: PropTypes.bool.isRequired,
 };
 
 export default Actions;
