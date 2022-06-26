@@ -9,25 +9,24 @@ function Post({
   title,
   dateCreated,
   username,
-  docId,
   likes,
   comments,
-  userLikedPhoto,
+  userLikedPost,
   id,
   imageUrl,
+  avatarUrl,
 }) {
   return (
     <div className="mt-5 w-full flex flex-col">
-      <Header username={username} />
+      <Header avatarUrl={avatarUrl} username={username} />
       <Image src={imageUrl} />
       <Information title={title} dateCreated={dateCreated} />
       <Actions
-        docId={docId}
         totalLikes={likes.length}
         likes={likes}
         totalComments={comments.length}
         comments={comments}
-        userLikedPhoto={userLikedPhoto}
+        userLikedPost={userLikedPost}
         id={id}
       />
     </div>
@@ -37,7 +36,7 @@ function Post({
 Post.defaultProps = {
   likes: [],
   comments: [],
-  userLikedPhoto: false,
+  userLikedPost: false,
   dateCreated: '',
 };
 
@@ -45,12 +44,12 @@ Post.propTypes = {
   title: PropTypes.string.isRequired,
   dateCreated: PropTypes.string,
   username: PropTypes.string.isRequired,
-  docId: PropTypes.string.isRequired,
   likes: PropTypes.arrayOf(PropTypes.arrayOf),
   comments: PropTypes.arrayOf(PropTypes.arrayOf),
-  userLikedPhoto: PropTypes.bool,
+  userLikedPost: PropTypes.bool,
   id: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string.isRequired,
 };
 
 export default Post;

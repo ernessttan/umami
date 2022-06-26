@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AuthContext from '../../context/AuthContext';
-import toggleLike from '../../firebase/services';
+import { toggleLike } from '../../firebase/services';
 
 function Actions({
   totalComments, totalLikes, userLikedPost, id,
@@ -12,7 +12,7 @@ function Actions({
   const [likedStatus, setLikedStatus] = useState(userLikedPost);
 
   useEffect(() => {
-    toggleLike(user.id, id, likedStatus);
+    toggleLike(user.uid, id, likedStatus);
   }, [likedStatus]);
 
   const handleLiked = () => {
