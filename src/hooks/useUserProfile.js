@@ -17,7 +17,7 @@ function useUserProfile() {
     }
   }, [user]);
 
-  return { userProfile };
+  return userProfile;
 }
 
 export default useUserProfile;
