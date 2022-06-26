@@ -7,6 +7,7 @@ import Servings from './Servings';
 import Time from './Time';
 import Difficulty from './Difficulty';
 import Ingredients from './Ingredients/Ingredients';
+import Instructions from './Instructions/Instructions';
 
 function UploadForm({ avatarUrl }) {
   const [recipe, setRecipe] = useState({
@@ -31,23 +32,17 @@ function UploadForm({ avatarUrl }) {
     }));
   };
 
-  console.log(recipe);
-
   return (
-    <form className="flex flex-col">
+    <form className="flex flex-col px-2 mt-10">
       <Title handleChange={handleChange} />
       <Image />
       <Servings handleChange={handleChange} />
       <Time handleChange={handleChange} />
       <Difficulty setRecipe={setRecipe} />
       <Ingredients setRecipe={setRecipe} />
-      {/* <Image />
-      <Time />
-      <Difficulty />
-      <Ingredients />
-      <Instructions /> */}
+      <Instructions setRecipe={setRecipe} />
       <div className="flex justify-end">
-        <button type="submit">Submit</button>
+        <button className="rounded-full bg-orange-500 text-white py-3 px-8" type="submit">Submit</button>
       </div>
     </form>
   );

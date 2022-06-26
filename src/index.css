@@ -16,4 +16,8 @@
     @apply font-semibold;
     @apply text-2xl;
   }
+
+  h3 {
+    @apply font-semibold;
+  }
 }
