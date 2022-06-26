@@ -10,7 +10,7 @@ function Image() {
 
   return (
     <div className="w-full mt-3 mb-3">
-      <h1 className="font-bold mb-2">Recipe Photo</h1>
+      <h3 className="mb-2">Recipe Photo</h3>
       <label
         className="bg-textbox-grey rounded-lg flex items-center justify-center h-80 w-full"
         htmlFor="photo"

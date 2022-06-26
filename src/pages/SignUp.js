@@ -36,6 +36,7 @@ function SignUp() {
         const { user } = createdCredentials;
         await updateProfile(user, {
           displayName: signUpInfo.username,
+          photoURL: 'gs://umami-ae4ad.appspot.com/avatars/ernest.jpeg',
         });
         await setUserProfile(user);
         navigate(ROUTES.FEED);
