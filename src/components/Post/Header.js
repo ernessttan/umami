@@ -5,7 +5,7 @@ function Header({ username, avatarUrl }) {
   return (
     <Link to={`/profile/${username}`} className="flex items-center gap-3 p-3">
       <img
-        className="rounded-full h-8 w-8"
+        className="object-cover rounded-full h-8 w-8"
         src={avatarUrl}
         alt="user profile avatar"
       />

@@ -17,7 +17,7 @@ function Post({
   avatarUrl,
 }) {
   return (
-    <div className="mt-5 w-full flex flex-col">
+    <div className="mt-2 w-full flex flex-col">
       <Header avatarUrl={avatarUrl} username={username} />
       <Image src={imageUrl} />
       <Information title={title} dateCreated={dateCreated} />
