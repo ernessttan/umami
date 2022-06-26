@@ -3,6 +3,7 @@ import { browserLocalPersistence, onAuthStateChanged, setPersistence } from 'fir
 import { useContext, useEffect, useState } from 'react';
 import FirebaseContext from './FireBaseContext';
 import AuthContext from './AuthContext';
+import { getUserByUsername } from '../firebase/services';
 
 function AuthContextProvider({ children }) {
   const { auth } = useContext(FirebaseContext);
@@ -15,7 +16,8 @@ function AuthContextProvider({ children }) {
       if (authUser) {
         // Set logged in user
         console.log('Logged In!');
-        setUser(authUser);
+        const profile = getUserByUsername(authUser.displayName);
+        setUser(profile);
       } else {
         console.log('Logged Out!');
         setUser('');

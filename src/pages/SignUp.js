@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../components/common/AuthHeader';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import FireBaseContext from '../context/FireBaseContext';
-import setUserProfile from '../firebase/services';
+import { setUserProfile } from '../firebase/services';
 import * as ROUTES from '../constants/routes';
 
 function SignUp() {

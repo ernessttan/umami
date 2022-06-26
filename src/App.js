@@ -6,6 +6,7 @@ import AuthContextProvider from './context/AuthContextProvider';
 const Welcome = lazy(() => import('./pages/Welcome'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const Login = lazy(() => import('./pages/Login'));
+const Feed = lazy(() => import('./pages/Feed'));
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path={ROUTES.WELCOME} element={<Welcome />} />
             <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
             <Route path={ROUTES.LOG_IN} element={<Login />} />
+            <Route path={ROUTES.FEED} element={<Feed />} />
           </Routes>
         </Suspense>
       </Router>
