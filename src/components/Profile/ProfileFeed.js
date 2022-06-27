@@ -17,7 +17,7 @@ function ProfileFeed({ userId }) {
   ));
 
   return (
-    <div className="grid grid-cols-2 gap-2 mt-5">
+    <div className="grid grid-cols-2 gap-2 mt-5 justify-items-center">
       {userPosts}
     </div>
   );

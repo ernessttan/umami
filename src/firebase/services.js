@@ -95,12 +95,13 @@ async function loadUserPosts(userId) {
 async function isActiveUserFollowing(activeUserId, userId) {
   const followingQuery = query(usersRef, where('id', '==', activeUserId), where('following', 'array-contains', userId));
   if (followingQuery) {
+    // If the query returns a result
     return true;
   }
   return false;
 }
 
-// Function to follow a user
+// Function to toggle follow
 async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
   const userRef = doc(db, 'users', userId);
   updateDoc(userRef, {
