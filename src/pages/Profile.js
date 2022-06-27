@@ -3,6 +3,7 @@ import useUserProfile from '../hooks/useUserProfile';
 import ProfileHeader from '../components/Profile/ProfileHeader';
 import Information from '../components/Profile/Information';
 import Statistics from '../components/Profile/Statistics';
+import Bio from '../components/Profile/Bio';
 
 function Profile() {
   const { username } = useParams();
@@ -21,6 +22,7 @@ function Profile() {
             totalFollowers={profile.followers.length}
             totalFollowing={profile.following.length}
           />
+          <Bio bio={profile.bio} />
           {/* <Actions />
           <ProfileFeed />
           <Navbar /> */}
