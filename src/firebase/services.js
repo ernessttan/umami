@@ -110,6 +110,11 @@ async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
   });
 }
 
+// Functio to handle edits for a users profile
+async function editUserProfile(userId, updatedProfile) {
+  await updateDoc(doc(usersRef, userId), updatedProfile);
+}
+
 export {
   setUserProfile,
   getUserByUsername,
@@ -120,4 +125,5 @@ export {
   loadUserPosts,
   isActiveUserFollowing,
   toggleFollow,
+  editUserProfile,
 };

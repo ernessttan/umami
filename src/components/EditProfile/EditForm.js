@@ -26,8 +26,6 @@ function EditForm({
         name="bio"
         defaultValue={bio}
       />
-      {/* <h2>Website</h2>
-        <input className="bg-textbox-grey rounded-lg py-3" /> */}
     </div>
   );
 }
