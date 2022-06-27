@@ -12,9 +12,9 @@ function Profile() {
   const { username } = useParams();
   const profile = useUserProfile(username);
   return (
-    <div className="h-full">
+    <div className="h-full py-8 px-5">
       {profile && (
-        <div className="h-full py-8 px-5">
+        <div className="h-full">
           <ProfileHeader />
           <Information
             avatarUrl={profile.avatarUrl}

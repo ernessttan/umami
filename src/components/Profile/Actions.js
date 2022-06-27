@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
-import * as ROUTES from '../../constants/routes';
 import { isActiveUserFollowing, toggleFollow } from '../../firebase/services';
 
 function Actions({ username, userId }) {
@@ -18,9 +17,6 @@ function Actions({ username, userId }) {
     checkFollowing();
   }, [userId]);
 
-  // TODO: Click handler to follow a user
-  // When clicked text should change to unfollow
-  // userId from value of button needs to be added to following array
   const handleFollow = async (event) => {
     const { value } = event.target;
     setIsFollowingUser((prevState) => !prevState);
@@ -32,7 +28,7 @@ function Actions({ username, userId }) {
       <div>
         {activeUser.displayName === username ? (
           <Link
-            to={ROUTES.EDIT_PROFILE}
+            to={`/editprofile/${username}`}
             type="button"
             className="w-full bg-orange-500 text-white flex justify-center p-3 rounded-full"
           >
