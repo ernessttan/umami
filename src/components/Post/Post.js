@@ -37,12 +37,11 @@ Post.defaultProps = {
   likes: [],
   comments: [],
   userLikedPost: false,
-  dateCreated: '',
 };
 
 Post.propTypes = {
   title: PropTypes.string.isRequired,
-  dateCreated: PropTypes.string,
+  dateCreated: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
   likes: PropTypes.arrayOf(PropTypes.arrayOf),
   comments: PropTypes.arrayOf(PropTypes.arrayOf),

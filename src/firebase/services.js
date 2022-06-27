@@ -47,7 +47,6 @@ async function getFollowingPosts(userId, userFollowingArr) {
       if (post.likes.includes(userId)) {
         userLikedPost = true;
       }
-
       return { ...post, userLikedPost };
     }),
   );

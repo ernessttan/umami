@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +27,7 @@ function UploadForm({ avatarUrl, id, username }) {
     difficulty: '',
     servings: 0,
     ingredients: [],
-    dateCreated: '',
+    dateCreated: Date.now(),
     likes: [],
     comments: [],
   });
@@ -47,7 +46,7 @@ function UploadForm({ avatarUrl, id, username }) {
       .then(() => {
         navigate(ROUTES.FEED);
       })
-      .catch((error) => {
+      .catch(() => {
         setRecipe({
           avatarUrl: `${avatarUrl}`,
           userId: '',
