@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
-  setDoc, doc, collection, query, where, getDocs, updateDoc, arrayRemove, arrayUnion,
+  setDoc, doc, collection, query, where, getDocs, updateDoc, arrayRemove, arrayUnion, getDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from './firebaseConfig';
@@ -79,6 +79,51 @@ async function saveRecipe(recipe, imageToStore) {
   updateDoc(doc(recipesRef, recipe.id), { imageUrl: url });
 }
 
+// Function to get a users posts
+async function loadUserPosts(userId) {
+  const q = query(recipesRef, where('userId', '==', userId));
+  const result = await getDocs(q);
+
+  const userPosts = result.docs.map((post) => ({
+    ...post.data(),
+  }));
+
+  return userPosts;
+}
+
+// Function to check if active user is following a user
+async function isActiveUserFollowing(activeUserId, userId) {
+  const followingQuery = query(usersRef, where('id', '==', activeUserId), where('following', 'array-contains', userId));
+  if (followingQuery) {
+    // If the query returns a result
+    return true;
+  }
+  return false;
+}
+
+// Function to toggle follow
+async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
+  const userRef = doc(db, 'users', userId);
+  updateDoc(userRef, {
+    following: isFollowingUser
+      ? arrayRemove(userIdToFollow) : arrayUnion(userIdToFollow),
+  });
+}
+
+// Functio to handle edits for a users profile
+async function editUserProfile(userId, updatedProfile) {
+  await updateDoc(doc(usersRef, userId), updatedProfile);
+}
+
 export {
-  setUserProfile, getUserByUsername, getFollowingPosts, toggleLike, getImageUrl, saveRecipe,
+  setUserProfile,
+  getUserByUsername,
+  getFollowingPosts,
+  toggleLike,
+  getImageUrl,
+  saveRecipe,
+  loadUserPosts,
+  isActiveUserFollowing,
+  toggleFollow,
+  editUserProfile,
 };

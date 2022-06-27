@@ -9,7 +9,7 @@ function AuthContextProvider({ children }) {
   const { auth } = useContext(FirebaseContext);
   // Sets persistence for authenticated user
   setPersistence(auth, browserLocalPersistence);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
+  const [activeUser, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
 
   useEffect(() => {
     onAuthStateChanged(auth, (authUser) => {
@@ -25,7 +25,7 @@ function AuthContextProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ activeUser }}>{children}</AuthContext.Provider>
   );
 }
 

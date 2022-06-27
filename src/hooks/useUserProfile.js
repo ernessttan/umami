@@ -1,14 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
-import AuthContext from '../context/AuthContext';
+import { useEffect, useState } from 'react';
 import { getUserByUsername } from '../firebase/services';
 
 function useUserProfile(username) {
   const [userProfile, setUserProfile] = useState('');
-  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     async function getUserProfileByUsername() {
-      const result = await getUserByUsername(user.displayName);
+      const result = await getUserByUsername(username);
       setUserProfile(result);
     }
     getUserProfileByUsername();

@@ -16,7 +16,7 @@ function Information({ title, dateCreated }) {
 
 Information.propTypes = {
   title: PropTypes.string.isRequired,
-  dateCreated: PropTypes.string.isRequired,
+  dateCreated: PropTypes.number.isRequired,
 };
 
 export default Information;
