@@ -79,6 +79,24 @@ async function saveRecipe(recipe, imageToStore) {
   updateDoc(doc(recipesRef, recipe.id), { imageUrl: url });
 }
 
+// Function to get a users posts
+async function loadUserPosts(userId) {
+  const q = query(recipesRef, where('userId', '==', userId));
+  const result = await getDocs(q);
+
+  const userPosts = result.docs.map((post) => ({
+    ...post.data(),
+  }));
+
+  return userPosts;
+}
+
 export {
-  setUserProfile, getUserByUsername, getFollowingPosts, toggleLike, getImageUrl, saveRecipe,
+  setUserProfile,
+  getUserByUsername,
+  getFollowingPosts,
+  toggleLike,
+  getImageUrl,
+  saveRecipe,
+  loadUserPosts,
 };

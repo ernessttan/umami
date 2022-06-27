@@ -4,12 +4,15 @@ import ProfileHeader from '../components/Profile/ProfileHeader';
 import Information from '../components/Profile/Information';
 import Statistics from '../components/Profile/Statistics';
 import Bio from '../components/Profile/Bio';
+import Actions from '../components/Profile/Actions';
+import Navbar from '../components/common/Navbar';
+import ProfileFeed from '../components/Profile/ProfileFeed';
 
 function Profile() {
   const { username } = useParams();
   const profile = useUserProfile(username);
   return (
-    <div>
+    <div className="h-full">
       {profile && (
         <div className="h-full py-8 px-5">
           <ProfileHeader />
@@ -23,11 +26,11 @@ function Profile() {
             totalFollowing={profile.following.length}
           />
           <Bio bio={profile.bio} />
-          {/* <Actions />
-          <ProfileFeed />
-          <Navbar /> */}
+          <Actions username={profile.username} />
+          <ProfileFeed userId={profile.id} />
         </div>
       )}
+      <Navbar />
     </div>
 
   );
