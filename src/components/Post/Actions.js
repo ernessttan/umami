@@ -21,7 +21,7 @@ function Actions({
   };
 
   return (
-    <div className="flex gap-3 pl-5 mt-3">
+    <div className="flex gap-3 mt-3">
       <div className="flex flex-col items-center">
         <button onClick={handleLiked} type="button">
           <svg

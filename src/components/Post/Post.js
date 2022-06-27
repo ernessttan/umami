@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import Image from './Image';
 import Information from './Information';
@@ -17,19 +18,22 @@ function Post({
   avatarUrl,
 }) {
   return (
-    <div className="mt-2 w-full flex flex-col">
+    <Link to={`/recipe/${id}`} className="mt-2 w-full flex flex-col">
       <Header avatarUrl={avatarUrl} username={username} />
       <Image src={imageUrl} />
       <Information title={title} dateCreated={dateCreated} />
-      <Actions
-        totalLikes={likes.length}
-        likes={likes}
-        totalComments={comments.length}
-        comments={comments}
-        userLikedPost={userLikedPost}
-        id={id}
-      />
-    </div>
+      <div className="pl-5">
+        <Actions
+          totalLikes={likes.length}
+          likes={likes}
+          totalComments={comments.length}
+          comments={comments}
+          userLikedPost={userLikedPost}
+          id={id}
+        />
+      </div>
+
+    </Link>
   );
 }
 

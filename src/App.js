@@ -10,6 +10,7 @@ const Feed = lazy(() => import('./pages/Feed'));
 const Upload = lazy(() => import('./pages/Upload'));
 const Profile = lazy(() => import('./pages/Profile'));
 const EditProfile = lazy(() => import('./pages/EditProfile'));
+const Recipe = lazy(() => import('./pages/Recipe'));
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path={ROUTES.UPLOAD} element={<Upload />} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
+            <Route path={ROUTES.RECIPE} element={<Recipe />} />
           </Routes>
         </Suspense>
       </Router>

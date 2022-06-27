@@ -110,9 +110,18 @@ async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
   });
 }
 
-// Functio to handle edits for a users profile
+// Function to handle edits for a users profile
 async function editUserProfile(userId, updatedProfile) {
   await updateDoc(doc(usersRef, userId), updatedProfile);
+}
+
+// Function to get a recipe by id
+async function getRecipeById(recipeId, userId) {
+  const q = query(recipesRef, where('id', '==', recipeId));
+  const result = await getDocs(q);
+  const recipeResult = result.docs.map((recipe) => recipe.data());
+
+  return recipeResult[0];
 }
 
 export {
@@ -126,4 +135,5 @@ export {
   isActiveUserFollowing,
   toggleFollow,
   editUserProfile,
+  getRecipeById,
 };
