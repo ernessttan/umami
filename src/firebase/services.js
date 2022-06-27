@@ -1,11 +1,14 @@
+/* eslint-disable no-unused-vars */
 import {
   setDoc, doc, collection, query, where, getDocs, updateDoc, arrayRemove, arrayUnion,
 } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { db, storage } from './firebaseConfig';
 
 /*    Globally Used Refs    */
 const usersRef = collection(db, 'users');
 const recipesRef = collection(db, 'recipes');
+const recipeImagesRef = ref(storage, 'recipes');
 
 // Function to set user document in Firestore
 async function setUserProfile(user) {
@@ -58,6 +61,25 @@ async function toggleLike(userId, id, liked) {
   updateDoc(postRef, { likes: liked ? arrayUnion(userId) : arrayRemove(userId) });
 }
 
+// Function to get store image url
+async function getImageUrl(recipeId) {
+  const result = await getDownloadURL(ref(storage, `recipes/${recipeId}`));
+  return result;
+}
+
+// Function to save recipe to firestore and image in storage
+async function saveRecipe(recipe, imageToStore) {
+  const spaceRef = ref(recipeImagesRef, `${recipe.id}`);
+  // Save image to storage
+  await uploadBytes(spaceRef, imageToStore);
+  // Save recipe to recipes in firestore
+  await setDoc(doc(recipesRef, recipe.id), recipe);
+  // Get url of stored image
+  const url = await getImageUrl(recipe.id);
+  // Update recipe with url
+  updateDoc(doc(recipesRef, recipe.id), { imageUrl: url });
+}
+
 export {
-  setUserProfile, getUserByUsername, getFollowingPosts, toggleLike,
+  setUserProfile, getUserByUsername, getFollowingPosts, toggleLike, getImageUrl, saveRecipe,
 };

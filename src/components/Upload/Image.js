@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function Image() {
+function Image({ setImage }) {
   const [preview, setPreview] = useState('');
 
   // Handle change of preview image
   const handleChange = (event) => {
     setPreview(URL.createObjectURL(event.target.files[0]));
+    setImage(event.target.files[0]);
   };
 
   return (
@@ -54,5 +56,9 @@ function Image() {
     </div>
   );
 }
+
+Image.propTypes = {
+  setImage: PropTypes.func.isRequired,
+};
 
 export default Image;

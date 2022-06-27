@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import generateUniqueId from 'generate-unique-id';
 import Title from './Title';
 import Image from './Image';
 import Servings from './Servings';
@@ -8,12 +10,17 @@ import Time from './Time';
 import Difficulty from './Difficulty';
 import Ingredients from './Ingredients/Ingredients';
 import Instructions from './Instructions/Instructions';
+import { saveRecipe } from '../../firebase/services';
+import * as ROUTES from '../../constants/routes';
 
-function UploadForm({ avatarUrl }) {
+function UploadForm({ avatarUrl, id, username }) {
+  const navigate = useNavigate();
+  const [image, setImage] = useState('');
   const [recipe, setRecipe] = useState({
     avatarUrl: `${avatarUrl}`,
-    userId: '',
-    id: '',
+    userId: `${id}`,
+    username: `${username}`,
+    id: generateUniqueId({ length: 6 }),
     title: '',
     imageUrl: '',
     prepTime: '',
@@ -22,6 +29,8 @@ function UploadForm({ avatarUrl }) {
     servings: 0,
     ingredients: [],
     dateCreated: '',
+    likes: [],
+    comments: [],
   });
 
   const handleChange = (event) => {
@@ -32,10 +41,33 @@ function UploadForm({ avatarUrl }) {
     }));
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await saveRecipe(recipe, image)
+      .then(() => {
+        navigate(ROUTES.FEED);
+      })
+      .catch((error) => {
+        setRecipe({
+          avatarUrl: `${avatarUrl}`,
+          userId: '',
+          id: `${id}`,
+          title: '',
+          imageUrl: '',
+          prepTime: '',
+          cookTime: '',
+          difficulty: '',
+          servings: 0,
+          ingredients: [],
+          dateCreated: '',
+        });
+      });
+  };
+
   return (
-    <form className="flex flex-col px-2 mt-10">
+    <form onSubmit={handleSubmit} className="flex flex-col px-2 mt-10">
       <Title handleChange={handleChange} />
-      <Image />
+      <Image setImage={setImage} />
       <Servings handleChange={handleChange} />
       <Time handleChange={handleChange} />
       <Difficulty setRecipe={setRecipe} />
@@ -54,6 +86,8 @@ UploadForm.defaultProps = {
 
 UploadForm.propTypes = {
   avatarUrl: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default UploadForm;
