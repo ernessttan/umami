@@ -7,12 +7,12 @@ import { toggleLike } from '../../firebase/services';
 function Actions({
   totalComments, totalLikes, userLikedPost, id,
 }) {
-  const { user } = useContext(AuthContext);
+  const { activeUser } = useContext(AuthContext);
   const [likes, setTotalLikes] = useState(totalLikes);
   const [likedStatus, setLikedStatus] = useState(userLikedPost);
 
   useEffect(() => {
-    toggleLike(user.uid, id, likedStatus);
+    toggleLike(activeUser.uid, id, likedStatus);
   }, [likedStatus]);
 
   const handleLiked = () => {

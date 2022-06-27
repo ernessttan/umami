@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
-  setDoc, doc, collection, query, where, getDocs, updateDoc, arrayRemove, arrayUnion,
+  setDoc, doc, collection, query, where, getDocs, updateDoc, arrayRemove, arrayUnion, getDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from './firebaseConfig';
@@ -91,6 +91,24 @@ async function loadUserPosts(userId) {
   return userPosts;
 }
 
+// Function to check if active user is following a user
+async function isActiveUserFollowing(activeUserId, userId) {
+  const followingQuery = query(usersRef, where('id', '==', activeUserId), where('following', 'array-contains', userId));
+  if (followingQuery) {
+    return true;
+  }
+  return false;
+}
+
+// Function to follow a user
+async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
+  const userRef = doc(db, 'users', userId);
+  updateDoc(userRef, {
+    following: isFollowingUser
+      ? arrayRemove(userIdToFollow) : arrayUnion(userIdToFollow),
+  });
+}
+
 export {
   setUserProfile,
   getUserByUsername,
@@ -99,4 +117,6 @@ export {
   getImageUrl,
   saveRecipe,
   loadUserPosts,
+  isActiveUserFollowing,
+  toggleFollow,
 };

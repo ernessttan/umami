@@ -4,7 +4,7 @@ import * as ROUTES from '../../constants/routes';
 import AuthContext from '../../context/AuthContext';
 
 function Navbar() {
-  const { user } = useContext(AuthContext);
+  const { activeUser } = useContext(AuthContext);
   return (
     <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow sticky bottom-0 md:bg-white md:shadow-none md:order-1 md:w-1/3 md:h-screen md:top-10">
       <div className="container flex justify-between mx-auto md:flex-col">
@@ -18,7 +18,7 @@ function Navbar() {
         </Link>
         <Link
           className="flex items-center md:mt-3 md:mb-3 md:gap-2"
-          to={`/profile/${user.displayName}`}
+          to={`/profile/${activeUser.displayName}`}
         >
           <img
             className="rounded-full h-10 w-10 md:ml-1"

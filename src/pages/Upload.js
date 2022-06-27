@@ -5,8 +5,8 @@ import useUserProfile from '../hooks/useUserProfile';
 import AuthContext from '../context/AuthContext';
 
 function Upload() {
-  const { user } = useContext(AuthContext);
-  const profile = useUserProfile(user.displayName);
+  const { activeUser } = useContext(AuthContext);
+  const profile = useUserProfile(activeUser.displayName);
   return (
     <div>
       {profile && (

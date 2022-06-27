@@ -26,7 +26,7 @@ function Profile() {
             totalFollowing={profile.following.length}
           />
           <Bio bio={profile.bio} />
-          <Actions username={profile.username} />
+          <Actions username={profile.username} userId={profile.id} />
           <ProfileFeed userId={profile.id} />
         </div>
       )}
