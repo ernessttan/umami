@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../components/common/AuthHeader';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import FireBaseContext from '../context/FireBaseContext';
-import setUserProfile from '../firebase/services';
+import { setUserProfile } from '../firebase/services';
 import * as ROUTES from '../constants/routes';
 
 function SignUp() {
@@ -36,6 +36,7 @@ function SignUp() {
         const { user } = createdCredentials;
         await updateProfile(user, {
           displayName: signUpInfo.username,
+          photoURL: 'gs://umami-ae4ad.appspot.com/avatars/ernest.jpeg',
         });
         await setUserProfile(user);
         navigate(ROUTES.FEED);

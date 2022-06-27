@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/prop-types */
 import { browserLocalPersistence, onAuthStateChanged, setPersistence } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
@@ -6,25 +7,25 @@ import AuthContext from './AuthContext';
 
 function AuthContextProvider({ children }) {
   const { auth } = useContext(FirebaseContext);
-  const [user, setUser] = useState('');
-
   // Sets persistence for authenticated user
   setPersistence(auth, browserLocalPersistence);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')));
+
   useEffect(() => {
     onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         // Set logged in user
-        console.log('Logged In!');
+        localStorage.setItem('authUser', JSON.stringify(authUser));
         setUser(authUser);
       } else {
-        console.log('Logged Out!');
+        localStorage.removeItem('authUser');
         setUser('');
       }
     });
-  }, [auth]);
+  }, []);
 
   return (
-    <AuthContext.Provider value={user}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
 }
 
