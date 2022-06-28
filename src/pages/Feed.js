@@ -7,7 +7,7 @@ function Feed() {
   return (
     <>
       <AppHeader />
-      <div className="flex flex-col h-full w-full md:flex-row">
+      <div className="flex flex-col w-full md:flex-row">
         <Timeline />
         <Navbar />
       </div>

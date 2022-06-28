@@ -25,21 +25,19 @@ function Actions({ username, userId }) {
 
   return (
     <div>
-      <div>
-        {activeUser.displayName === username ? (
-          <Link
-            to={`/editprofile/${username}`}
-            type="button"
-            className="w-full bg-orange-500 text-white flex justify-center p-3 rounded-full"
-          >
-            Edit Profile
-          </Link>
-        ) : (
-          <button onClick={handleFollow} type="button" value={userId} className="w-full bg-orange-500 text-white flex justify-center p-3 rounded-full">
-            {isFollowingUser ? 'Unfollow' : 'Follow'}
-          </button>
-        )}
-      </div>
+      {activeUser.displayName === username ? (
+        <Link
+          to={`/editprofile/${username}`}
+          type="button"
+          className="w-full bg-orange-500 text-white flex justify-center p-3 rounded-full"
+        >
+          Edit Profile
+        </Link>
+      ) : (
+        <button onClick={handleFollow} type="button" value={userId} className="w-full bg-orange-500 text-white flex justify-center p-3 rounded-full">
+          {isFollowingUser ? 'Unfollow' : 'Follow'}
+        </button>
+      )}
     </div>
   );
 }
