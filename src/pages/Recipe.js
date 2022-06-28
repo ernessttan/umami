@@ -8,16 +8,17 @@ import Information from '../components/Recipe/Information';
 import useRecipe from '../hooks/useRecipe';
 import Servings from '../components/Recipe/Servings';
 import Details from '../components/Recipe/Details';
+import Social from '../components/Recipe/Social';
 
 function Recipe() {
   const { id } = useParams();
   const recipe = useRecipe(id);
 
   return (
-    <div className="h-full py-8 px-5">
+    <div className="py-8 px-5">
       <PageHeader title="" route={ROUTES.FEED} />
       {recipe && (
-        <div className="px-2 mt-5">
+        <div className="px-2 mt-5 h-full">
           <Title title={recipe.title} />
           <Image imageUrl={recipe.imageUrl} />
           <Information
@@ -29,13 +30,13 @@ function Recipe() {
           />
           <Servings servings={recipe.servings} />
           <Details instructions={recipe.instructions} ingredients={recipe.ingredients} />
-          {/* <Social
+          <Social
             comments={recipe.comments}
             avatarUrl={recipe.avatarUrl}
             username={recipe.username}
             description={recipe.description}
             id={id}
-          /> */}
+          />
         </div>
       )}
     </div>

@@ -18,10 +18,12 @@ function Post({
   avatarUrl,
 }) {
   return (
-    <Link to={`/recipe/${id}`} className="mt-2 w-full flex flex-col">
+    <div className="mt-2 w-full flex flex-col">
       <Header avatarUrl={avatarUrl} username={username} />
-      <Image src={imageUrl} />
-      <Information title={title} dateCreated={dateCreated} />
+      <Link to={`/recipe/${id}`}>
+        <Image src={imageUrl} />
+        <Information title={title} dateCreated={dateCreated} />
+      </Link>
       <div className="pl-5">
         <Actions
           totalLikes={likes.length}
@@ -32,8 +34,7 @@ function Post({
           id={id}
         />
       </div>
-
-    </Link>
+    </div>
   );
 }
 

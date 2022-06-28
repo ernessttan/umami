@@ -3,12 +3,18 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
+  html {
     font-family: 'Jost', sans-serif;
-    min-height: 100vh;
-    min-width: 100vw;
   }
-  
+
+  body {
+    min-height: 100vh;
+  }
+
+  #root {
+    min-height: 100%;
+  }
+ 
   /* Typography */
   h1 {
     @apply font-semibold;
