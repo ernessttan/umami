@@ -5,14 +5,14 @@ function Description({
   avatarUrl, username, description,
 }) {
   return (
-    <>
+    <div className="px-5">
       <div className="flex items-center gap-2 py-5">
         <img className="object-cover h-8 w-8 rounded-full" src={avatarUrl} alt="user avatar" />
         <p className="font-semibold text-lg">{username}</p>
         {/* TODO: Add follow button */}
       </div>
       <p className="text-lg">{description}</p>
-    </>
+    </div>
   );
 }
 

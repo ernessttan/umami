@@ -15,9 +15,10 @@ function Recipe() {
   const recipe = useRecipe(id);
 
   return (
-    <div className="py-8 px-5">
-      <PageHeader title="" route={ROUTES.FEED} />
-      {recipe && (
+    <>
+      <div className="py-8 px-5">
+        <PageHeader title="" route={ROUTES.FEED} />
+        {recipe && (
         <div className="px-2 mt-5 h-full">
           <Title title={recipe.title} />
           <Image imageUrl={recipe.imageUrl} />
@@ -30,16 +31,17 @@ function Recipe() {
           />
           <Servings servings={recipe.servings} />
           <Details instructions={recipe.instructions} ingredients={recipe.ingredients} />
-          <Social
-            comments={recipe.comments}
-            avatarUrl={recipe.avatarUrl}
-            username={recipe.username}
-            description={recipe.description}
-            id={id}
-          />
         </div>
-      )}
-    </div>
+        )}
+      </div>
+      <Social
+        comments={recipe.comments}
+        avatarUrl={recipe.avatarUrl}
+        username={recipe.username}
+        description={recipe.description}
+        id={id}
+      />
+    </>
 
   );
 }

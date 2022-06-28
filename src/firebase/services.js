@@ -116,12 +116,17 @@ async function editUserProfile(userId, updatedProfile) {
 }
 
 // Function to get a recipe by id
-async function getRecipeById(recipeId, userId) {
+async function getRecipeById(recipeId) {
   const q = query(recipesRef, where('id', '==', recipeId));
   const result = await getDocs(q);
   const recipeResult = result.docs.map((recipe) => recipe.data());
 
   return recipeResult[0];
+}
+
+// Function to add comment
+async function addComment(comment, recipeId) {
+  updateDoc(doc(recipesRef, recipeId), { comments: arrayUnion(comment) });
 }
 
 export {
@@ -136,4 +141,5 @@ export {
   toggleFollow,
   editUserProfile,
   getRecipeById,
+  addComment,
 };

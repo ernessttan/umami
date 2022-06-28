@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Description from './Description';
-import Comments from '../Common/Comments/Comments';
+import Comments from './Comments/Comments';
 
 function Social({
   avatarUrl, username, description, id, comments,
@@ -16,8 +16,8 @@ function Social({
   };
 
   return (
-    <div className="mt-5 py-5">
-      <div className="flex items-center gap-5 ">
+    <div className="mt-5">
+      <div className="flex items-center gap-5 px-5">
         <button
           onClick={handleClick}
           type="button"
@@ -36,10 +36,8 @@ function Social({
         </button>
       </div>
       <div className="border -ml-7 w-screen" />
-      <div>
-        {selected === 'description' ? <Description avatarUrl={avatarUrl} username={username} description={description} /> : null}
-        {selected === 'comments' ? <Comments comments={comments} avatarUrl={avatarUrl} /> : null}
-      </div>
+      {selected === 'description' ? <Description avatarUrl={avatarUrl} username={username} description={description} /> : null}
+      {selected === 'comments' ? <Comments username={username} recipeId={id} comments={comments} avatarUrl={avatarUrl} /> : null}
     </div>
   );
 }
@@ -47,12 +45,14 @@ function Social({
 Social.defaultProps = {
   avatarUrl: '/icons/profile.svg',
   comments: [],
+  description: '',
+  username: '',
 };
 
 Social.propTypes = {
   avatarUrl: PropTypes.string,
-  username: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  username: PropTypes.string,
+  description: PropTypes.string,
   id: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object),
 };
