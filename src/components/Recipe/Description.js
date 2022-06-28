@@ -11,7 +11,7 @@ function Description({
         <p className="font-semibold text-lg">{username}</p>
         {/* TODO: Add follow button */}
       </div>
-      <p className="text-lg">{description}</p>
+      <p className="text-lg py-2">{description}</p>
     </div>
   );
 }
