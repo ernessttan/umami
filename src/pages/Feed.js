@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
-import AppHeader from '../components/common/AppHeader';
+import AppHeader from '../components/Common/AppHeader';
 import Timeline from '../components/Feed/Timeline';
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/Common/Navbar';
 
 function Feed() {
   return (

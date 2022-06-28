@@ -5,7 +5,7 @@ import Information from '../components/Profile/Information';
 import Statistics from '../components/Profile/Statistics';
 import Bio from '../components/Profile/Bio';
 import Actions from '../components/Profile/Actions';
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/Common/Navbar';
 import ProfileFeed from '../components/Profile/ProfileFeed';
 
 function Profile() {

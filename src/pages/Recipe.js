@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useParams } from 'react-router-dom';
-import PageHeader from '../components/common/PageHeader';
+import PageHeader from '../components/Common/PageHeader';
 import * as ROUTES from '../constants/routes';
 import Title from '../components/Recipe/Title';
 import Image from '../components/Recipe/Image';
@@ -8,7 +8,6 @@ import Information from '../components/Recipe/Information';
 import useRecipe from '../hooks/useRecipe';
 import Servings from '../components/Recipe/Servings';
 import Details from '../components/Recipe/Details';
-import Social from '../components/Recipe/Social';
 
 function Recipe() {
   const { id } = useParams();
@@ -30,12 +29,13 @@ function Recipe() {
           />
           <Servings servings={recipe.servings} />
           <Details instructions={recipe.instructions} ingredients={recipe.ingredients} />
-          <Social />
-          {/* <Title />
-             <Image />
-             <Information /> */}
-          {/* <Servings />
-             <Details /> */}
+          {/* <Social
+            comments={recipe.comments}
+            avatarUrl={recipe.avatarUrl}
+            username={recipe.username}
+            description={recipe.description}
+            id={id}
+          /> */}
         </div>
       )}
     </div>

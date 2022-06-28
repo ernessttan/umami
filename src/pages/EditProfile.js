@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import PageHeader from '../components/common/PageHeader';
+import PageHeader from '../components/Common/PageHeader';
 import Avatar from '../components/EditProfile/Avatar';
 import useUserProfile from '../hooks/useUserProfile';
 import EditForm from '../components/EditProfile/EditForm';

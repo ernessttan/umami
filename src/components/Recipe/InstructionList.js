@@ -7,7 +7,7 @@ function InstructionList({ instructions }) {
 
   const instructionList = instructions.map((instruction, index) => (
     <li key={instruction.id} className="flex items-center gap-2 py-1">
-      <input id={instruction.id} value={instruction} type="checkbox" className="form-checkbox w-4 h-4 border-orange-500 focus:ring-0 text-orange-500" />
+      <input id={instruction.id} value={instruction} type="checkbox" className="w-4 h-4 border border-orange-500 focus:ring-0 text-orange-500" />
       <label htmlFor={instruction.id} className="text-lg flex items-center gap-2 ">
         <span className="font-bold">{index + 1}</span>
         {instruction.text}
