@@ -32,27 +32,6 @@ function Profile() {
       )}
       <Navbar />
     </div>
-
-  // <div className="h-screen relative">
-  //   <ProfileHeader />
-  //   {/* {profile && (
-  //     <div className="px-5">
-  //       <Information
-  //         avatarUrl={profile.avatarUrl}
-  //         username={profile.username}
-  //         name={profile.name}
-  //       />
-  //       <Statistics
-  //         totalFollowers={profile.followers.length}
-  //         totalFollowing={profile.following.length}
-  //       />
-  //       <Bio bio={profile.bio} />
-  //       <Actions username={profile.username} userId={profile.id} />
-  //       <ProfileFeed userId={profile.id} />
-  //     </div>
-  //   )} */}
-  //   <Navbar />
-  // </div>
   );
 }
 
