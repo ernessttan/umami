@@ -3,7 +3,7 @@ import * as ROUTES from '../../constants/routes';
 
 function ProfileHeader() {
   return (
-    <div className="mb-8 ml-1 flex justify-end">
+    <div className="mb-8 ml-1 px-5 flex justify-end">
       <Link to={ROUTES.SETTINGS}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

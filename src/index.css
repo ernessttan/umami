@@ -6,15 +6,24 @@
   html {
     font-family: 'Jost', sans-serif;
   }
+
   body {
-   height: 100vh;
-   width: 100vw;
+    min-height: 100vh;
   }
 
+  #root {
+    min-height: 100%;
+  }
+ 
   /* Typography */
   h1 {
     @apply font-semibold;
     @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+    @apply font-semibold;
   }
 
   h3 {

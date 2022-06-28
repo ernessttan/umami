@@ -5,17 +5,17 @@ import Information from '../components/Profile/Information';
 import Statistics from '../components/Profile/Statistics';
 import Bio from '../components/Profile/Bio';
 import Actions from '../components/Profile/Actions';
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/Common/Navbar';
 import ProfileFeed from '../components/Profile/ProfileFeed';
 
 function Profile() {
   const { username } = useParams();
   const profile = useUserProfile(username);
   return (
-    <div className="h-full py-8 px-5">
+    <div className="h-full py-8">
+      <ProfileHeader />
       {profile && (
-        <div className="h-full">
-          <ProfileHeader />
+        <div className="h-full px-5">
           <Information
             avatarUrl={profile.avatarUrl}
             username={profile.username}

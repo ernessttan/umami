@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import AuthHeader from '../components/common/AuthHeader';
+import AuthHeader from '../components/Common/AuthHeader';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import FireBaseContext from '../context/FireBaseContext';
 import { setUserProfile } from '../firebase/services';
