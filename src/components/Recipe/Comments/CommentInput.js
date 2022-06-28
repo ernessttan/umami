@@ -17,8 +17,6 @@ function CommentInput({ recipeId, setAllComments, comments }) {
     dateCreated: '',
   });
 
-  console.log(comment);
-
   const handleChange = (event) => {
     const { value, name } = event.target;
     setComment((prevComment) => ({
