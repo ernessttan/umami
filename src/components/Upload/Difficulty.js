@@ -18,7 +18,7 @@ function Difficulty({ setRecipe }) {
         <button
           className="flex rounded-full border border-orange-100 text-orange-500 focus:bg-orange-500 focus:text-white font-semibold py-2 px-5"
           type="button"
-          value="easy"
+          value="Easy"
           onClick={handleDifficulty}
         >
           Easy
@@ -26,7 +26,7 @@ function Difficulty({ setRecipe }) {
         <button
           className="flex rounded-full border border-orange-100 text-orange-500 focus:bg-orange-500 focus:text-white font-semibold py-2 px-5"
           type="button"
-          value="intermediate"
+          value="Intermediate"
           onClick={handleDifficulty}
         >
           Intermediate
@@ -34,7 +34,7 @@ function Difficulty({ setRecipe }) {
         <button
           className="flex rounded-full border border-orange-100 text-orange-500 focus:bg-orange-500 focus:text-white font-semibold py-2 px-5"
           type="button"
-          value="hard"
+          value="Hard"
           onClick={handleDifficulty}
         >
           Hard
