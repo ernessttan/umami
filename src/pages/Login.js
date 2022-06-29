@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import AuthHeader from '../components/Common/AuthHeader';
 import LoginForm from '../components/Login/LoginForm';
 import FirebaseContext from '../context/FireBaseContext';
@@ -29,7 +29,9 @@ function Login() {
   const handleLogin = async (event) => {
     event.preventDefault();
     await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
-      .then(() => navigate(ROUTES.FEED))
+      .then(() => {
+        navigate(ROUTES.FEED);
+      })
       .catch((error) => {
         if (error.code === 'auth/user-not-found') {
           setErrorMessage('Sorry that user does not exist');

@@ -34,9 +34,9 @@ function SignUp() {
       .then(async (createdCredentials) => {
         // Signed up successfully
         const { user } = createdCredentials;
+        // Update username
         await updateProfile(user, {
           displayName: signUpInfo.username,
-          photoURL: 'gs://umami-ae4ad.appspot.com/avatars/ernest.jpeg',
         });
         await setUserProfile(user);
         navigate(ROUTES.FEED);
