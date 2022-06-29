@@ -16,24 +16,27 @@ const Saved = lazy(() => import('./pages/Saved'));
 
 function App() {
   return (
-    <AuthContextProvider>
-      <Router>
-        <Suspense fallback={<p>Loading...</p>}>
-          <Routes>
-            <Route path={ROUTES.WELCOME} element={<Welcome />} />
-            <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
-            <Route path={ROUTES.LOG_IN} element={<Login />} />
-            <Route path={ROUTES.FEED} element={<Feed />} />
-            <Route path={ROUTES.UPLOAD} element={<Upload />} />
-            <Route path={ROUTES.PROFILE} element={<Profile />} />
-            <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
-            <Route path={ROUTES.RECIPE} element={<Recipe />} />
-            <Route path={ROUTES.EXPLORE} element={<Explore />} />
-            <Route path={ROUTES.SAVED} element={<Saved />} />
-          </Routes>
-        </Suspense>
-      </Router>
-    </AuthContextProvider>
+    <div className="h-screen">
+      <AuthContextProvider>
+        <Router>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Routes>
+              <Route path={ROUTES.WELCOME} element={<Welcome />} />
+              <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+              <Route path={ROUTES.LOG_IN} element={<Login />} />
+              <Route path={ROUTES.FEED} element={<Feed />} />
+              <Route path={ROUTES.UPLOAD} element={<Upload />} />
+              <Route path={ROUTES.PROFILE} element={<Profile />} />
+              <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
+              <Route path={ROUTES.RECIPE} element={<Recipe />} />
+              <Route path={ROUTES.EXPLORE} element={<Explore />} />
+              <Route path={ROUTES.SAVED} element={<Saved />} />
+            </Routes>
+          </Suspense>
+        </Router>
+      </AuthContextProvider>
+    </div>
+
   );
 }
 

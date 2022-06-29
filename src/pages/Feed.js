@@ -7,10 +7,8 @@ function Feed() {
   return (
     <>
       <AppHeader />
-      <div className="flex flex-col w-full md:flex-row">
-        <Timeline />
-        <Navbar />
-      </div>
+      <Timeline />
+      <Navbar />
     </>
   );
 }
