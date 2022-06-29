@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import Comment from './Comment';
 
 function CommentList({ comments }) {
+  comments.sort((a, b) => b.dateCreated - a.dateCreated);
   const commentList = comments.map((comment) => (
     <Comment
       key={comment.id}
       avatarUrl={comment.avatarUrl}
       username={comment.username}
-      comment={comment.comment}
+      content={comment.content}
       dateCreated={comment.dateCreated}
     />
   ));

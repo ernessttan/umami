@@ -4,26 +4,20 @@
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import generateUniqueId from 'generate-unique-id';
-import { addComment } from '../../../firebase/services';
 import AuthContext from '../../../context/AuthContext';
-import useUserProfile from '../../../hooks/useUserProfile';
-import FirebaseContext from '../../../context/FireBaseContext';
+import { addComment } from '../../../firebase/services';
 
 function AddComment({
   recipeId, setAllComments, comments,
 }) {
-  const { db } = useContext(FirebaseContext);
   const { activeUser } = useContext(AuthContext);
-  const profile = useUserProfile(activeUser.displayName);
-  console.log(profile);
   const [newComment, setNewComment] = useState({
     content: '',
     dateCreated: Date.now(),
-    username: '',
-    avatarUrl: `${profile.avatarUrl}`,
+    username: `${activeUser.username}`,
+    avatarUrl: `${activeUser.avatarUrl}`,
+    id: generateUniqueId({ length: 2, useLetters: false }),
   });
-
-  console.log(newComment);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,22 +27,32 @@ function AddComment({
     }));
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Add comment to db
+    await addComment(newComment, recipeId);
+    // Set all comments state with new comment
+    setAllComments([newComment, ...comments]);
+    setNewComment((prevComment) => ({
+      ...prevComment,
+      content: '',
+    }));
+  };
+
   return (
     <div className="border py-5 pl-5 pr-5 shadow sticky bottom-0 w-full">
-      {profile && (
-        <form className="flex items-center bg-textbox-grey py-3 px-4 rounded">
-          <img className="rounded-full h-8 w-8" src={profile.avatarUrl} alt="user avatar" />
-          <input
-            onChange={handleChange}
-            className="border-none bg-transparent grow focus:ring-0"
-            type="text"
-            name="content"
-            placeholder="Add a comment..."
-          />
-          <button className="text-orange-500" type="submit">Send</button>
-        </form>
-      )}
-
+      <form onSubmit={handleSubmit} className="flex items-center bg-textbox-grey py-3 px-4 rounded">
+        <img className="rounded-full h-8 w-8" src={activeUser.avatarUrl} alt="user avatar" />
+        <input
+          onChange={handleChange}
+          className="border-none bg-transparent grow focus:ring-0"
+          type="text"
+          name="content"
+          value={newComment.content}
+          placeholder="Add a comment..."
+        />
+        <button className="text-orange-500" type="submit">Send</button>
+      </form>
     </div>
   );
 }
