@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import formatDistance from 'date-fns/formatDistance';
 
 function Comment({
-  avatarUrl, comment, username, dateCreated,
+  avatarUrl, content, username, dateCreated,
 }) {
   return (
     <div className="border-b-2 py-3">
@@ -18,7 +18,7 @@ function Comment({
         </div>
       </div>
       <p className="py-2">
-        {comment}
+        {content}
       </p>
     </div>
   );
@@ -30,7 +30,7 @@ Comment.defaultProps = {
 
 Comment.propTypes = {
   avatarUrl: PropTypes.string,
-  comment: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   dateCreated: PropTypes.number.isRequired,
 };

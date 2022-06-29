@@ -7,4 +7,5 @@ export const PROFILE = '/profile/:username';
 export const EDIT_PROFILE = '/editprofile/:username';
 export const SETTINGS = '/settings/:username';
 export const RECIPE = '/recipe/:id';
-export const COMMENTS = '/comments/:id';
+export const SAVED = '/saved';
+export const EXPLORE = '/explore';

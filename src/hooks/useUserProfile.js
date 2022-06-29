@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { getUserByUsername } from '../firebase/services';
 
 function useUserProfile(username) {
-  const [userProfile, setUserProfile] = useState('');
+  const [userProfile, setUserProfile] = useState();
 
   useEffect(() => {
     async function getUserProfileByUsername() {
       const result = await getUserByUsername(username);
-      setUserProfile(result);
+      if (result) {
+        setUserProfile(result);
+      }
     }
     getUserProfileByUsername();
   }, [username]);

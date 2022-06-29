@@ -1,5 +1,4 @@
-import { useParams } from 'react-router-dom';
-import useUserProfile from '../hooks/useUserProfile';
+import { useContext } from 'react';
 import ProfileHeader from '../components/Profile/ProfileHeader';
 import Information from '../components/Profile/Information';
 import Statistics from '../components/Profile/Statistics';
@@ -7,29 +6,27 @@ import Bio from '../components/Profile/Bio';
 import Actions from '../components/Profile/Actions';
 import Navbar from '../components/Common/Navbar';
 import ProfileFeed from '../components/Profile/ProfileFeed';
+import AuthContext from '../context/AuthContext';
 
 function Profile() {
-  const { username } = useParams();
-  const profile = useUserProfile(username);
+  const { activeUser } = useContext(AuthContext);
   return (
     <div className="h-screen py-3">
       <ProfileHeader />
-      {profile && (
       <div className="h-full px-5">
         <Information
-          avatarUrl={profile.avatarUrl}
-          username={profile.username}
-          name={profile.name}
+          avatarUrl={activeUser.avatarUrl}
+          username={activeUser.username}
+          name={activeUser.name}
         />
         <Statistics
-          totalFollowers={profile.followers.length}
-          totalFollowing={profile.following.length}
+          totalFollowers={activeUser.followers.length}
+          totalFollowing={activeUser.following.length}
         />
-        <Bio bio={profile.bio} />
-        <Actions username={profile.username} userId={profile.id} />
-        <ProfileFeed userId={profile.id} />
+        <Bio bio={activeUser.bio} />
+        <Actions username={activeUser.username} userId={activeUser.id} />
+        <ProfileFeed userId={activeUser.id} />
       </div>
-      )}
       <Navbar />
     </div>
   );

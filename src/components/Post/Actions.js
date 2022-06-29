@@ -13,11 +13,11 @@ function Actions({
   const [likedStatus, setLikedStatus] = useState(userLikedPost);
 
   useEffect(() => {
-    toggleLike(activeUser.uid, id, likedStatus);
+    toggleLike(activeUser.id, id, likedStatus);
   }, [likedStatus]);
 
   const routeToComments = () => {
-    navigate(`/comments/${id}`);
+    navigate(`/recipe/${id}/#${id}`);
   };
 
   const handleLiked = () => {

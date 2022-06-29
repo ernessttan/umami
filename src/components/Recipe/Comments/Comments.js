@@ -1,18 +1,23 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import CommentList from './CommentList';
-import CommentInput from './CommentInput';
+import AddComment from './AddComment';
 
 function Comments({
   comments, recipeId,
 }) {
   const [allComments, setAllComments] = useState(comments);
+
   return (
     <div>
       <CommentList comments={allComments} />
-      <CommentInput comments={comments} setAllComments={setAllComments} recipeId={recipeId} />
+      <AddComment
+        comments={comments}
+        setAllComments={setAllComments}
+        recipeId={recipeId}
+      />
     </div>
   );
 }
