@@ -13,7 +13,7 @@ function Navbar() {
       {profile && (
         <div className="container flex items-center justify-between mx-auto md:flex-col">
           <Link className="flex items-center md:mt-3 md:mb-3 md:gap-2" to={ROUTES.FEED}>
-            <img src="/icons/home.svg" alt="home icon" />
+            <img className="h-9 w-9" src="/icons/home.svg" alt="home icon" />
             <p className="hidden md:block">Home</p>
           </Link>
           <Link className="flex items-center md:mt-3 md:mb-3 md:gap-2" to={ROUTES.UPLOAD}>

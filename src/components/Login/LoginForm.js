@@ -13,7 +13,7 @@ function LoginForm({ handleChange, handleLogin, errorMessage }) {
             type="text"
             name="email"
             placeholder="gordonramsay@hellskitchen.com"
-            className="rounded w-full bg-textbox-grey p-2"
+            className="input-grey"
           />
         </div>
         <div>
@@ -22,7 +22,7 @@ function LoginForm({ handleChange, handleLogin, errorMessage }) {
             onChange={handleChange}
             type="text"
             name="password"
-            className="rounded w-full bg-textbox-grey p-2"
+            className="input-grey"
           />
         </div>
         <div className="flex justify-end mt-5">
