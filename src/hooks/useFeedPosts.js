@@ -9,7 +9,7 @@ function useFeedPosts() {
 
   useEffect(() => {
     async function getFeedPosts() {
-      const userProfile = await getUserByUsername(activeUser.displayName);
+      const userProfile = await getUserByUsername(activeUser.username);
       if (userProfile.following.length > 0) {
         const posts = await getFollowingPosts(userProfile.id, userProfile.following);
         posts.sort((a, b) => b.dateCreated - a.dateCreated);
