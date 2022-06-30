@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {
-  setDoc, doc, collection, query, where, getDocs, updateDoc, arrayRemove, arrayUnion, getDoc,
+  setDoc, doc, collection, query, where, getDocs, updateDoc,
+  arrayRemove, arrayUnion, getDoc, orderBy,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from './firebaseConfig';
@@ -129,6 +130,24 @@ async function addComment(comment, recipeId) {
   updateDoc(doc(recipesRef, recipeId), { comments: arrayUnion(comment) });
 }
 
+// TODO: Combine the two functions below into one
+
+async function getAllUsers() {
+  const q = query(usersRef, orderBy('username'));
+  const result = await getDocs(q);
+  const userResult = result.docs.map((user) => user.data());
+
+  return userResult;
+}
+
+async function getAllRecipes() {
+  const q = query(recipesRef, orderBy('title'));
+  const result = await getDocs(q);
+  const recipeResult = result.docs.map((recipe) => recipe.data());
+
+  return recipeResult;
+}
+
 export {
   setUserProfile,
   getUserByUsername,
@@ -142,4 +161,6 @@ export {
   editUserProfile,
   getRecipeById,
   addComment,
+  getAllUsers,
+  getAllRecipes,
 };

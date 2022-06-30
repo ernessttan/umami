@@ -10,7 +10,7 @@ function Navbar() {
   const { activeUser } = useContext(AuthContext);
 
   return (
-    <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow sticky bottom-0 md:bg-white md:shadow-none md:order-1 md:w-1/3 md:h-screen md:top-10">
+    <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow fixed bottom-0 md:bg-white md:shadow-none md:order-1 md:w-1/3 md:h-screen md:top-10">
       <div className="container flex items-center justify-between mx-auto md:flex-col">
         <Link className="flex items-center md:mt-3 md:mb-3 md:gap-2" to={ROUTES.FEED}>
           <HomeIcon className="navbar-icon" />
