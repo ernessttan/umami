@@ -38,9 +38,7 @@ function SignUp() {
         await updateProfile(user, {
           displayName: signUpInfo.username,
         });
-        await setUserProfile(user);
-        await getUserByUsername(user.displayName);
-        navigate(ROUTES.FEED);
+        await setUserProfile(user).then(navigate(ROUTES.FEED));
       })
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {

@@ -30,7 +30,7 @@ function Navbar() {
         </Link>
         <Link
           className="flex items-center rounded-full h-9 w-9 md:mt-3 md:mb-3 md:gap-2"
-          to={`/profile/${activeUser.username}`}
+          to={`/profile/${activeUser.displayName}`}
         >
           {
             activeUser.avatarUrl

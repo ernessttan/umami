@@ -11,7 +11,7 @@ function Actions({ username, userId }) {
   useEffect(() => {
     // Checks if active user is following a user
     const checkFollowing = async () => {
-      const isFollowing = await isActiveUserFollowing(activeUser.id, userId);
+      const isFollowing = await isActiveUserFollowing(activeUser.uid, userId);
       setIsFollowingUser(isFollowing);
     };
     checkFollowing();
@@ -25,7 +25,7 @@ function Actions({ username, userId }) {
 
   return (
     <div>
-      {activeUser.username === username ? (
+      {activeUser.displayName === username ? (
         <Link
           to={`/editprofile/${username}`}
           type="button"

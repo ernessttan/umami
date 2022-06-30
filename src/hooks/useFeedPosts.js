@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../context/AuthContext';
-import { getFollowingPosts, getUserByUsername } from '../firebase/services';
+import { getFollowingPosts, getProfileByUsername } from '../firebase/services';
 
 // Hook to get a user's feed content
 function useFeedPosts() {
@@ -9,7 +9,7 @@ function useFeedPosts() {
 
   useEffect(() => {
     async function getFeedPosts() {
-      const userProfile = await getUserByUsername(activeUser.username);
+      const userProfile = await getProfileByUsername(activeUser.displayName);
       if (userProfile.following.length > 0) {
         const posts = await getFollowingPosts(userProfile.id, userProfile.following);
         posts.sort((a, b) => b.dateCreated - a.dateCreated);
@@ -17,7 +17,7 @@ function useFeedPosts() {
       }
     }
     getFeedPosts();
-  }, [activeUser.uid]);
+  }, [activeUser.id]);
 
   return followingPosts;
 }

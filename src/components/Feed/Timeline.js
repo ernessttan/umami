@@ -1,12 +1,8 @@
 // import Skeleton from 'react-loading-skeleton';
-import { useContext } from 'react';
-import AuthContext from '../../context/AuthContext';
 import useFeedPosts from '../../hooks/useFeedPosts';
 import Post from '../Post/Post';
 
 function Timeline() {
-  const { activeUser } = useContext(AuthContext);
-  console.log(activeUser);
   const followingPosts = useFeedPosts();
   const posts = followingPosts.map((post) => (
     <Post

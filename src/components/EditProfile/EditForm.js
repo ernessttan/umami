@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
 
 function EditForm({
-  name, username, bio, handleChange,
+  setUserProfile, userProfile,
 }) {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserProfile((prevUserProfile) => ({
+      ...prevUserProfile,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <h3>Name</h3>
@@ -10,36 +18,29 @@ function EditForm({
         className="bg-textbox-grey rounded-lg py-3 px-2"
         onChange={handleChange}
         name="name"
-        defaultValue={name}
+        value={userProfile.name}
       />
       <h3>Username</h3>
       <input
         className="bg-textbox-grey rounded-lg py-3 px-2"
         onChange={handleChange}
         name="username"
-        defaultValue={username}
+        value={userProfile.username}
       />
       <h3>Bio</h3>
       <textarea
         className="bg-textbox-grey rounded-lg py-3 px-2"
         onChange={handleChange}
         name="bio"
-        defaultValue={bio}
+        value={userProfile.bio}
       />
     </div>
   );
 }
 
-EditForm.defaultProps = {
-  name: '',
-  bio: '',
-};
-
 EditForm.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  name: PropTypes.string,
-  bio: PropTypes.string,
-  username: PropTypes.string.isRequired,
+  setUserProfile: PropTypes.func.isRequired,
+  userProfile: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default EditForm;

@@ -9,8 +9,12 @@ function Avatar({ avatarUrl }) {
   );
 }
 
+Avatar.defaultProps = {
+  avatarUrl: '/icons/profile.svg',
+};
+
 Avatar.propTypes = {
-  avatarUrl: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string,
 };
 
 export default Avatar;

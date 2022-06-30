@@ -26,7 +26,7 @@ async function setUserProfile(user) {
 }
 
 // Function to retrieve user's information using username
-async function getUserByUsername(username) {
+async function getProfileByUsername(username) {
   const q = query(usersRef, where('username', '==', username));
   const result = await getDocs(q);
   const userResult = result.docs.map((user) => user.data());
@@ -114,7 +114,6 @@ async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
 // Function to handle edits for a users profile
 async function editUserProfile(userId, updatedProfile) {
   await updateDoc(doc(usersRef, userId), updatedProfile);
-  localStorage.setItem('activeUser', JSON.stringify(updatedProfile));
 }
 
 // Function to get a recipe by id
@@ -151,7 +150,7 @@ async function getAllRecipes() {
 
 export {
   setUserProfile,
-  getUserByUsername,
+  getProfileByUsername,
   getFollowingPosts,
   toggleLike,
   getImageUrl,
