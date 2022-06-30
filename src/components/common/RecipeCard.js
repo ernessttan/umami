@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function ProfilePost({
   id, imageUrl, title, totalLikes,
 }) {
   return (
-    <div>
+    <Link to={`/recipe/${id}`}>
       <img className="object-cover rounded w-40 h-40" src={imageUrl} alt="user post" />
       <h2 className="py-1 font-bold text-xl">{title}</h2>
       <div className="flex items-center gap-2">
@@ -25,7 +26,7 @@ function ProfilePost({
         </svg>
         <p className="text-sm">{totalLikes}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 ProfilePost.propTypes = {

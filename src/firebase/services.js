@@ -130,8 +130,7 @@ async function addComment(comment, recipeId) {
   updateDoc(doc(recipesRef, recipeId), { comments: arrayUnion(comment) });
 }
 
-// TODO: Combine the two functions below into one
-
+// Function to get all users
 async function getAllUsers() {
   const q = query(usersRef, orderBy('username'));
   const result = await getDocs(q);
@@ -140,6 +139,7 @@ async function getAllUsers() {
   return userResult;
 }
 
+// Function to get all recipes
 async function getAllRecipes() {
   const q = query(recipesRef, orderBy('title'));
   const result = await getDocs(q);
