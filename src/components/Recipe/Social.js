@@ -3,10 +3,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Description from './Description';
-import Comments from './Comments/Comments';
 
 function Social({
-  avatarUrl, username, description, id, comments,
+  avatarUrl, username, description,
 }) {
   const [selected, setSelected] = useState('description');
 
@@ -36,15 +35,13 @@ function Social({
         </button>
       </div>
       <div className="border -ml-7 w-screen" />
-      {selected === 'description' ? <Description avatarUrl={avatarUrl} username={username} description={description} /> : null}
-      {selected === 'comments' ? <Comments username={username} recipeId={id} comments={comments} avatarUrl={avatarUrl} /> : null}
+      <Description avatarUrl={avatarUrl} username={username} description={description} />
     </div>
   );
 }
 
 Social.defaultProps = {
   avatarUrl: '/icons/profile.svg',
-  comments: [],
   description: '',
   username: '',
 };
@@ -53,8 +50,6 @@ Social.propTypes = {
   avatarUrl: PropTypes.string,
   username: PropTypes.string,
   description: PropTypes.string,
-  id: PropTypes.string.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Social;

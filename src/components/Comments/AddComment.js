@@ -4,8 +4,8 @@
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import generateUniqueId from 'generate-unique-id';
-import AuthContext from '../../../context/AuthContext';
-import { addComment } from '../../../firebase/services';
+import AuthContext from '../../context/AuthContext';
+import { addComment } from '../../firebase/services';
 
 function AddComment({
   recipeId, setAllComments, comments,
@@ -24,6 +24,7 @@ function AddComment({
     setNewComment((prevComment) => ({
       ...prevComment,
       [name]: value,
+      id: generateUniqueId({ length: 2, useLetters: false }),
     }));
   };
 
@@ -40,8 +41,8 @@ function AddComment({
   };
 
   return (
-    <div className="border py-5 pl-5 pr-5 shadow sticky bottom-0 w-full">
-      <form onSubmit={handleSubmit} className="flex items-center bg-textbox-grey py-3 px-4 rounded">
+    <div className="border py-5 pl-5 pr-5 shadow fixed bottom-0 w-full h-auto">
+      <form onSubmit={handleSubmit} className="flex items-center gap-2 bg-textbox-grey py-3 px-4 rounded">
         <img className="rounded-full h-8 w-8" src={activeUser.avatarUrl} alt="user avatar" />
         <input
           onChange={handleChange}

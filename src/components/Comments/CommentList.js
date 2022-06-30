@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Comment from './Comment';
 
 function CommentList({ comments }) {
-  comments.sort((a, b) => b.dateCreated - a.dateCreated);
+  console.log(comments);
   const commentList = comments.map((comment) => (
     <Comment
       key={comment.id}

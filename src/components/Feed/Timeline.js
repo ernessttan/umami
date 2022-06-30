@@ -21,7 +21,7 @@ function Timeline() {
   ));
 
   return (
-    <div className="h-full">
+    <div>
       {posts}
     </div>
   );

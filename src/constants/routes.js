@@ -9,3 +9,4 @@ export const SETTINGS = '/settings/:username';
 export const RECIPE = '/recipe/:id';
 export const SAVED = '/saved';
 export const EXPLORE = '/explore';
+export const COMMENTS = '/comments/:id';

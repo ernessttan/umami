@@ -13,6 +13,7 @@ const EditProfile = lazy(() => import('./pages/EditProfile'));
 const Recipe = lazy(() => import('./pages/Recipe'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Saved = lazy(() => import('./pages/Saved'));
+const Comments = lazy(() => import('./pages/Comments'));
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path={ROUTES.RECIPE} element={<Recipe />} />
               <Route path={ROUTES.EXPLORE} element={<Explore />} />
               <Route path={ROUTES.SAVED} element={<Saved />} />
+              <Route path={ROUTES.COMMENTS} element={<Comments />} />
             </Routes>
           </Suspense>
         </Router>
