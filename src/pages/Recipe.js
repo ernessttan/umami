@@ -16,7 +16,7 @@ function Recipe() {
 
   return (
     <>
-      <div className="py-8 px-5">
+      <div className="py-9 px-5">
         <PageHeader title="" route={ROUTES.FEED} />
         {recipe && (
         <div className="px-2 mt-5 h-full">

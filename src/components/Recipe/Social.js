@@ -25,14 +25,6 @@ function Social({
         >
           Description
         </button>
-        <button
-          onClick={handleClick}
-          type="button"
-          value="comments"
-          className={`text-lg ${selected === 'comments' ? 'border-b-4 border-orange-500 font-semibold' : ''}`}
-        >
-          Comments
-        </button>
       </div>
       <div className="border -ml-7 w-screen" />
       <Description avatarUrl={avatarUrl} username={username} description={description} />

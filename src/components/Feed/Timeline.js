@@ -21,7 +21,7 @@ function Timeline() {
   ));
 
   return (
-    <div>
+    <div className="overflow-y-scroll">
       {posts}
     </div>
   );
