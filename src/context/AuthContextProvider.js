@@ -4,9 +4,6 @@
 /* eslint-disable react/prop-types */
 import { onAuthStateChanged } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
-import { useDocument } from 'react-firebase-hooks/firestore';
-import { doc } from 'firebase/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { getUserByUsername } from '../firebase/services';
 
 import FirebaseContext from './FireBaseContext';
@@ -18,12 +15,13 @@ function AuthContextProvider({ children }) {
   useEffect(() => {
     onAuthStateChanged(auth, async (authUser) => {
       if (authUser) {
-        const user = await getUserByUsername(authUser.displayName);
-        localStorage.setItem('activeUser', JSON.stringify(user));
-        setActiveUser(user);
+        localStorage.setItem('activeUser', JSON.stringify(authUser));
+        await getUserByUsername(authUser.displayName).then((user) => {
+          setActiveUser(user);
+        });
       } else {
         localStorage.removeItem('activeUser');
-        setUser('');
+        setActiveUser('');
       }
     });
   }, [auth]);

@@ -114,6 +114,7 @@ async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
 // Function to handle edits for a users profile
 async function editUserProfile(userId, updatedProfile) {
   await updateDoc(doc(usersRef, userId), updatedProfile);
+  localStorage.setItem('activeUser', JSON.stringify(updatedProfile));
 }
 
 // Function to get a recipe by id

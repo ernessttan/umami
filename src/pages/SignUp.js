@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../components/Common/AuthHeader';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import FireBaseContext from '../context/FireBaseContext';
-import { setUserProfile } from '../firebase/services';
+import { getUserByUsername, setUserProfile } from '../firebase/services';
 import * as ROUTES from '../constants/routes';
 
 function SignUp() {
@@ -39,6 +39,7 @@ function SignUp() {
           displayName: signUpInfo.username,
         });
         await setUserProfile(user);
+        await getUserByUsername(user.displayName);
         navigate(ROUTES.FEED);
       })
       .catch((error) => {
