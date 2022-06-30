@@ -30,23 +30,29 @@
     @apply font-semibold;
   }
 
-  @layer components {
-    .input-grey {
-      background-color: theme('colors.textbox-grey');
-      border-radius: theme('borderRadius.DEFAULT');
-      padding: theme('spacing.2');
-      padding-top: theme('spacing.3');
-      padding-bottom: theme('spacing.3');
-      width: theme('width.full');
-    }
-    .navbar-icon {
-      width: theme(width.7);
-      height: theme(height.7);
-      color: theme('colors.grey-500');
-    }
-    .navbar-icon:active {
-      color: theme('colors.orange-500');
-    }
+  input:focus {
+    outline: none;
   }
 
+}
+
+@layer components {
+  .input-grey {
+    background-color: theme('colors.textbox-grey');
+    border-radius: theme('borderRadius.DEFAULT');
+    padding: theme('spacing.2');
+    padding-top: theme('spacing.3');
+    padding-bottom: theme('spacing.3');
+    width: theme('width.full');
+  }
+
+
+  .navbar-icon {
+    width: theme(width.7);
+    height: theme(height.7);
+    color: theme('colors.grey-500');
+  }
+  .navbar-icon:active {
+    color: theme('colors.orange-500');
+  }
 }

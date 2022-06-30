@@ -11,6 +11,7 @@ function Details({ instructions, ingredients }) {
     const { value } = event.target;
     setSelected(value);
   };
+
   return (
     <div className="mt-5">
       <div className="flex items-center gap-5 ">

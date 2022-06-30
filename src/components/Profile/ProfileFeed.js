@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ProfilePost from './ProfilePost';
+import RecipeCard from '../Common/RecipeCard';
 import useUserPosts from '../../hooks/useUserPosts';
 
 function ProfileFeed({ userId }) {
@@ -7,7 +7,7 @@ function ProfileFeed({ userId }) {
   const posts = useUserPosts(userId);
 
   const userPosts = posts.map((post) => (
-    <ProfilePost
+    <RecipeCard
       key={post.id}
       id={post.id}
       imageUrl={post.imageUrl}
