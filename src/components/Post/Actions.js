@@ -17,7 +17,7 @@ function Actions({
   }, [likedStatus]);
 
   const routeToComments = () => {
-    navigate(`/recipe/${id}/#${id}`);
+    navigate(`/comments/${id}`);
   };
 
   const handleLiked = () => {
