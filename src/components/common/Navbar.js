@@ -36,12 +36,12 @@ function Navbar() {
             activeUser.avatarUrl
               ? (
                 <img
-                  className="object-cover rounded-full h-full w-full md:ml-1"
-                  src={activeUser.avatarUrl}
+                  className="object-cover rounded-full h-8 w-8 md:ml-1"
+                  src={activeUser.photoUrl}
                   alt="user avatar"
                 />
               )
-              : (<UserCircleIcon className="navbar-icon" />)
+              : (<UserCircleIcon className="navbar-icon h-8 w-8" />)
           }
           <p className="hidden md:block md:ml-1">Profile</p>
         </Link>
