@@ -14,7 +14,7 @@ function Profile() {
 
   return (
     <div className="h-screen py-3">
-      <ProfileHeader />
+      <ProfileHeader username={username} />
       {userProfile && (
       <div className="h-full px-5">
         <Information
