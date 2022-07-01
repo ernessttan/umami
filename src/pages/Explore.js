@@ -7,10 +7,10 @@ import SearchResults from '../components/Explore/SearchResults/SearchResults';
 
 function Explore() {
   const [isSearching, setIsSearching] = useState(false);
-  const [selected, setSelected] = useState('users');
+  const [selected, setSelected] = useState('recipes');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const toggleSearch = () => {
+  const startSearch = () => {
     setIsSearching(true);
   };
 
@@ -35,7 +35,7 @@ function Explore() {
       <SearchBar
         searchQuery={searchQuery}
         isSearching={isSearching}
-        toggleSearch={toggleSearch}
+        toggleSearch={startSearch}
         closeSearch={closeSearch}
         handleChange={handleChange}
       />
