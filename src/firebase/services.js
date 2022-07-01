@@ -26,8 +26,16 @@ async function addNewUser(user) {
   });
 }
 
+// Get a user object from db using a users id
+async function getUserById(userId) {
+  const docRef = doc(usersRef, userId);
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data();
+}
+
 // Function to retrieve user's information using username
-async function getProfileByUsername(username) {
+async function getUserByUsername(username) {
   const q = query(usersRef, where('username', '==', username));
   const result = await getDocs(q);
   const userResult = result.docs.map((user) => user.data());
@@ -113,7 +121,7 @@ async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
 }
 
 // Function to handle edits for a users profile
-async function editUserProfile(userId, updatedProfile) {
+async function saveEditedProfile(userId, updatedProfile) {
   await updateDoc(doc(usersRef, userId), updatedProfile);
 }
 
@@ -150,8 +158,9 @@ async function getAllRecipes() {
 }
 
 export {
+  getUserById,
   addNewUser,
-  getProfileByUsername,
+  getUserByUsername,
   getFollowingPosts,
   toggleLike,
   getImageUrl,
@@ -159,7 +168,7 @@ export {
   loadUserPosts,
   isActiveUserFollowing,
   toggleFollow,
-  editUserProfile,
+  saveEditedProfile,
   getRecipeById,
   addComment,
   getAllUsers,

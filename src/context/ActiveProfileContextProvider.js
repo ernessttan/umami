@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useContext } from 'react';
-import useUserProfile from '../hooks/useUserProfile';
+import useUser from '../hooks/useUser';
 import AuthContext from './AuthContext';
 import ActiveProfileContext from './ActiveProfileContext';
 
 function ActiveProfileContextProvider({ children }) {
   const { activeUser } = useContext(AuthContext);
-  const userProfile = useUserProfile(activeUser.displayName);
+  const user = useUser(activeUser.uid);
 
   return (
-    <ActiveProfileContext.Provider value={{ userProfile }}>
+    <ActiveProfileContext.Provider value={{ user }}>
       { children }
     </ActiveProfileContext.Provider>
   );

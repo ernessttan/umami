@@ -1,9 +1,20 @@
 import PropTypes from 'prop-types';
-import useRecipes from '../../../hooks/useRecipes';
+import { useEffect, useState } from 'react';
+import { getAllRecipes } from '../../../firebase/services';
 import RecipeCard from '../../Common/RecipeCard';
 
 function RecipeResults({ searchQuery }) {
-  const recipes = useRecipes();
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    const getRecipes = async () => {
+      await getAllRecipes()
+        .then((allRecipes) => {
+          setRecipes(allRecipes);
+        });
+    };
+    getRecipes();
+  }, []);
 
   const filterResults = (query, recipeArr) => recipeArr.filter(
     (recipe) => recipe.title.toLowerCase().includes(query),

@@ -1,19 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../context/AuthContext';
-import { getFollowingPosts, getProfileByUsername } from '../firebase/services';
+import { getFollowingPosts, getUserById } from '../firebase/services';
 
 // Hook to get a user's feed content
-function useFeedPosts() {
+function useFeed() {
   const { activeUser } = useContext(AuthContext);
   const [followingPosts, setFollowingPosts] = useState([]);
 
   useEffect(() => {
     async function getFeedPosts() {
-      const userProfile = await getProfileByUsername(activeUser.displayName);
+      const userProfile = await getUserById(activeUser.uid);
       if (userProfile.following.length > 0) {
-        const posts = await getFollowingPosts(userProfile.id, userProfile.following);
-        posts.sort((a, b) => b.dateCreated - a.dateCreated);
-        setFollowingPosts(posts);
+        await getFollowingPosts(userProfile.id, userProfile.following)
+          .then((posts) => {
+            posts.sort((a, b) => b.dateCreated - a.dateCreated);
+            setFollowingPosts(posts);
+          });
       }
     }
     getFeedPosts();
@@ -22,4 +24,4 @@ function useFeedPosts() {
   return followingPosts;
 }
 
-export default useFeedPosts;
+export default useFeed;

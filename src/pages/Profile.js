@@ -6,11 +6,11 @@ import Bio from '../components/Profile/Bio';
 import Actions from '../components/Profile/Actions';
 import Navbar from '../components/Common/Navbar';
 import ProfileFeed from '../components/Profile/ProfileFeed';
-import useUserProfile from '../hooks/useUserProfile';
+import useUser from '../hooks/useUser';
 
 function Profile() {
   const { username } = useParams();
-  const userProfile = useUserProfile(username);
+  const userProfile = useUser(username);
 
   return (
     <div className="h-screen py-3">
