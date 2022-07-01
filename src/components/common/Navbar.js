@@ -33,7 +33,7 @@ function Navbar() {
           to={`/profile/${activeUser.displayName}`}
         >
           {
-            activeUser.avatarUrl
+            activeUser.photoUrl
               ? (
                 <img
                   className="object-cover rounded-full h-8 w-8 md:ml-1"
