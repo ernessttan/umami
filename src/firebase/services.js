@@ -126,12 +126,22 @@ async function saveEditedProfile(userId, updatedProfile) {
 }
 
 // Function to get a recipe by id
-async function getRecipeById(recipeId) {
+async function getRecipeById(recipeId, activeUserId) {
   const q = query(recipesRef, where('id', '==', recipeId));
   const result = await getDocs(q);
   const recipeResult = result.docs.map((recipe) => recipe.data());
 
-  return recipeResult[0];
+  const recipe = await Promise.all(
+    recipeResult.map(async (post) => {
+      let userLikedPost = false;
+      if (post.likes.includes(activeUserId)) {
+        userLikedPost = true;
+      }
+      return { ...post, userLikedPost };
+    }),
+  );
+
+  return recipe[0];
 }
 
 // Function to add comment

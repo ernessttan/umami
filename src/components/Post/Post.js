@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Image from './Image';
 import Information from './Information';
-import Actions from './Actions';
+import SocialBar from '../Common/SocialBar';
 
 // Component for Individual Post on Feed
 function Post({
@@ -25,11 +25,9 @@ function Post({
         <Information title={title} dateCreated={dateCreated} />
       </Link>
       <div className="pl-5">
-        <Actions
+        <SocialBar
           totalLikes={likes.length}
-          likes={likes}
           totalComments={comments.length}
-          comments={comments}
           userLikedPost={userLikedPost}
           id={id}
         />

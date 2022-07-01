@@ -7,7 +7,7 @@ function SearchBar({
   return (
     <div className="p-4 mx-5 bg-textbox-grey rounded flex items-center">
       <div className="flex items-center gap-2 w-full">
-        {isSearching === true ? <ChevronLeftIcon className="w-5 h-5" onClick={closeSearch} /> : <SearchIcon className="w-5 h-5" />}
+        {isSearching ? <ChevronLeftIcon className="w-5 h-5" onClick={closeSearch} /> : <SearchIcon className="w-5 h-5" />}
         <input
           onKeyDown={startSearch}
           onChange={handleChange}
