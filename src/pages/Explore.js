@@ -35,7 +35,7 @@ function Explore() {
       <SearchBar
         searchQuery={searchQuery}
         isSearching={isSearching}
-        toggleSearch={startSearch}
+        startSearch={startSearch}
         closeSearch={closeSearch}
         handleChange={handleChange}
       />
