@@ -55,4 +55,12 @@
   .navbar-icon:active {
     color: theme('colors.orange-500');
   }
+
+  .navbar-side {
+    bottom: auto;
+    position: static;
+    height: theme(height.full);
+    width: theme(width.auto);
+    background-color: theme('colors.transparent');
+  }
 }

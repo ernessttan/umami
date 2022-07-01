@@ -22,10 +22,10 @@ function Timeline() {
   ));
 
   return (
-    <div className="overflow-y-scroll">
+    <div className="overflow-y-scroll flex flex-col items-center h-full mt-40 md:order-last md:grow">
       {followingPosts.length > 0 ? ({ posts })
         : (
-          <div className="flex flex-col items-center justify-center mt-[30vh]">
+          <div className="text-center">
             <h1 className="text-grey-500 font-bold">
               Follow Someone To
               {' '}
