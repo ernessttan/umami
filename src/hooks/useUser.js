@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
-import { getUserById } from '../firebase/services';
+import { getUserByUsername } from '../firebase/services';
 
 /*  Hook to retrieve a user's profile from db  */
 
-// Expected Input: userId <String>
+// Expected Input: username <String>
 // Expected Output: userProfile <Object>
-function useUser(userId) {
+function useUser(username) {
   const [user, setUser] = useState();
 
   useEffect(() => {
     async function getUser() {
-      const result = await getUserById(userId);
+      const result = await getUserByUsername(username);
       if (result) {
         setUser(result);
       }
     }
     getUser();
-  }, [userId]);
+  }, [username]);
 
   return user;
 }

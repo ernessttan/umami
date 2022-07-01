@@ -11,20 +11,11 @@ import * as ROUTES from '../constants/routes';
 function SignUp() {
   const navigate = useNavigate();
   const { auth } = useContext(FireBaseContext);
+  const [errorMessage, setErrorMessage] = useState('');
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     username: '',
     password: '',
-  });
-  const [errorMessage, setErrorMessage] = useState('');
-
-  // Function to handle input change
-  const handleChange = ((event) => {
-    const { name, value } = event.target;
-    setSignUpInfo((prevSignUpInfo) => ({
-      ...prevSignUpInfo,
-      [name]: value,
-    }));
   });
 
   // Function to handle Sign Up completion
@@ -45,11 +36,6 @@ function SignUp() {
         if (error.code === 'auth/email-already-in-use') {
           setErrorMessage('Sorry that email already exists');
         }
-        setSignUpInfo({
-          email: '',
-          username: '',
-          password: '',
-        });
       });
   };
 
@@ -57,9 +43,10 @@ function SignUp() {
     <div className="container py-8 px-5">
       <AuthHeader />
       <SignUpForm
+        signUpInfo={signUpInfo}
+        setSignUpInfo={setSignUpInfo}
         errorMessage={errorMessage}
         handleSignUp={handleSignUp}
-        handleChange={handleChange}
       />
     </div>
   );

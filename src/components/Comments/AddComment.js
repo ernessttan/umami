@@ -14,8 +14,8 @@ function AddComment({
   const [newComment, setNewComment] = useState({
     content: '',
     dateCreated: Date.now(),
-    username: `${activeUser.username}`,
-    avatarUrl: `${activeUser.avatarUrl}`,
+    username: `${activeUser.displayName}`,
+    avatarUrl: `${activeUser.photoUrl}`,
     id: generateUniqueId({ length: 2, useLetters: false }),
   });
 
