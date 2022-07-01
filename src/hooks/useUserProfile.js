@@ -6,19 +6,19 @@ import { getProfileByUsername } from '../firebase/services';
 // Expected Input: username <String>
 // Expected Output: userProfile <Object>
 function useUserProfile(username) {
-  const [userProfile, setUserProfile] = useState();
+  const [activeProfile, setActiveProfile] = useState();
 
   useEffect(() => {
     async function getUserProfileByUsername() {
       const result = await getProfileByUsername(username);
       if (result) {
-        setUserProfile(result);
+        setActiveProfile(result);
       }
     }
     getUserProfileByUsername();
   }, [username]);
 
-  return userProfile;
+  return activeProfile;
 }
 
 export default useUserProfile;

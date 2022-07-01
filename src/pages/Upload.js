@@ -6,19 +6,14 @@ import AuthContext from '../context/AuthContext';
 function Upload() {
   const { activeUser } = useContext(AuthContext);
   return (
-    <div>
-
-      <div className="container py-8 px-5">
-        <UploadHeader />
-        <UploadForm
-          avatarUrl={activeUser.avatarUrl}
-          id={activeUser.id}
-          username={activeUser.username}
-        />
-      </div>
-
+    <div className="container py-8 px-5">
+      <UploadHeader />
+      <UploadForm
+        avatarUrl={activeUser.photoUrl}
+        id={activeUser.uid}
+        username={activeUser.displayName}
+      />
     </div>
-
   );
 }
 

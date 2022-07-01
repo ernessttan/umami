@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../components/Common/AuthHeader';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import FireBaseContext from '../context/FireBaseContext';
-import { getUserByUsername, setUserProfile } from '../firebase/services';
+import { addNewUser } from '../firebase/services';
 import * as ROUTES from '../constants/routes';
 
 function SignUp() {
@@ -34,11 +34,12 @@ function SignUp() {
       .then(async (createdCredentials) => {
         // Signed up successfully
         const { user } = createdCredentials;
-        // Update username
+        // Update username in Firebase Auth
         await updateProfile(user, {
           displayName: signUpInfo.username,
         });
-        await setUserProfile(user).then(navigate(ROUTES.FEED));
+        // Add new user to db
+        await addNewUser(user).then(navigate(ROUTES.FEED));
       })
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {

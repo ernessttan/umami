@@ -11,8 +11,9 @@ const usersRef = collection(db, 'users');
 const recipesRef = collection(db, 'recipes');
 const recipeImagesRef = ref(storage, 'recipes');
 
-// Function to set user document in Firestore
-async function setUserProfile(user) {
+// Function to save user document in Firestore on Signup
+async function addNewUser(user) {
+  // Uses active users id as the doc
   await setDoc(doc(usersRef, user.uid), {
     id: user.uid,
     bio: '',
@@ -149,7 +150,7 @@ async function getAllRecipes() {
 }
 
 export {
-  setUserProfile,
+  addNewUser,
   getProfileByUsername,
   getFollowingPosts,
   toggleLike,

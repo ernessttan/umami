@@ -1,10 +1,10 @@
 // import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
-import useFeedPosts from '../../hooks/useFeedPosts';
+import useFeed from '../../hooks/useFeed';
 import Post from '../Post/Post';
 
 function Timeline() {
-  const followingPosts = useFeedPosts();
+  const followingPosts = useFeed();
   const posts = followingPosts.map((post) => (
     <Post
       key={post.id}
