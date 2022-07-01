@@ -40,14 +40,18 @@ function SignUp() {
   };
 
   return (
-    <div className="container py-8 px-5">
-      <AuthHeader />
-      <SignUpForm
-        signUpInfo={signUpInfo}
-        setSignUpInfo={setSignUpInfo}
-        errorMessage={errorMessage}
-        handleSignUp={handleSignUp}
-      />
+    <div className="container mx-auto max-w-screen-md h-screen flex items-center">
+      <div className="w-full px-5">
+        <AuthHeader />
+        <div>
+          <SignUpForm
+            signUpInfo={signUpInfo}
+            setSignUpInfo={setSignUpInfo}
+            errorMessage={errorMessage}
+            handleSignUp={handleSignUp}
+          />
+        </div>
+      </div>
     </div>
   );
 }
