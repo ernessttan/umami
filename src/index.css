@@ -50,7 +50,6 @@
   .navbar-icon {
     width: theme(width.7);
     height: theme(height.7);
-    color: theme('colors.grey-500');
   }
   .navbar-icon:active {
     color: theme('colors.orange-500');

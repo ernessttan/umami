@@ -1,37 +1,49 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import {
-  BookmarkIcon, HomeIcon, SearchIcon, UserCircleIcon,
+  BookmarkIcon, HomeIcon, SearchIcon, UserCircleIcon, PlusCircleIcon,
 } from '@heroicons/react/outline';
 import * as ROUTES from '../../constants/routes';
 import AuthContext from '../../context/AuthContext';
 
 function Navbar() {
   const { activeUser } = useContext(AuthContext);
-  console.log(activeUser.photoUrl);
+  const currentRoute = useLocation().pathname;
 
   return (
     <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow fixed bottom-0 md:shadow-none md:order-first md:navbar-side md:basis-1/4">
       <div className="flex items-center justify-between md:flex-col md:items-start">
-        <Link className="flex items-center md:mt-3 md:mb-3 md:gap-2" to={ROUTES.FEED}>
+        <NavLink
+          to={ROUTES.FEED}
+          className={`${currentRoute.includes('feed') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+        >
           <HomeIcon className="navbar-icon" />
           <p className="hidden md:block">Home</p>
-        </Link>
-        <Link className="flex items-center md:mt-3 md:mb-3 md:gap-2" to={ROUTES.EXPLORE}>
+        </NavLink>
+        <NavLink
+          to={ROUTES.EXPLORE}
+          className={`${currentRoute.includes('explore') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+        >
           <SearchIcon className="navbar-icon" />
           <p className="hidden md:block">Explore</p>
-        </Link>
-        <Link className="flex items-center md:mt-3 md:mb-3 md:gap-2" to={ROUTES.UPLOAD}>
-          <img className="h-8 w-8 md:ml-1" src="/icons/post.svg" alt="post icon" />
-          <p className="hidden md:block md:ml-1">Post</p>
-        </Link>
-        <Link className="flex items-center md:mt-3 md:mb-3 md:gap-2" to={ROUTES.SAVED}>
+        </NavLink>
+        <NavLink
+          to={ROUTES.UPLOAD}
+          className={`${currentRoute.includes('upload') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+        >
+          <PlusCircleIcon className="navbar-icon" />
+          <p className="hidden md:block">Post</p>
+        </NavLink>
+        <NavLink
+          to={ROUTES.SAVED}
+          className={`${currentRoute.includes('saved') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+        >
           <BookmarkIcon className="navbar-icon" />
           <p className="hidden md:block">Explore</p>
-        </Link>
-        <Link
-          className="flex items-center rounded-full md:mt-3 md:mb-3 md:gap-2"
+        </NavLink>
+        <NavLink
           to={`/profile/${activeUser.displayName}`}
+          className={`${currentRoute.includes('profile') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
         >
           {
             activeUser.photoUrl === undefined
@@ -40,14 +52,14 @@ function Navbar() {
               )
               : (
                 <img
-                  className="object-cover rounded-full h-8 w-8 md:ml-1"
+                  className="object-cover rounded-full h-8 w-8"
                   src={activeUser.photoUrl}
                   alt="user avatar"
                 />
               )
           }
-          <p className="hidden md:block md:ml-1">Profile</p>
-        </Link>
+          <p className="hidden text-grey-700 md:block">Profile</p>
+        </NavLink>
       </div>
     </nav>
   );

@@ -7,7 +7,7 @@ function AppHeader() {
     useNavigate('/feed');
   };
   return (
-    <header className="p-5 text-orange-500">
+    <header className="p-5 text-orange-500 md:shadow">
       <div className="flex">
         <button onClick={routeHome} type="button">
           <img className="h-8 w-8" src="logo.svg" alt="Umami Icon" />
