@@ -29,12 +29,12 @@ function Actions({ username, userId }) {
         <Link
           to={`/editprofile/${username}`}
           type="button"
-          className="w-full bg-orange-500 text-white flex justify-center p-3 rounded-full"
+          className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full"
         >
           Edit Profile
         </Link>
       ) : (
-        <button onClick={handleFollow} type="button" value={userId} className="w-full bg-orange-500 text-white flex justify-center p-3 rounded-full">
+        <button onClick={handleFollow} type="button" value={userId} className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full">
           {isFollowingUser ? 'Unfollow' : 'Follow'}
         </button>
       )}

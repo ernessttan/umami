@@ -13,26 +13,29 @@ function Profile() {
   const userProfile = useUser(username);
 
   return (
-    <div className="h-screen py-3">
+    <>
       <ProfileHeader username={username} />
       {userProfile && (
-      <div className="h-full px-5">
-        <Information
-          avatarUrl={userProfile.avatarUrl}
-          username={userProfile.username}
-          name={userProfile.name}
-        />
-        <Statistics
-          totalFollowers={userProfile.followers.length}
-          totalFollowing={userProfile.following.length}
-        />
-        <Bio bio={userProfile.bio} />
-        <Actions username={userProfile.username} userId={userProfile.id} />
-        <ProfileFeed userId={userProfile.id} />
+      <div className="md:app-container">
+        <div className="grow-1 basis-3/4 px-10">
+          <Information
+            avatarUrl={userProfile.avatarUrl}
+            username={userProfile.username}
+            name={userProfile.name}
+          />
+          <Statistics
+            totalFollowers={userProfile.followers.length}
+            totalFollowing={userProfile.following.length}
+          />
+          <Bio bio={userProfile.bio} />
+          <Actions username={userProfile.username} userId={userProfile.id} />
+          <ProfileFeed userId={userProfile.id} />
+        </div>
+        <Navbar />
       </div>
       )}
-      <Navbar />
-    </div>
+
+    </>
   );
 }
 

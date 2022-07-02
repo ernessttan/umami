@@ -22,7 +22,7 @@ function Timeline() {
   ));
 
   return (
-    <div className="mt-20 order-last grow">
+    <div className="mt-20 order-last grow basis-3/4 overflow-y-scroll">
       {followingPosts.length > 0 ? ({ posts })
         : (
           <div className="text-center">
