@@ -40,7 +40,7 @@ function SignUp() {
   };
 
   return (
-    <div className="container mx-auto max-w-screen-md h-screen flex items-center">
+    <div className="container mx-auto max-w-screen-md h-screen flex mt-20">
       <div className="w-full px-5">
         <AuthHeader />
         <div>
