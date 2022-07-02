@@ -8,6 +8,7 @@ import AuthContext from '../../context/AuthContext';
 
 function Navbar() {
   const { activeUser } = useContext(AuthContext);
+  console.log(activeUser.photoUrl);
 
   return (
     <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow fixed bottom-0 md:shadow-none md:order-first md:navbar-side md:basis-1/4">
@@ -29,19 +30,21 @@ function Navbar() {
           <p className="hidden md:block">Explore</p>
         </Link>
         <Link
-          className="flex items-center rounded-full h-9 w-9 md:mt-3 md:mb-3 md:gap-2"
+          className="flex items-center rounded-full md:mt-3 md:mb-3 md:gap-2"
           to={`/profile/${activeUser.displayName}`}
         >
           {
-            activeUser.photoUrl
+            activeUser.photoUrl === undefined
               ? (
+                <UserCircleIcon className="navbar-icon" />
+              )
+              : (
                 <img
                   className="object-cover rounded-full h-8 w-8 md:ml-1"
                   src={activeUser.photoUrl}
                   alt="user avatar"
                 />
               )
-              : (<UserCircleIcon className="navbar-icon h-8 w-8" />)
           }
           <p className="hidden md:block md:ml-1">Profile</p>
         </Link>

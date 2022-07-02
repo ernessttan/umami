@@ -7,7 +7,7 @@ function ProfilePost({
 }) {
   return (
     <Link to={`/recipe/${id}`}>
-      <img className="object-cover rounded w-40 h-40" src={imageUrl} alt="user post" />
+      <img className="object-cover rounded w-full h-2/3" src={imageUrl} alt="user post" />
       <h2 className="py-1 font-bold text-xl">{title}</h2>
       <div className="flex items-center gap-2">
         <svg

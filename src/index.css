@@ -63,4 +63,11 @@
     width: theme(width.auto);
     background-color: theme('colors.transparent');
   }
+
+  .app-container {
+    height: theme(height.full);
+    display: flex;
+    flex-direction: row;
+  }
 }
+
