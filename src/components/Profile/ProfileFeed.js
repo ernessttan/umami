@@ -1,11 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
 import RecipeCard from '../Common/RecipeCard';
-import useUserPosts from '../../hooks/useUserPosts';
 
-function ProfileFeed({ userId }) {
-  // Get a users posts
-  const posts = useUserPosts(userId);
-
+function ProfileFeed({ posts }) {
   const userPosts = posts.map((post) => (
     <RecipeCard
       key={post.id}
@@ -23,8 +20,12 @@ function ProfileFeed({ userId }) {
   );
 }
 
+ProfileFeed.defaultProps = {
+  posts: [],
+};
+
 ProfileFeed.propTypes = {
-  userId: PropTypes.string.isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default ProfileFeed;

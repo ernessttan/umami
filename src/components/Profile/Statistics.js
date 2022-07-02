@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-function Statistics({ totalFollowers, totalFollowing }) {
+function Statistics({ totalFollowers, totalFollowing, totalPosts }) {
   return (
     <div className="flex items-center gap-5 mt-2 pl-3">
       <h3 className="font-bold">
-        48
+        {totalPosts}
         {' '}
         <span className="font-normal">Posts</span>
       </h3>
@@ -25,6 +25,7 @@ function Statistics({ totalFollowers, totalFollowing }) {
 Statistics.propTypes = {
   totalFollowers: PropTypes.number.isRequired,
   totalFollowing: PropTypes.number.isRequired,
+  totalPosts: PropTypes.number.isRequired,
 };
 
 export default Statistics;

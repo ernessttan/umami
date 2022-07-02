@@ -7,11 +7,14 @@ import Actions from '../components/Profile/Actions';
 import Navbar from '../components/Common/Navbar';
 import ProfileFeed from '../components/Profile/ProfileFeed';
 import useUser from '../hooks/useUser';
+import useUserPosts from '../hooks/useUserPosts';
 import AppHeader from '../components/Common/AppHeader';
 
 function Profile() {
   const { username } = useParams();
   const userProfile = useUser(username);
+  // Get a users posts
+  const posts = useUserPosts(username);
 
   return (
     <>
@@ -28,12 +31,13 @@ function Profile() {
             name={userProfile.name}
           />
           <Statistics
+            totalPosts={posts.length}
             totalFollowers={userProfile.followers.length}
             totalFollowing={userProfile.following.length}
           />
           <Bio bio={userProfile.bio} />
           <Actions username={userProfile.username} userId={userProfile.id} />
-          <ProfileFeed userId={userProfile.id} />
+          <ProfileFeed posts={posts} />
         </div>
         )}
         <Navbar />

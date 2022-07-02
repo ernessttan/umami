@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { loadUserPosts } from '../firebase/services';
 
-function useUserPosts(userId) {
+function useUserPosts(username) {
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
     async function getUserPosts() {
       // Get user posts from db
-      const posts = await loadUserPosts(userId);
+      const posts = await loadUserPosts(username);
       posts.sort((a, b) => b.dateCreated - a.dateCreated);
       setUserPosts(posts);
     }
     getUserPosts();
-  }, [userId]);
+  }, [username]);
   return userPosts;
 }
 
