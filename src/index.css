@@ -65,7 +65,7 @@
   .app-container {
     height: theme(height.full);
     display: flex;
-    flex-direction: row;
+    flex-direction: row;  
   }
 }
 

@@ -33,7 +33,7 @@ function Explore() {
     <>
       <AppHeader />
       <div className="h-full md:app-container">
-        <div className="grow-1 basis-3/4">
+        <div className="grow-1 basis-3/4 py-5">
           <SearchBar
             searchQuery={searchQuery}
             isSearching={isSearching}

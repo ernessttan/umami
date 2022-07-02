@@ -7,6 +7,7 @@ import Actions from '../components/Profile/Actions';
 import Navbar from '../components/Common/Navbar';
 import ProfileFeed from '../components/Profile/ProfileFeed';
 import useUser from '../hooks/useUser';
+import AppHeader from '../components/Common/AppHeader';
 
 function Profile() {
   const { username } = useParams();
@@ -14,10 +15,13 @@ function Profile() {
 
   return (
     <>
-      <ProfileHeader username={username} />
-      {userProfile && (
-      <div className="md:app-container">
-        <div className="grow-1 basis-3/4 px-10">
+      <div className="hidden md:block">
+        <AppHeader />
+      </div>
+      <div className="h-full md:app-container">
+        {userProfile && (
+        <div className="grow-1 basis-3/4 px-10 py-5">
+          <ProfileHeader username={username} />
           <Information
             avatarUrl={userProfile.avatarUrl}
             username={userProfile.username}
@@ -31,10 +35,9 @@ function Profile() {
           <Actions username={userProfile.username} userId={userProfile.id} />
           <ProfileFeed userId={userProfile.id} />
         </div>
+        )}
         <Navbar />
       </div>
-      )}
-
     </>
   );
 }
