@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import Loader from './components/Common/Loader';
 import * as ROUTES from './constants/routes';
 import AuthContextProvider from './context/AuthContextProvider';
 
@@ -21,7 +22,7 @@ function App() {
       <div className="h-full flex flex-col md:flex-row">
         <AuthContextProvider>
           <Router>
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense fallback={<Loader />}>
               <Routes>
                 <Route path={ROUTES.WELCOME} element={<Welcome />} />
                 <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
