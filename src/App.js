@@ -14,29 +14,34 @@ const Recipe = lazy(() => import('./pages/Recipe'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Saved = lazy(() => import('./pages/Saved'));
 const Comments = lazy(() => import('./pages/Comments'));
+const Settings = lazy(() => import('./pages/Settings'));
 
 function App() {
   return (
-    <div className="h-screen">
-      <AuthContextProvider>
-        <Router>
-          <Suspense fallback={<p>Loading...</p>}>
-            <Routes>
-              <Route path={ROUTES.WELCOME} element={<Welcome />} />
-              <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
-              <Route path={ROUTES.LOG_IN} element={<Login />} />
-              <Route path={ROUTES.FEED} element={<Feed />} />
-              <Route path={ROUTES.UPLOAD} element={<Upload />} />
-              <Route path={ROUTES.PROFILE} element={<Profile />} />
-              <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
-              <Route path={ROUTES.RECIPE} element={<Recipe />} />
-              <Route path={ROUTES.EXPLORE} element={<Explore />} />
-              <Route path={ROUTES.SAVED} element={<Saved />} />
-              <Route path={ROUTES.COMMENTS} element={<Comments />} />
-            </Routes>
-          </Suspense>
-        </Router>
-      </AuthContextProvider>
+    <div className="h-screen  ">
+      <div className="h-full flex flex-col md:flex-row">
+        <AuthContextProvider>
+          <Router>
+            <Suspense fallback={<p>Loading...</p>}>
+              <Routes>
+                <Route path={ROUTES.WELCOME} element={<Welcome />} />
+                <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+                <Route path={ROUTES.LOG_IN} element={<Login />} />
+                <Route path={ROUTES.FEED} element={<Feed />} />
+                <Route path={ROUTES.UPLOAD} element={<Upload />} />
+                <Route path={ROUTES.PROFILE} element={<Profile />} />
+                <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
+                <Route path={ROUTES.RECIPE} element={<Recipe />} />
+                <Route path={ROUTES.EXPLORE} element={<Explore />} />
+                <Route path={ROUTES.SAVED} element={<Saved />} />
+                <Route path={ROUTES.COMMENTS} element={<Comments />} />
+                <Route path={ROUTES.SETTINGS} element={<Settings />} />
+              </Routes>
+            </Suspense>
+          </Router>
+        </AuthContextProvider>
+      </div>
+
     </div>
 
   );

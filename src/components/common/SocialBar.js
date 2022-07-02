@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import { toggleLike } from '../../firebase/services';
 
-function Actions({
+function SocialBar({
   totalComments, totalLikes, userLikedPost, id,
 }) {
   const navigate = useNavigate();
@@ -13,22 +13,22 @@ function Actions({
   const [likedStatus, setLikedStatus] = useState(userLikedPost);
 
   useEffect(() => {
-    toggleLike(activeUser.id, id, likedStatus);
+    toggleLike(activeUser.uid, id, likedStatus);
   }, [likedStatus]);
+
+  const handleLike = () => {
+    setLikedStatus((prevLikedStatus) => !prevLikedStatus);
+    setTotalLikes((prevTotalLikes) => (likedStatus ? prevTotalLikes - 1 : prevTotalLikes + 1));
+  };
 
   const routeToComments = () => {
     navigate(`/comments/${id}`);
   };
 
-  const handleLiked = () => {
-    setLikedStatus((prevLikedStatus) => !prevLikedStatus);
-    setTotalLikes((prevTotalLikes) => (likedStatus ? prevTotalLikes - 1 : prevTotalLikes + 1));
-  };
-
   return (
     <div className="flex gap-3 mt-3">
       <div className="flex flex-col items-center">
-        <button onClick={handleLiked} type="button">
+        <button onClick={handleLike} type="button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`h-6 w-6 ${likedStatus ? 'fill-orange-100' : ''}`}
@@ -69,11 +69,11 @@ function Actions({
   );
 }
 
-Actions.propTypes = {
+SocialBar.propTypes = {
   id: PropTypes.string.isRequired,
   totalComments: PropTypes.number.isRequired,
   totalLikes: PropTypes.number.isRequired,
   userLikedPost: PropTypes.bool.isRequired,
 };
 
-export default Actions;
+export default SocialBar;

@@ -16,15 +16,6 @@ function Login() {
   });
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Function to handle input change
-  const handleChange = ((event) => {
-    const { name, value } = event.target;
-    setLoginInfo((prevLoginInfo) => ({
-      ...prevLoginInfo,
-      [name]: value,
-    }));
-  });
-
   // Function to handle Login
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -44,13 +35,19 @@ function Login() {
   };
 
   return (
-    <div className="container py-8 px-5">
-      <AuthHeader />
-      <LoginForm
-        errorMessage={errorMessage}
-        handleChange={handleChange}
-        handleLogin={handleLogin}
-      />
+    <div className="container mx-auto max-w-screen-md h-screen flex items-center">
+      <div className="w-full px-5">
+        <AuthHeader />
+        <div>
+          <LoginForm
+            loginInfo={loginInfo}
+            setLoginInfo={setLoginInfo}
+            errorMessage={errorMessage}
+            handleLogin={handleLogin}
+          />
+        </div>
+      </div>
+
     </div>
   );
 }

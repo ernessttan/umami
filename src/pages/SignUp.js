@@ -5,26 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import AuthHeader from '../components/Common/AuthHeader';
 import SignUpForm from '../components/SignUp/SignUpForm';
 import FireBaseContext from '../context/FireBaseContext';
-import { setUserProfile } from '../firebase/services';
+import { addNewUser } from '../firebase/services';
 import * as ROUTES from '../constants/routes';
 
 function SignUp() {
   const navigate = useNavigate();
   const { auth } = useContext(FireBaseContext);
+  const [errorMessage, setErrorMessage] = useState('');
   const [signUpInfo, setSignUpInfo] = useState({
     email: '',
     username: '',
     password: '',
-  });
-  const [errorMessage, setErrorMessage] = useState('');
-
-  // Function to handle input change
-  const handleChange = ((event) => {
-    const { name, value } = event.target;
-    setSignUpInfo((prevSignUpInfo) => ({
-      ...prevSignUpInfo,
-      [name]: value,
-    }));
   });
 
   // Function to handle Sign Up completion
@@ -34,33 +25,33 @@ function SignUp() {
       .then(async (createdCredentials) => {
         // Signed up successfully
         const { user } = createdCredentials;
-        // Update username
+        // Update username in Firebase Auth
         await updateProfile(user, {
           displayName: signUpInfo.username,
         });
-        await setUserProfile(user);
-        navigate(ROUTES.FEED);
+        // Add new user to db
+        await addNewUser(user).then(navigate(ROUTES.FEED));
       })
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
           setErrorMessage('Sorry that email already exists');
         }
-        setSignUpInfo({
-          email: '',
-          username: '',
-          password: '',
-        });
       });
   };
 
   return (
-    <div className="container py-8 px-5">
-      <AuthHeader />
-      <SignUpForm
-        errorMessage={errorMessage}
-        handleSignUp={handleSignUp}
-        handleChange={handleChange}
-      />
+    <div className="container mx-auto max-w-screen-md h-screen flex items-center">
+      <div className="w-full px-5">
+        <AuthHeader />
+        <div>
+          <SignUpForm
+            signUpInfo={signUpInfo}
+            setSignUpInfo={setSignUpInfo}
+            errorMessage={errorMessage}
+            handleSignUp={handleSignUp}
+          />
+        </div>
+      </div>
     </div>
   );
 }

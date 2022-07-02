@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
+import PropTypes from 'prop-types';
 
-function ProfileHeader() {
+function ProfileHeader({ username }) {
   return (
     <div className="mb-8 ml-1 px-5 flex justify-end">
-      <Link to={ROUTES.SETTINGS}>
+      <Link to={`/settings/${username}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -24,5 +24,9 @@ function ProfileHeader() {
     </div>
   );
 }
+
+ProfileHeader.propTypes = {
+  username: PropTypes.string.isRequired,
+};
 
 export default ProfileHeader;

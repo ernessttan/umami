@@ -1,9 +1,10 @@
 // import Skeleton from 'react-loading-skeleton';
-import useFeedPosts from '../../hooks/useFeedPosts';
+import { Link } from 'react-router-dom';
+import useFeed from '../../hooks/useFeed';
 import Post from '../Post/Post';
 
 function Timeline() {
-  const followingPosts = useFeedPosts();
+  const followingPosts = useFeed();
   const posts = followingPosts.map((post) => (
     <Post
       key={post.id}
@@ -21,8 +22,19 @@ function Timeline() {
   ));
 
   return (
-    <div>
-      {posts}
+    <div className="mt-20 order-last grow basis-3/4 overflow-y-scroll py-5">
+      {followingPosts.length > 0 ? ({ posts })
+        : (
+          <div className="text-center">
+            <h1 className="text-grey-500 font-bold">
+              Follow Someone To
+              {' '}
+              <br />
+              View Some Recipes
+            </h1>
+            <Link className="mt-5 text-orange-500 text-xl font-semibold" to="/explore">Explore</Link>
+          </div>
+        )}
     </div>
   );
 }

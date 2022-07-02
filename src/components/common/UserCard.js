@@ -6,7 +6,7 @@ function userCard({
 }) {
   return (
     <Link to={`/profile/${username}`} className="flex items-center gap-2">
-      <img className="object-cover rounded-full h-8 w-8" src={avatarUrl} alt="user avatar" />
+      <img className="object-cover rounded-full h-10 w-10" src={avatarUrl} alt="user avatar" />
       <div>
         <p className="font-semibold">{name}</p>
         <p>{username}</p>
@@ -17,10 +17,11 @@ function userCard({
 
 userCard.defaultProps = {
   name: '',
+  avatarUrl: '/icons/profile.svg',
 };
 
 userCard.propTypes = {
-  avatarUrl: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string,
   username: PropTypes.string.isRequired,
 };
 

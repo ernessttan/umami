@@ -7,10 +7,10 @@ import SearchResults from '../components/Explore/SearchResults/SearchResults';
 
 function Explore() {
   const [isSearching, setIsSearching] = useState(false);
-  const [selected, setSelected] = useState('users');
+  const [selected, setSelected] = useState('recipes');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const toggleSearch = () => {
+  const startSearch = () => {
     setIsSearching(true);
   };
 
@@ -32,19 +32,25 @@ function Explore() {
   return (
     <>
       <AppHeader />
-      <SearchBar
-        searchQuery={searchQuery}
-        isSearching={isSearching}
-        toggleSearch={toggleSearch}
-        closeSearch={closeSearch}
-        handleChange={handleChange}
-      />
-      <SelectSearch handleClick={handleClick} selected={selected} />
-      <SearchResults
-        selected={selected}
-        searchQuery={searchQuery}
-      />
-      <Navbar className="mt-full" />
+      <div className="h-full md:app-container">
+        <div className="grow-1 basis-3/4 py-5">
+          <SearchBar
+            searchQuery={searchQuery}
+            isSearching={isSearching}
+            startSearch={startSearch}
+            closeSearch={closeSearch}
+            handleChange={handleChange}
+          />
+          <SelectSearch handleClick={handleClick} selected={selected} />
+          <SearchResults
+            selected={selected}
+            searchQuery={searchQuery}
+          />
+        </div>
+
+        <Navbar className="mt-full" />
+      </div>
+
     </>
   );
 }

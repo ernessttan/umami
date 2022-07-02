@@ -1,14 +1,17 @@
-/* eslint-disable react/jsx-no-undef */
-import AppHeader from '../components/Common/AppHeader';
 import Timeline from '../components/Feed/Timeline';
 import Navbar from '../components/Common/Navbar';
+import AppHeader from '../components/Common/AppHeader';
 
+// Page that display a users feed
 function Feed() {
   return (
     <>
       <AppHeader />
-      <Timeline />
-      <Navbar />
+      <div className="md:app-container">
+        <Timeline />
+        <Navbar />
+      </div>
+
     </>
   );
 }

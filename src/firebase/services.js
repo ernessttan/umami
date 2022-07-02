@@ -11,8 +11,9 @@ const usersRef = collection(db, 'users');
 const recipesRef = collection(db, 'recipes');
 const recipeImagesRef = ref(storage, 'recipes');
 
-// Function to set user document in Firestore
-async function setUserProfile(user) {
+// Function to save user document in Firestore on Signup
+async function addNewUser(user) {
+  // Uses active users id as the doc
   await setDoc(doc(usersRef, user.uid), {
     id: user.uid,
     bio: '',
@@ -23,6 +24,14 @@ async function setUserProfile(user) {
     followers: [],
     dateCreated: Date.now(),
   });
+}
+
+// Get a user object from db using a users id
+async function getUserById(userId) {
+  const docRef = doc(usersRef, userId);
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data();
 }
 
 // Function to retrieve user's information using username
@@ -112,17 +121,27 @@ async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
 }
 
 // Function to handle edits for a users profile
-async function editUserProfile(userId, updatedProfile) {
+async function saveEditedProfile(userId, updatedProfile) {
   await updateDoc(doc(usersRef, userId), updatedProfile);
 }
 
 // Function to get a recipe by id
-async function getRecipeById(recipeId) {
+async function getRecipeById(recipeId, activeUserId) {
   const q = query(recipesRef, where('id', '==', recipeId));
   const result = await getDocs(q);
   const recipeResult = result.docs.map((recipe) => recipe.data());
 
-  return recipeResult[0];
+  const recipe = await Promise.all(
+    recipeResult.map(async (post) => {
+      let userLikedPost = false;
+      if (post.likes.includes(activeUserId)) {
+        userLikedPost = true;
+      }
+      return { ...post, userLikedPost };
+    }),
+  );
+
+  return recipe[0];
 }
 
 // Function to add comment
@@ -149,7 +168,8 @@ async function getAllRecipes() {
 }
 
 export {
-  setUserProfile,
+  getUserById,
+  addNewUser,
   getUserByUsername,
   getFollowingPosts,
   toggleLike,
@@ -158,7 +178,7 @@ export {
   loadUserPosts,
   isActiveUserFollowing,
   toggleFollow,
-  editUserProfile,
+  saveEditedProfile,
   getRecipeById,
   addComment,
   getAllUsers,

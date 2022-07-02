@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 function Bio({ bio }) {
   return (
-    <p className="py-3">{bio}</p>
+    <p className="py-3 pl-3">{bio}</p>
   );
 }
 

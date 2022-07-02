@@ -1,9 +1,20 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import UserCard from '../../Common/UserCard';
-import useUsers from '../../../hooks/useUsers';
+import { getAllUsers } from '../../../firebase/services';
 
 function UserResults({ searchQuery }) {
-  const users = useUsers();
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      await getAllUsers()
+        .then((allUsers) => {
+          setUsers(allUsers);
+        });
+    };
+    getUsers();
+  }, []);
 
   const filterResults = (query, userArr) => userArr.filter(
     (user) => user.username.toLowerCase().includes(query),
@@ -18,6 +29,7 @@ function UserResults({ searchQuery }) {
       name={user.name}
     />
   ));
+
   return (
     <div className="grid p-5 gap-5">
       {userList}

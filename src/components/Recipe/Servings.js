@@ -10,7 +10,7 @@ function Servings({ servings }) {
 }
 
 Servings.propTypes = {
-  servings: PropTypes.string.isRequired,
+  servings: PropTypes.number.isRequired,
 };
 
 export default Servings;

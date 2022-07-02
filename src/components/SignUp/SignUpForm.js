@@ -2,7 +2,18 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
-function SignUpForm({ handleChange, handleSignUp, errorMessage }) {
+function SignUpForm({
+  handleSignUp, errorMessage, signUpInfo, setSignUpInfo,
+}) {
+  // Function to handle input change
+  const handleChange = ((event) => {
+    const { name, value } = event.target;
+    setSignUpInfo((prevSignUpInfo) => ({
+      ...prevSignUpInfo,
+      [name]: value,
+    }));
+  });
+
   return (
     <div className="px-2">
       {errorMessage !== '' && <p className="text-red-500 py-3">{errorMessage}</p>}
@@ -14,6 +25,7 @@ function SignUpForm({ handleChange, handleSignUp, errorMessage }) {
             onChange={handleChange}
             type="text"
             name="email"
+            value={signUpInfo.email}
             placeholder="gordonramsay@hellskitchen.com"
             className="input-grey"
           />
@@ -24,6 +36,7 @@ function SignUpForm({ handleChange, handleSignUp, errorMessage }) {
             onChange={handleChange}
             type="text"
             name="username"
+            value={signUpInfo.username}
             placeholder="thegreatestchefalive123"
             className="input-grey"
           />
@@ -34,6 +47,7 @@ function SignUpForm({ handleChange, handleSignUp, errorMessage }) {
             onChange={handleChange}
             type="text"
             name="password"
+            value={signUpInfo.password}
             className="input-grey"
           />
         </div>
@@ -56,7 +70,8 @@ SignUpForm.defaultProps = {
 };
 
 SignUpForm.propTypes = {
-  handleChange: PropTypes.func.isRequired,
+  signUpInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+  setSignUpInfo: PropTypes.func.isRequired,
   handleSignUp: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };

@@ -4,7 +4,7 @@ import RecipeResults from './RecipeResults';
 
 function SearchResults({ selected, searchQuery }) {
   return (
-    <div>
+    <div className="mx-5">
       {`${selected}` === 'recipes' ? (
         <RecipeResults searchQuery={searchQuery} />
       ) : (

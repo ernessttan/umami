@@ -4,6 +4,9 @@
 module.exports = {
   content: ['./src/pages/**/*.{html,js}', './src/components/**/*.{html,js}', './public/index.html'],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       colors: {
         'orange-100': '#F7C3AF',

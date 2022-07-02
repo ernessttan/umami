@@ -9,6 +9,7 @@ import useRecipe from '../hooks/useRecipe';
 import Servings from '../components/Recipe/Servings';
 import Details from '../components/Recipe/Details';
 import Social from '../components/Recipe/Social';
+import SocialBar from '../components/Common/SocialBar';
 
 function Recipe() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ function Recipe() {
 
   return (
     <>
-      <div className="py-8 px-5">
+      <div className="pt-9 px-5">
         <PageHeader title="" route={ROUTES.FEED} />
         {recipe && (
         <div className="px-2 mt-5 h-full">
@@ -31,6 +32,12 @@ function Recipe() {
           />
           <Servings servings={recipe.servings} />
           <Details instructions={recipe.instructions} ingredients={recipe.ingredients} />
+          <SocialBar
+            totalComments={recipe.comments.length}
+            totalLikes={recipe.likes.length}
+            userLikedPost={recipe.userLikedPost}
+            id={id}
+          />
         </div>
         )}
       </div>
