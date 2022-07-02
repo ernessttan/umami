@@ -13,9 +13,9 @@ function Settings() {
     });
   };
   return (
-    <div className="p-5">
+    <div className="container mx-auto max-w-screen-md h-screen py-10 px-10">
       <PageHeader title="Settings" />
-      <button type="button" onClick={handleLogOut}>
+      <button className="mt-10" type="button" onClick={handleLogOut}>
         Log Out
       </button>
     </div>
