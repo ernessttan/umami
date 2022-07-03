@@ -1,5 +1,5 @@
-// import Skeleton from 'react-loading-skeleton';
-import { Link } from 'react-router-dom';
+/* eslint-disable no-nested-ternary */
+import Skeleton from 'react-loading-skeleton';
 import useFeed from '../../hooks/useFeed';
 import Post from '../Post/Post';
 
@@ -22,19 +22,17 @@ function Timeline() {
   ));
 
   return (
-    <div className="mt-20 order-last grow basis-3/4 overflow-y-scroll py-5">
-      {followingPosts.length > 0 ? ({ posts })
-        : (
-          <div className="text-center">
-            <h1 className="text-grey-500 font-bold">
-              Follow Someone To
-              {' '}
-              <br />
-              View Some Recipes
-            </h1>
-            <Link className="mt-5 text-orange-500 text-xl font-semibold" to="/explore">Explore</Link>
-          </div>
-        )}
+    <div className="order-last grow basis-3/4 overflow-y-scroll py-5">
+      {followingPosts === undefined ? (
+        <Skeleton count={2} width={640} height={500} className="mb-5" />
+      ) : followingPosts.length === 0 ? (
+        <h1 className="text-grey-500 font-bold">
+          Follow Someone To
+          {' '}
+          <br />
+          View Some Recipes
+        </h1>
+      ) : followingPosts ? posts : null}
     </div>
   );
 }

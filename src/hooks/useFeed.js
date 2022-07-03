@@ -9,9 +9,9 @@ function useFeed() {
 
   useEffect(() => {
     async function getFeedPosts() {
-      const userProfile = await getUserById(activeUser.uid);
-      if (userProfile.following.length > 0) {
-        await getFollowingPosts(userProfile.id, userProfile.following)
+      const { following } = await getUserById(activeUser.uid);
+      if (following.length > 0) {
+        await getFollowingPosts(activeUser.uid, following)
           .then((posts) => {
             posts.sort((a, b) => b.dateCreated - a.dateCreated);
             setFollowingPosts(posts);
@@ -19,7 +19,7 @@ function useFeed() {
       }
     }
     getFeedPosts();
-  }, [activeUser.id]);
+  }, [activeUser.uid]);
 
   return followingPosts;
 }

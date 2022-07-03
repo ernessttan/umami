@@ -3,8 +3,17 @@ import PropTypes from 'prop-types';
 function Avatar({ avatarUrl }) {
   return (
     <div className="py-8 text-center">
-      <img className="object-cover rounded-full h-24 w-24 mx-auto" src={avatarUrl} alt="user avatar" />
-      <p className="font-semibold text-orange-500 mt-3">Edit Profile Picture</p>
+      <label htmlFor="avatar" className="font-semibold text-orange-500 mt-3">
+        <img className="object-cover rounded-full h-24 w-24 mx-auto" src={avatarUrl} alt="user avatar" />
+        <input
+          className="hidden"
+          type="file"
+          accept=".png, .jpg, .jpeg"
+          name="avatar"
+          id="avatar"
+        />
+        Edit Profile
+      </label>
     </div>
   );
 }

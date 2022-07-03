@@ -2,7 +2,7 @@ import { TailSpin } from 'react-loader-spinner';
 
 function Loader() {
   return (
-    <TailSpin width="110" color="#EC6C3A" />
+    <TailSpin className="flex justify-center mt-10" width="110" color="#EC6C3A" />
   );
 }
 
