@@ -10,15 +10,19 @@ function AuthContextProvider({ children }) {
   const [activeUser, setActiveUser] = useState(JSON.parse(localStorage.getItem('activeUser')));
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (authUser) => {
-      if (authUser) {
-        localStorage.setItem('activeUser', JSON.stringify(authUser));
-        setActiveUser(authUser);
-      } else {
-        localStorage.removeItem('activeUser');
-        setActiveUser('');
-      }
-    });
+    const authListener = () => {
+      onAuthStateChanged(auth, async (authUser) => {
+        if (authUser) {
+          localStorage.setItem('activeUser', JSON.stringify(authUser));
+          setActiveUser(authUser);
+        } else {
+          localStorage.removeItem('activeUser');
+          setActiveUser(null);
+        }
+      });
+    };
+
+    return () => authListener();
   }, [auth]);
 
   return (

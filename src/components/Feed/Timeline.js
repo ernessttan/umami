@@ -1,38 +1,60 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
+import { useContext, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import useFeed from '../../hooks/useFeed';
 import Post from '../Post/Post';
+import ActiveProfileContext from '../../context/ActiveProfileContext';
+import { getFollowingPosts } from '../../firebase/services';
 
 function Timeline() {
-  const followingPosts = useFeed();
-  const posts = followingPosts.map((post) => (
-    <Post
-      key={post.id}
-      avatarUrl={post.avatarUrl}
-      id={post.id}
-      likes={post.likes}
-      comments={post.comments}
-      title={post.title}
-      dateCreated={post.dateCreated}
-      userId={post.userId}
-      username={post.username}
-      userLikedPost={post.userLikedPost}
-      imageUrl={post.imageUrl}
-    />
-  ));
+  const { userProfile } = useContext(ActiveProfileContext);
+
+  const { userProfile: { following } = {} } = useContext(ActiveProfileContext);
+
+  const [timelinePosts, setTimelinePosts] = useState();
+
+  useEffect(() => {
+    async function getTimeline() {
+      if (following.length > 0) {
+        await getFollowingPosts(userProfile.id, following)
+          .then((posts) => {
+            posts.sort((a, b) => b.dateCreated - a.dateCreated);
+            setTimelinePosts(posts);
+          });
+      }
+    }
+    getTimeline();
+  }, [userProfile]);
 
   return (
-    <div className="order-last grow basis-3/4 overflow-y-scroll py-5">
-      {followingPosts === undefined ? (
-        <Skeleton count={2} width={640} height={500} className="mb-5" />
-      ) : followingPosts.length === 0 ? (
+    <div className="h-full order-last grow basis-3/4 overflow-y-scroll py-5">
+      {following === undefined ? (
+        <Skeleton count={3} className="w-full h-[35vh] mb-2" />
+      ) : following.length === 0 ? (
         <h1 className="text-grey-500 font-bold">
           Follow Someone To
-          {' '}
           <br />
           View Some Recipes
         </h1>
-      ) : followingPosts ? posts : null}
+      ) : timelinePosts ? (
+        timelinePosts.map((post) => (
+          <Post
+            key={post.id}
+            avatarUrl={post.avatarUrl}
+            id={post.id}
+            likes={post.likes}
+            comments={post.comments}
+            title={post.title}
+            dateCreated={post.dateCreated}
+            userId={post.userId}
+            username={post.username}
+            userLikedPost={post.userLikedPost}
+            imageUrl={post.imageUrl}
+          />
+        ))) : null }
     </div>
   );
 }
