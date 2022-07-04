@@ -17,7 +17,6 @@ function Profile() {
   const { activeUser } = useContext(AuthContext);
   const { id } = useParams();
   const { userProfile } = useUser(id);
-  console.log(userProfile);
   // Get a users posts
   const posts = useUserPosts(id);
 
@@ -26,9 +25,9 @@ function Profile() {
       <div className="hidden md:block">
         <AppHeader />
       </div>
-      <div className="h-full md:app-container">
+      <div className="h-full md:app-container md:container md:max-w-screen-lg">
         {userProfile && (
-        <div className="grow-1 basis-3/4 px-10 py-5">
+        <div className="grow-1 basis-3/4 px-10">
           { activeUser.uid === userProfile.id ? (
             <ProfileHeader username={userProfile.username} />
           ) : (

@@ -3,17 +3,17 @@ import { useParams } from 'react-router-dom';
 import PageHeader from '../components/Common/PageHeader';
 import Avatar from '../components/EditProfile/Avatar';
 import EditForm from '../components/EditProfile/EditForm';
-import { saveEditedProfile, getUserByUsername } from '../firebase/services';
+import { saveEditedProfile, getUserById } from '../firebase/services';
 import AuthContext from '../context/AuthContext';
 
 function EditProfile() {
-  const { username } = useParams();
+  const { id } = useParams();
   const { activeUser } = useContext(AuthContext);
   const [userProfile, setUserProfile] = useState();
 
   useEffect(() => {
     const getExistingUser = async () => {
-      await getUserByUsername(username)
+      await getUserById(id)
         .then((profile) => {
           setUserProfile({
             name: `${profile.name}`,
@@ -23,7 +23,7 @@ function EditProfile() {
         });
     };
     getExistingUser();
-  }, [username]);
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

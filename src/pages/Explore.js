@@ -32,7 +32,7 @@ function Explore() {
   return (
     <>
       <AppHeader />
-      <div className="h-full md:app-container">
+      <div className="h-full md:app-container md:container md:max-w-screen-lg">
         <div className="grow-1 basis-3/4 py-5">
           <SearchBar
             searchQuery={searchQuery}
@@ -47,7 +47,6 @@ function Explore() {
             searchQuery={searchQuery}
           />
         </div>
-
         <Navbar className="mt-full" />
       </div>
 

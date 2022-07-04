@@ -6,21 +6,22 @@ import RecipeCard from '../../Common/RecipeCard';
 function RecipeResults({ searchQuery }) {
   const [recipes, setRecipes] = useState([]);
 
+  const filterResults = (query, recipeArr) => recipeArr.filter(
+    (recipe) => recipe.title.toLowerCase().includes(query),
+  );
+
   useEffect(() => {
     const getRecipes = async () => {
       await getAllRecipes()
         .then((allRecipes) => {
-          setRecipes(allRecipes);
+          const filteredRecipes = filterResults(searchQuery, allRecipes);
+          setRecipes(filteredRecipes);
         });
     };
     getRecipes();
   }, []);
 
-  const filterResults = (query, recipeArr) => recipeArr.filter(
-    (recipe) => recipe.title.toLowerCase().includes(query),
-  );
-
-  const recipeList = filterResults(searchQuery, recipes).map((recipe) => (
+  const recipeList = recipes.map((recipe) => (
     <RecipeCard
       key={recipe.id}
       id={recipe.id}
@@ -31,7 +32,7 @@ function RecipeResults({ searchQuery }) {
   ));
 
   return (
-    <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4">
+    <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 py-2">
       {recipeList}
     </div>
   );

@@ -28,7 +28,7 @@ function Timeline() {
   }, [following]);
 
   return (
-    <div className="h-full order-last grow basis-3/4 overflow-y-scroll py-5">
+    <div className="h-full order-last grow basis-3/4 py-5 md:px-20 lg:px-40">
       {following === undefined ? (
         <Skeleton count={3} className="w-full h-[35vh] mb-2" />
       ) : following.length === 0 ? (

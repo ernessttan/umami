@@ -16,7 +16,7 @@ function Feed() {
   return (
     <ActiveProfileContext.Provider value={{ userProfile }}>
       <AppHeader />
-      <div className="md:app-container">
+      <div className="md:app-container md:container md:max-w-screen-lg">
         <Timeline />
         <Navbar />
       </div>

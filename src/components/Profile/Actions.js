@@ -27,7 +27,7 @@ function Actions({ username, userId }) {
     <div>
       {activeUser.displayName === username ? (
         <Link
-          to={`/editprofile/${username}`}
+          to={`/editprofile/${userId}`}
           type="button"
           className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full"
         >
