@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function userCard({
-  avatarUrl, name, username,
+  avatarUrl, name, id, username,
 }) {
   return (
-    <Link to={`/profile/${username}`} className="flex items-center gap-2">
+    <Link to={`/profile/${id}`} className="flex items-center gap-2">
       <img className="object-cover rounded-full h-10 w-10" src={avatarUrl} alt="user avatar" />
       <div>
         <p className="font-semibold">{name}</p>
@@ -22,6 +22,7 @@ userCard.defaultProps = {
 
 userCard.propTypes = {
   avatarUrl: PropTypes.string,
+  id: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
 };
 

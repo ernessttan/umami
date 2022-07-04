@@ -90,8 +90,8 @@ async function saveRecipe(recipe, imageToStore) {
 }
 
 // Function to get a users posts
-async function loadUserPosts(username) {
-  const q = query(recipesRef, where('username', '==', username));
+async function loadUserPosts(userId) {
+  const q = query(recipesRef, where('userId', '==', userId));
   const result = await getDocs(q);
 
   const userPosts = result.docs.map((post) => ({

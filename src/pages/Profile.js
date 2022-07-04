@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import ProfileHeader from '../components/Profile/ProfileHeader';
 import Information from '../components/Profile/Information';
 import Statistics from '../components/Profile/Statistics';
@@ -9,12 +10,16 @@ import ProfileFeed from '../components/Profile/ProfileFeed';
 import useUser from '../hooks/useUser';
 import useUserPosts from '../hooks/useUserPosts';
 import AppHeader from '../components/Common/AppHeader';
+import AuthContext from '../context/AuthContext';
+import PageHeader from '../components/Common/PageHeader';
 
 function Profile() {
-  const { username } = useParams();
-  const userProfile = useUser(username);
+  const { activeUser } = useContext(AuthContext);
+  const { id } = useParams();
+  const { userProfile } = useUser(id);
+  console.log(userProfile);
   // Get a users posts
-  const posts = useUserPosts(username);
+  const posts = useUserPosts(id);
 
   return (
     <>
@@ -24,7 +29,14 @@ function Profile() {
       <div className="h-full md:app-container">
         {userProfile && (
         <div className="grow-1 basis-3/4 px-10 py-5">
-          <ProfileHeader username={username} />
+          { activeUser.uid === userProfile.id ? (
+            <ProfileHeader username={userProfile.username} />
+          ) : (
+            <div className="py-5 md:hidden">
+              <PageHeader />
+            </div>
+          )}
+
           <Information
             avatarUrl={userProfile.avatarUrl}
             username={userProfile.username}

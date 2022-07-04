@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 import { useContext, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import useFeed from '../../hooks/useFeed';
 import Post from '../Post/Post';
 import ActiveProfileContext from '../../context/ActiveProfileContext';
 import { getFollowingPosts } from '../../firebase/services';
+import AuthContext from '../../context/AuthContext';
 
 function Timeline() {
+  const { activeUser } = useContext(AuthContext);
   const { userProfile } = useContext(ActiveProfileContext);
 
   const { userProfile: { following } = {} } = useContext(ActiveProfileContext);
@@ -18,16 +18,14 @@ function Timeline() {
 
   useEffect(() => {
     async function getTimeline() {
-      if (following.length > 0) {
-        await getFollowingPosts(userProfile.id, following)
-          .then((posts) => {
-            posts.sort((a, b) => b.dateCreated - a.dateCreated);
-            setTimelinePosts(posts);
-          });
-      }
+      await getFollowingPosts(activeUser.id, following)
+        .then((posts) => {
+          posts.sort((a, b) => b.dateCreated - a.dateCreated);
+          setTimelinePosts(posts);
+        });
     }
     getTimeline();
-  }, [userProfile]);
+  }, [following]);
 
   return (
     <div className="h-full order-last grow basis-3/4 overflow-y-scroll py-5">

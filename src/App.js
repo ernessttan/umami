@@ -18,29 +18,26 @@ const Comments = lazy(() => import('./pages/Comments'));
 
 function App() {
   return (
-    <div className="h-screen  ">
-      <div className="h-full flex flex-col md:flex-row">
-        <AuthContextProvider>
-          <Router>
-            <Suspense fallback={<Loader />}>
-              <Routes>
-                <Route path={ROUTES.WELCOME} element={<Welcome />} />
-                <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
-                <Route path={ROUTES.LOG_IN} element={<Login />} />
-                <Route path={ROUTES.FEED} element={<Feed />} />
-                <Route path={ROUTES.UPLOAD} element={<Upload />} />
-                <Route path={ROUTES.PROFILE} element={<Profile />} />
-                <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
-                <Route path={ROUTES.RECIPE} element={<Recipe />} />
-                <Route path={ROUTES.EXPLORE} element={<Explore />} />
-                <Route path={ROUTES.SAVED} element={<Saved />} />
-                <Route path={ROUTES.COMMENTS} element={<Comments />} />
-              </Routes>
-            </Suspense>
-          </Router>
-        </AuthContextProvider>
-      </div>
-
+    <div className="md:flex-row">
+      <AuthContextProvider>
+        <Router>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path={ROUTES.WELCOME} element={<Welcome />} />
+              <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
+              <Route path={ROUTES.LOG_IN} element={<Login />} />
+              <Route path={ROUTES.FEED} element={<Feed />} />
+              <Route path={ROUTES.UPLOAD} element={<Upload />} />
+              <Route path={ROUTES.PROFILE} element={<Profile />} />
+              <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
+              <Route path={ROUTES.RECIPE} element={<Recipe />} />
+              <Route path={ROUTES.EXPLORE} element={<Explore />} />
+              <Route path={ROUTES.SAVED} element={<Saved />} />
+              <Route path={ROUTES.COMMENTS} element={<Comments />} />
+            </Routes>
+          </Suspense>
+        </Router>
+      </AuthContextProvider>
     </div>
 
   );

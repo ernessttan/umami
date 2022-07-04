@@ -11,7 +11,7 @@ function Navbar() {
   const currentRoute = useLocation().pathname;
 
   return (
-    <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow fixed bottom-0 md:shadow-none md:order-first md:navbar-side md:basis-1/4">
+    <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow fixed bottom-0 md:shadow-none md:order-first md:navbar-side md:basis-1/4 z-50">
       <div className="flex items-center justify-between md:flex-col md:items-start">
         <NavLink
           to={ROUTES.FEED}
@@ -42,7 +42,7 @@ function Navbar() {
           <p className="hidden md:block">Explore</p>
         </NavLink>
         <NavLink
-          to={`/profile/${activeUser.displayName}`}
+          to={`/profile/${activeUser.uid}`}
           className={`${currentRoute.includes('profile') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
         >
           {
