@@ -33,16 +33,17 @@ function Header({ profile, totalPosts }) {
     <>
       <div className="flex items-center gap-3 p-3">
         <img
-          className="object-cover rounded-full h-16 w-16"
+          className="object-cover rounded-full h-20 w-16"
           src={profile.avatarUrl ? profile.avatarUrl : '/icons/profile.svg'}
           alt="user profile avatar"
         />
-        <p className="font-semibold">{profile.name}</p>
-        <p className="text-grey-700">
-          @
-          {profile.username}
-        </p>
-        <p className="py-3 pl-3">{profile.bio}</p>
+        <div>
+          <p className="font-semibold">{profile.name}</p>
+          <p className="text-grey-700">
+            @
+            {profile.username}
+          </p>
+        </div>
       </div>
       <div className="flex items-center gap-5 mt-2 pl-3">
         <h3 className="font-bold">
@@ -61,6 +62,7 @@ function Header({ profile, totalPosts }) {
           <span className="font-normal">Following</span>
         </h3>
       </div>
+      <p className="py-2 ml-3">{profile.bio}</p>
       <div className="py-4">
         {activeUser.displayName === profile.username ? (
           <Link

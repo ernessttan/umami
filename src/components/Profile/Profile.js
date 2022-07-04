@@ -23,7 +23,7 @@ function Profile({ profile }) {
   }, [profile.id]);
 
   return posts ? (
-    <div className="grow-1 basis-3/4">
+    <div className="grow-1 basis-3/4 px-5">
       {activeUser.uid === profile.id ? (
         <Actions />
       ) : null}
