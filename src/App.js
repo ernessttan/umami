@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import Loader from './components/Common/Loader';
+import Loader from './components/common/Loader';
 import * as ROUTES from './constants/routes';
 import AuthContextProvider from './context/AuthContextProvider';
 

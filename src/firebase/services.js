@@ -104,19 +104,30 @@ async function loadUserPosts(userId) {
 // Function to check if active user is following a user
 async function isActiveUserFollowing(activeUserId, userId) {
   const followingQuery = query(usersRef, where('id', '==', activeUserId), where('following', 'array-contains', userId));
-  if (followingQuery) {
-    // If the query returns a result
+  const result = await getDocs(followingQuery);
+
+  // Empty if not following
+  if (result.docs.length > 0) {
     return true;
   }
+
   return false;
 }
 
 // Function to toggle follow
-async function toggleFollow(userId, userIdToFollow, isFollowingUser) {
-  const userRef = doc(db, 'users', userId);
-  updateDoc(userRef, {
+async function toggleFollow(activeUserId, userIdToFollow, isFollowingUser) {
+  const activeUserRef = doc(db, 'users', activeUserId);
+  const userRef = doc(db, 'users', userIdToFollow);
+  // Update active users following array
+  updateDoc(activeUserRef, {
     following: isFollowingUser
       ? arrayRemove(userIdToFollow) : arrayUnion(userIdToFollow),
+  });
+
+  // Update followed user's followers array
+  updateDoc(userRef, {
+    followers: isFollowingUser
+      ? arrayRemove(activeUserId) : arrayUnion(activeUserId),
   });
 }
 

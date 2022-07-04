@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { getAllRecipes } from '../../../firebase/services';
-import RecipeCard from '../../Common/RecipeCard';
+import RecipeCard from '../../common/RecipeCard';
 
 function RecipeResults({ searchQuery }) {
   const [recipes, setRecipes] = useState([]);

@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useContext } from 'react';
 import Timeline from '../components/Feed/Timeline';
-import Navbar from '../components/Common/Navbar';
-import AppHeader from '../components/Common/AppHeader';
+import Navbar from '../components/common/Navbar';
+import AppHeader from '../components/common/AppHeader';
 import AuthContext from '../context/AuthContext';
 import useUser from '../hooks/useUser';
 import ActiveProfileContext from '../context/ActiveProfileContext';

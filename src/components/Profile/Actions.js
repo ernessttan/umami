@@ -1,50 +1,25 @@
-import { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/AuthContext';
-import { isActiveUserFollowing, toggleFollow } from '../../firebase/services';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { signOut } from 'firebase/auth';
+import FirebaseContext from '../../context/FireBaseContext';
 
-function Actions({ username, userId }) {
-  const { activeUser } = useContext(AuthContext);
-  const [isFollowingUser, setIsFollowingUser] = useState(null);
+function Actions() {
+  const navigate = useNavigate();
+  const { auth } = useContext(FirebaseContext);
 
-  useEffect(() => {
-    // Checks if active user is following a user
-    const checkFollowing = async () => {
-      const isFollowing = await isActiveUserFollowing(activeUser.uid, userId);
-      setIsFollowingUser(isFollowing);
-    };
-    checkFollowing();
-  }, [userId]);
-
-  const handleFollow = async (event) => {
-    const { value } = event.target;
-    setIsFollowingUser((prevState) => !prevState);
-    await toggleFollow(activeUser.uid, value, isFollowingUser);
+  const handleLogOut = () => {
+    signOut(auth).then(() => {
+      navigate('/');
+    });
   };
 
   return (
-    <div>
-      {activeUser.displayName === username ? (
-        <Link
-          to={`/editprofile/${userId}`}
-          type="button"
-          className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full"
-        >
-          Edit Profile
-        </Link>
-      ) : (
-        <button onClick={handleFollow} type="button" value={userId} className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full">
-          {isFollowingUser ? 'Unfollow' : 'Follow'}
-        </button>
-      )}
+    <div className="mb-5 ml-1 px-5 py-5 flex justify-end">
+      <button className="text-orange-500" type="button" onClick={handleLogOut}>
+        Log Out
+      </button>
     </div>
   );
 }
-
-Actions.propTypes = {
-  username: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
-};
 
 export default Actions;

@@ -2,7 +2,7 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import FirebaseContext from '../context/FireBaseContext';
-import PageHeader from '../components/Common/PageHeader';
+import PageHeader from '../components/common/PageHeader';
 
 function Settings() {
   const navigate = useNavigate();

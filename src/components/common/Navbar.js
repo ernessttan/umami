@@ -43,7 +43,7 @@ function Navbar() {
         </NavLink>
         <NavLink
           to={`/profile/${activeUser.uid}`}
-          className={`${currentRoute.includes('profile') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+          className={`${currentRoute.includes(`profile/${activeUser.uid}`) ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
         >
           {
             activeUser.photoUrl === undefined
@@ -58,7 +58,7 @@ function Navbar() {
                 />
               )
           }
-          <p className="hidden text-grey-700 md:block">Profile</p>
+          <p className="hidden md:block">Profile</p>
         </NavLink>
       </div>
     </nav>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PageHeader from '../components/Common/PageHeader';
+import PageHeader from '../components/common/PageHeader';
 import CommentList from '../components/Comments/CommentList';
 import AddComment from '../components/Comments/AddComment';
 import { getRecipeById } from '../firebase/services';

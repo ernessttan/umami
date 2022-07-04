@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import AppHeader from '../components/Common/AppHeader';
-import Navbar from '../components/Common/Navbar';
-import SearchBar from '../components/Common/SearchBar';
+import AppHeader from '../components/common/AppHeader';
+import Navbar from '../components/common/Navbar';
+import SearchBar from '../components/common/SearchBar';
 import SelectSearch from '../components/Explore/SelectSearch';
 import SearchResults from '../components/Explore/SearchResults/SearchResults';
 

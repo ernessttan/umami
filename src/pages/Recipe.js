@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useParams } from 'react-router-dom';
-import PageHeader from '../components/Common/PageHeader';
+import PageHeader from '../components/common/PageHeader';
 import * as ROUTES from '../constants/routes';
 import Title from '../components/Recipe/Title';
 import Image from '../components/Recipe/Image';
@@ -9,7 +9,7 @@ import useRecipe from '../hooks/useRecipe';
 import Servings from '../components/Recipe/Servings';
 import Details from '../components/Recipe/Details';
 import Social from '../components/Recipe/Social';
-import SocialBar from '../components/Common/SocialBar';
+import SocialBar from '../components/common/SocialBar';
 
 function Recipe() {
   const { id } = useParams();

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Image from './Image';
 import Information from './Information';
-import SocialBar from '../Common/SocialBar';
+import SocialBar from '../common/SocialBar';
 
 // Component for Individual Post on Feed
 function Post({

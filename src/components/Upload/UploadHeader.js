@@ -1,4 +1,4 @@
-import BackButton from '../Common/BackButton';
+import BackButton from '../common/BackButton';
 
 function UploadHeader() {
   return (

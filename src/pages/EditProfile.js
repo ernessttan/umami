@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PageHeader from '../components/Common/PageHeader';
+import PageHeader from '../components/common/PageHeader';
 import Avatar from '../components/EditProfile/Avatar';
 import EditForm from '../components/EditProfile/EditForm';
 import { saveEditedProfile, getUserById } from '../firebase/services';

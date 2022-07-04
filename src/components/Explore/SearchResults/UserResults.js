@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import UserCard from '../../Common/UserCard';
+import UserCard from '../../common/UserCard';
 import { getAllUsers } from '../../../firebase/services';
 
 function UserResults({ searchQuery }) {
