@@ -2,11 +2,23 @@ import {
   setDoc, doc, collection, getDoc, query, getDocs, where, updateDoc,
   arrayRemove, arrayUnion,
 } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { db, storage } from './firebaseConfig';
 
 /*    Globally Used Refs    */
 const usersRef = collection(db, 'users');
 const recipesRef = collection(db, 'recipes');
+const recipeImagesRef = ref(storage, 'recipes');
+
+/*
+    Storage functions
+*/
+
+// Function to get store image url
+async function getImageUrl(recipeId) {
+  const result = await getDownloadURL(ref(storage, `recipes/${recipeId}`));
+  return result;
+}
 
 /*
     Onboarding Services
@@ -18,6 +30,7 @@ async function addNewUser(user) {
   // Creates a new document in db/users
   await setDoc(doc(usersRef, user.uid), {
     id: user.uid,
+    avatarUrl: '',
     bio: '',
     name: '',
     username: user.displayName,
@@ -74,6 +87,19 @@ async function getFollowingPosts(userId, followingArr) {
   return followingPosts;
 }
 
+async function saveRecipe(recipe) {
+  // Storage Reference
+  const spaceRef = ref(recipeImagesRef, `${recipe.id}`);
+  // Save image to storage
+  await uploadBytes(spaceRef, recipe.imageFile);
+  // Save recipe to recipes in firestore
+  await setDoc(doc(recipesRef, recipe.id), recipe);
+  // Get url of stored image
+  const url = await getImageUrl(recipe.id);
+  // Update recipe with url
+  updateDoc(doc(recipesRef, recipe.id), { imageFile: url });
+}
+
 /*
     Social functions
 */
@@ -85,5 +111,5 @@ async function toggleLike(userId, id, liked) {
 }
 
 export {
-  addNewUser, getUserById, getFollowingPosts, toggleLike,
+  addNewUser, getUserById, getFollowingPosts, toggleLike, saveRecipe,
 };

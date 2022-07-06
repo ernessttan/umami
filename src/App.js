@@ -7,6 +7,7 @@ const Welcome = lazy(() => import('./pages/Welcome'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const Login = lazy(() => import('./pages/Login'));
 const Home = lazy(() => import('./pages/Home'));
+const Upload = lazy(() => import('./pages/Upload'));
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
             <Route path={ROUTES.LOG_IN} element={<Login />} />
             <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.UPLOAD} element={<Upload />} />
           </Routes>
         </Suspense>
       </Router>

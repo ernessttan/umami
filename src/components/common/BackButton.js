@@ -1,14 +1,15 @@
-import { ChevronLeftIcon } from '@heroicons/react/solid';
+import { ChevronLeftIcon } from '@heroicons/react/outline';
 import { useNavigate } from 'react-router-dom';
 
 function BackButton() {
   const navigate = useNavigate();
 
   return (
-    <button onClick={() => navigate(-1)} type="button">
-      <ChevronLeftIcon className="h-8 w-8" />
-    </button>
-
+    <div className="py-3">
+      <button onClick={() => navigate(-1)} type="button">
+        <ChevronLeftIcon className="h-6 w-6" />
+      </button>
+    </div>
   );
 }
 
