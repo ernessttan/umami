@@ -10,8 +10,12 @@ function useUser(userId) {
 
   useEffect(() => {
     async function getUser(id) {
-      const result = await getUserById(id);
-      setUser(result || {});
+      await getUserById(id).then((result) => {
+        setUser(result || {});
+      })
+        .catch((error) => {
+          console.log(error.message);
+        });
     }
 
     if (userId) {
@@ -19,7 +23,7 @@ function useUser(userId) {
     }
   }, [userId]);
 
-  return { userProfile: user };
+  return user;
 }
 
 export default useUser;

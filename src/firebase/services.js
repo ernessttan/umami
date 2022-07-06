@@ -1,4 +1,6 @@
-import { setDoc, doc, collection } from 'firebase/firestore';
+import {
+  setDoc, doc, collection, getDoc,
+} from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
 /*    Globally Used Refs    */
@@ -25,4 +27,19 @@ async function addNewUser(user) {
   });
 }
 
-export default addNewUser;
+/*
+    User db functions
+*/
+
+// Function to retrieve a user document from the db
+// Input: userId <String>
+async function getUserById(userId) {
+  // Refer to document by its id
+  const docRef = doc(usersRef, userId);
+  // Get its information
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data();
+}
+
+export { addNewUser, getUserById };

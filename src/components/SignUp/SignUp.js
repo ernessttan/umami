@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import FirebaseContext from '../../context/FireBaseContext';
-import addNewUser from '../../firebase/services';
+import { addNewUser } from '../../firebase/services';
 import * as ROUTES from '../../constants/routes';
 
-function SignUpForm() {
+function SignUp() {
   const navigate = useNavigate();
   const { auth } = useContext(FirebaseContext);
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({
@@ -84,4 +84,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default SignUp;

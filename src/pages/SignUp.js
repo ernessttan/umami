@@ -1,5 +1,5 @@
 import BackButton from '../components/common/BackButton';
-import SignUpForm from '../components/SignUp/SignUpForm';
+import SignUpForm from '../components/SignUp/SignUp';
 
 function SignUp() {
   return (
