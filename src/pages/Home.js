@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-unused-vars */
 // import { useNavigate } from 'react-router-dom';
 // import { useContext } from 'react';
@@ -8,11 +9,12 @@ import AuthContext from '../context/AuthContext';
 import UserProfileContext from '../context/UserProfileContext';
 import useUser from '../hooks/useUser';
 import AppHeader from '../components/common/AppHeader';
+import Timeline from '../components/Home/Timeline';
 import Navbar from '../components/common/Navbar';
 
 function Home() {
   const { authUser } = useContext(AuthContext);
-  const user = useUser(authUser.uid);
+  const { profile } = useUser(authUser.uid);
   //   const navigate = useNavigate();
   //   const { auth } = useContext(FirebaseContext);
 
@@ -20,18 +22,18 @@ function Home() {
   //     signOut(auth).then(() => {
   //       navigate('/');
   //     });
-  return user ? (
+  return (
     // <button onClick={handleLogOut} type="button">Logout</button>
     <div className="p-5 h-screen">
       <AppHeader />
-      <UserProfileContext.Provider value={user}>
+      <UserProfileContext.Provider value={{ profile }}>
         <div className="mt-5 md:desktop-screen">
-          <div className="bg-blue-500 md:order-2 md:grow">TIMELINE</div>
+          <Timeline />
           <Navbar />
         </div>
       </UserProfileContext.Provider>
     </div>
-  ) : null;
+  );
 }
 
 export default Home;

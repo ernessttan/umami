@@ -1,11 +1,12 @@
 import {
-  setDoc, doc, collection, getDoc,
+  setDoc, doc, collection, getDoc, query, getDocs, where, updateDoc,
+  arrayRemove, arrayUnion,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
 /*    Globally Used Refs    */
 const usersRef = collection(db, 'users');
-// const recipesRef = collection(db, 'recipes');
+const recipesRef = collection(db, 'recipes');
 
 /*
     Onboarding Services
@@ -42,4 +43,47 @@ async function getUserById(userId) {
   return docSnap.data();
 }
 
-export { addNewUser, getUserById };
+/*
+    Recipe db functions
+*/
+
+// Function to get a user's following posts
+// Input: userId <String>, followingArr <Array>
+async function getFollowingPosts(userId, followingArr) {
+  // Query for all the recipes that are created by the users in followingArr
+  const q = query(recipesRef, where('userId', 'in', followingArr));
+  const response = await getDocs(q);
+
+  const posts = response.docs.map((post) => ({
+    ...post.data(),
+  }));
+
+  const followingPosts = await Promise.all(
+    posts.map(async (post) => {
+      // By default the active user does not like a post
+      let userLikedPost = false;
+      if (post.likes.includes(userId)) {
+        // If the active users likes a post flip the status
+        userLikedPost = true;
+      }
+      // Return new object with post info and liked status
+      return { ...post, userLikedPost };
+    }),
+  );
+
+  return followingPosts;
+}
+
+/*
+    Social functions
+*/
+
+// Function to toggle liking a post
+async function toggleLike(userId, id, liked) {
+  const postRef = doc(db, 'recipes', id);
+  updateDoc(postRef, { likes: liked ? arrayUnion(userId) : arrayRemove(userId) });
+}
+
+export {
+  addNewUser, getUserById, getFollowingPosts, toggleLike,
+};

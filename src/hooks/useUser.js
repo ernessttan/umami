@@ -10,20 +10,17 @@ function useUser(userId) {
 
   useEffect(() => {
     async function getUser(id) {
+      // Get user object from db
       await getUserById(id).then((result) => {
         setUser(result || {});
-      })
-        .catch((error) => {
-          console.log(error.message);
-        });
+      });
     }
-
     if (userId) {
       getUser(userId);
     }
   }, [userId]);
 
-  return user;
+  return { profile: user };
 }
 
 export default useUser;
