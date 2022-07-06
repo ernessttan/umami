@@ -15,13 +15,14 @@ import * as ROUTES from '../../constants/routes';
 import { saveRecipe } from '../../firebase/services';
 
 function Upload({ avatarUrl, username, id }) {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
+  const [imageFile, setImageFile] = useState();
   const [recipe, setRecipe] = useState({
     avatarUrl: `${avatarUrl}`,
     userId: `${id}`,
     id: generateUniqueId({ length: 6 }),
     title: '',
-    imageFile: '',
+    imageUrl: '',
     prepTime: '',
     cookTime: '',
     difficulty: '',
@@ -31,6 +32,8 @@ function Upload({ avatarUrl, username, id }) {
     likes: [],
     comments: [],
   });
+
+  console.log(recipe);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -42,16 +45,16 @@ function Upload({ avatarUrl, username, id }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await saveRecipe(recipe)
+    await saveRecipe(recipe, imageFile)
       .then(() => {
         navigate(ROUTES.HOME);
       });
   };
 
   return (
-    <form className="px-2 flex flex-col gap-3">
+    <form onSubmit={handleSubmit} className="px-2 flex flex-col gap-3">
       <Title handleChange={handleChange} />
-      <Image setRecipe={setRecipe} />
+      <Image setImageFile={setImageFile} />
       <Servings setRecipe={setRecipe} handleChange={handleChange} servings={recipe.servings} />
       <Time handleChange={handleChange} prepTime={recipe.prepTime} cookTime={recipe.cookTime} />
       <Difficulty setRecipe={setRecipe} />

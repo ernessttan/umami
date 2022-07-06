@@ -87,17 +87,17 @@ async function getFollowingPosts(userId, followingArr) {
   return followingPosts;
 }
 
-async function saveRecipe(recipe) {
+async function saveRecipe(recipe, imageToStore) {
   // Storage Reference
   const spaceRef = ref(recipeImagesRef, `${recipe.id}`);
   // Save image to storage
-  await uploadBytes(spaceRef, recipe.imageFile);
+  await uploadBytes(spaceRef, imageToStore);
   // Save recipe to recipes in firestore
   await setDoc(doc(recipesRef, recipe.id), recipe);
   // Get url of stored image
   const url = await getImageUrl(recipe.id);
   // Update recipe with url
-  updateDoc(doc(recipesRef, recipe.id), { imageFile: url });
+  updateDoc(doc(recipesRef, recipe.id), { imageUrl: url });
 }
 
 /*

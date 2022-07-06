@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function Image({ setRecipe }) {
+function Image({ setImageFile }) {
   const [preview, setPreview] = useState('');
 
   const handleChange = (event) => {
-    setRecipe((prevRecipe) => ({
-      ...prevRecipe,
-      imageFile: event.target.files[0],
-    }));
+    setImageFile(event.target.files[0]);
     setPreview(URL.createObjectURL(event.target.files[0]));
   };
 
@@ -54,7 +51,7 @@ function Image({ setRecipe }) {
 }
 
 Image.propTypes = {
-  setRecipe: PropTypes.func.isRequired,
+  setImageFile: PropTypes.func.isRequired,
 };
 
 export default Image;
