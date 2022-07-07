@@ -15,7 +15,7 @@ function Profile() {
   const { profile } = useUser(id);
 
   return profile ? (
-    <div className="h-screen py-5">
+    <div className="h-screen py-5 md:px-5 md:container md:max-w-screen-lg">
       {authUser.uid === profile.id ? (<SettingsBar />) : (<BackButton />)}
       <UserProfileContext.Provider value={{ profile }}>
         <div className="mt-5 md:desktop-screen">

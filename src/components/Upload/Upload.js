@@ -33,8 +33,6 @@ function Upload({ avatarUrl, username, id }) {
     comments: [],
   });
 
-  console.log(recipe);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setRecipe((prevRecipe) => ({

@@ -26,10 +26,8 @@ function Timeline() {
     getTimeline();
   }, [following]);
 
-  console.log(profile);
-
   return (
-    <div className="md:order-2 md:grow">
+    <div className="md:desktop-content">
       {following === undefined ? (
         <Skeleton count={3} className="w-full h-[35vh] mb-2" />
       ) : following.length === 0 ? (
@@ -43,7 +41,7 @@ function Timeline() {
           <Post
             key={post.id}
             id={post.id}
-            avatarUrl={post.avatarUrl}
+            userId={post.userId}
             username={post.username}
             imageUrl={post.imageUrl}
             title={post.title}

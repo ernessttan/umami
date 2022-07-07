@@ -5,7 +5,7 @@ function Information({ title, dateCreated }) {
   return (
     <>
       <h3>{title}</h3>
-      <p>
+      <p className="text-grey-700">
         {formatDistance(dateCreated, new Date())}
         {' '}
         ago

@@ -10,8 +10,10 @@ function Upload() {
   const { profile } = useUser(authUser.uid);
 
   return profile ? (
-    <div className="p-5">
-      <BackButton />
+    <div className="p-5 md:container md:max-w-screen-lg">
+      <div className="py-5">
+        <BackButton />
+      </div>
       <UploadForm
         avatarUrl={profile.avatarUrl}
         username={authUser.displayName}

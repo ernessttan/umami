@@ -1,6 +1,6 @@
 import {
   setDoc, doc, collection, getDoc, query, getDocs, where, updateDoc,
-  arrayRemove, arrayUnion,
+  arrayRemove, arrayUnion, orderBy,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from './firebaseConfig';
@@ -9,14 +9,22 @@ import { db, storage } from './firebaseConfig';
 const usersRef = collection(db, 'users');
 const recipesRef = collection(db, 'recipes');
 const recipeImagesRef = ref(storage, 'recipes');
+const avatarImagesRef = ref(storage, 'avatars');
 
 /*
     Storage functions
 */
 
 // Function to get store image url
-async function getImageUrl(recipeId) {
-  const result = await getDownloadURL(ref(storage, `recipes/${recipeId}`));
+async function getImageUrl(id, location) {
+  let result;
+  if (location === 'recipes') {
+    result = await getDownloadURL(ref(storage, `recipes/${id}`));
+  }
+  if (location === 'avatars') {
+    result = await getDownloadURL(ref(storage, `avatars/${id}`));
+  }
+
   return result;
 }
 
@@ -39,21 +47,6 @@ async function addNewUser(user) {
     followers: [],
     dateCreated: Date.now(),
   });
-}
-
-/*
-    User db functions
-*/
-
-// Function to retrieve a user document from the db
-// Input: userId <String>
-async function getUserById(userId) {
-  // Refer to document by its id
-  const docRef = doc(usersRef, userId);
-  // Get its information
-  const docSnap = await getDoc(docRef);
-
-  return docSnap.data();
 }
 
 /*
@@ -97,7 +90,7 @@ async function saveRecipe(recipe, imageToStore) {
   // Save recipe to recipes in firestore
   await setDoc(doc(recipesRef, recipe.id), recipe);
   // Get url of stored image
-  const url = await getImageUrl(recipe.id);
+  const url = await getImageUrl(recipe.id, 'recipes');
   // Update recipe with url
   updateDoc(doc(recipesRef, recipe.id), { imageUrl: url });
 }
@@ -135,6 +128,47 @@ async function getRecipeById(recipeId, authUserId) {
   return recipe[0];
 }
 
+// Function to get all recipes
+async function getAllRecipes() {
+  const q = query(recipesRef, orderBy('title'));
+  const result = await getDocs(q);
+  const recipeResult = result.docs.map((recipe) => recipe.data());
+
+  return recipeResult;
+}
+
+/*
+    User db functions
+*/
+
+// Function to retrieve a user document from the db
+// Input: userId <String>
+async function getUserById(userId) {
+  // Refer to document by its id
+  const docRef = doc(usersRef, userId);
+  // Get its information
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data();
+}
+
+async function savedEditedProfile(userId, editedProfile, avatarImage) {
+  const spaceRef = ref(avatarImagesRef, `${userId}`);
+  await uploadBytes(spaceRef, avatarImage);
+  await updateDoc(doc(usersRef, userId), editedProfile);
+  const url = await getImageUrl(userId, 'avatars');
+  updateDoc(doc(usersRef, userId), { avatarUrl: url });
+}
+
+// Function to get all users
+async function getAllUsers() {
+  const q = query(usersRef, orderBy('username'));
+  const result = await getDocs(q);
+  const userResult = result.docs.map((user) => user.data());
+
+  return userResult;
+}
+
 /*
     Social functions
 */
@@ -164,7 +198,14 @@ async function toggleFollow(authUserId, userIdToFollow, isFollowingUser) {
   });
 }
 
+// Function to add comment
+async function addComment(comment, recipeId) {
+  updateDoc(doc(recipesRef, recipeId), { comments: arrayUnion(comment) });
+}
+
 export {
   addNewUser, getUserById, getFollowingPosts,
-  toggleLike, saveRecipe, getUserPosts, toggleFollow, getRecipeById,
+  toggleLike, saveRecipe, getUserPosts, toggleFollow,
+  getRecipeById, savedEditedProfile, getAllUsers,
+  getAllRecipes, addComment,
 };

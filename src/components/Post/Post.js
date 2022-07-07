@@ -4,14 +4,17 @@ import Header from './Header';
 import Image from './Image';
 import Information from './Information';
 import SocialBar from '../common/SocialBar';
+import useUser from '../../hooks/useUser';
 
 function Post({
-  id, avatarUrl, username, imageUrl, title, dateCreated, likes, comments, userLikedPost,
+  id, username, imageUrl, title, dateCreated, likes, comments, userLikedPost, userId,
 }) {
+  const { profile } = useUser(userId);
+
   return (
-    <>
+    <div>
       <Header
-        avatarUrl={avatarUrl}
+        avatarUrl={profile?.avatarUrl}
         username={username}
       />
       <Link to={`/recipe/${id}`}>
@@ -32,7 +35,7 @@ function Post({
         />
       </div>
 
-    </>
+    </div>
   );
 }
 
@@ -50,8 +53,8 @@ Post.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.object),
   userLikedPost: PropTypes.bool,
   id: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
 };
 
 export default Post;

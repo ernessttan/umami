@@ -15,12 +15,10 @@ function useAuthUser() {
       // Watch for state change
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log('Logged in');
           // If authenticated and logged in
           localStorage.setItem('authUser', JSON.stringify(user));
           setAuthUser(user);
         } else {
-          console.log('No user signed in');
           localStorage.removeItem('authUser');
           setAuthUser(null);
         }

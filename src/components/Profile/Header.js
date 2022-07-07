@@ -26,17 +26,19 @@ function Header({
 
   return (
     <>
-      <div className="flex items-center gap-2 p-3">
+      <div className="flex items-center gap-3 p-3">
         <img
           src={avatarUrl || '/icons/profile.svg'}
           alt="user avatar"
-          className="h-16 w-16"
+          className="rounded-full h-16 w-16"
         />
-        <p>{name}</p>
-        <p className="text-grey-700">
-          @
-          {username}
-        </p>
+        <div>
+          <p>{name}</p>
+          <p className="text-grey-700">
+            @
+            {username}
+          </p>
+        </div>
       </div>
       <div className="flex items-center gap-5 mt-2 pl-3">
         <h3 className="font-bold">

@@ -22,7 +22,7 @@ function Profile() {
   }, [id]);
 
   return profile && posts ? (
-    <div className="px-5">
+    <div className="px-5 md:desktop-content">
       <Header
         name={profile.name}
         avatarUrl={profile.avatarUrl}

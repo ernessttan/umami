@@ -12,10 +12,12 @@ const Home = lazy(() => import('./pages/Home'));
 const Upload = lazy(() => import('./pages/Upload'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Recipe = lazy(() => import('./pages/RecipePage'));
+const EditProfile = lazy(() => import('./pages/EditProfile'));
+const Explore = lazy(() => import('./pages/Explore'));
+const Comments = lazy(() => import('./pages/CommentsPage'));
 
 function App() {
   const { authUser } = useAuthUser();
-  console.log(authUser);
 
   return (
     <AuthContext.Provider value={{ authUser }}>
@@ -29,6 +31,9 @@ function App() {
             <Route path={ROUTES.UPLOAD} element={<Upload />} />
             <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.RECIPE} element={<Recipe />} />
+            <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
+            <Route path={ROUTES.EXPLORE} element={<Explore />} />
+            <Route path={ROUTES.COMMENTS} element={<Comments />} />
           </Routes>
         </Suspense>
       </Router>

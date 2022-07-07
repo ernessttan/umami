@@ -70,9 +70,9 @@
     flex-direction: row;  
   }
 
-  .larger-screen {
-    margin-left: auto;
-    margin-right: auto;
+  .desktop-content {
+    flex-grow: 1;
+    flex-basis: 75%;
   }
 }
 

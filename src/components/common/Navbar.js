@@ -13,11 +13,11 @@ function Navbar() {
   const currentRoute = useLocation().pathname;
 
   return profile ? (
-    <div className="bg-navbar-fill py-5 px-4 shadow fixed bottom-0 w-full md:navbar-side md:shadow-none md:basis-1/4">
+    <div className="bg-navbar-fill py-5 px-4 shadow fixed bottom-0 w-full md:order-first md:navbar-side md:shadow-none md:basis-1/3">
       <div className="flex items-center justify-between md:flex-col md:items-start">
         <NavLink
           to={ROUTES.HOME}
-          className={`${currentRoute.includes('feed') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+          className={`${currentRoute.includes('home') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
         >
           <HomeIcon className="navbar-icon" />
           <p className="hidden md:block">Home</p>
