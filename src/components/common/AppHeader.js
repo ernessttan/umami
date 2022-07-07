@@ -3,10 +3,10 @@ import * as ROUTES from '../../constants/routes';
 
 function AppHeader() {
   return (
-    <header className="p-5 text-orange-500 md:container md:max-w-screen-lg">
+    <header className="text-orange-500 px-5 md:px-0">
       <div className="flex">
-        <Link to={ROUTES.FEED}>
-          <img className="h-8 w-8" src="/logo.svg" alt="Umami Icon" />
+        <Link to={ROUTES.HOME}>
+          <img className="h-8  w-8" src="/logo.svg" alt="Umami Icon" />
         </Link>
       </div>
     </header>

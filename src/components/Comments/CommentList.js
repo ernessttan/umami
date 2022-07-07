@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
 import Comment from './Comment';
 
@@ -14,7 +13,7 @@ function CommentList({ comments }) {
   ));
 
   return (
-    <div className="px-5 py-5">
+    <div className="px-5 py-5 overflow-y-scroll">
       {commentList}
     </div>
   );

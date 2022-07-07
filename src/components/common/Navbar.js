@@ -1,21 +1,23 @@
+import {
+  BookmarkIcon, HomeIcon, SearchIcon, PlusCircleIcon, UserCircleIcon,
+} from '@heroicons/react/outline';
 import { useContext } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
-import {
-  BookmarkIcon, HomeIcon, SearchIcon, UserCircleIcon, PlusCircleIcon,
-} from '@heroicons/react/outline';
 import * as ROUTES from '../../constants/routes';
 import AuthContext from '../../context/AuthContext';
+import useUser from '../../hooks/useUser';
 
 function Navbar() {
-  const { activeUser } = useContext(AuthContext);
+  const { authUser } = useContext(AuthContext);
+  const { profile } = useUser(authUser.uid);
   const currentRoute = useLocation().pathname;
 
-  return (
-    <nav className="bg-navbar-fill w-full p-3 pl-5 pr-5 shadow fixed bottom-0 md:shadow-none md:order-first md:navbar-side md:basis-1/4 z-50">
+  return profile ? (
+    <div className="bg-navbar-fill py-5 px-4 shadow fixed bottom-0 w-full md:order-first md:navbar-side md:shadow-none md:basis-1/3">
       <div className="flex items-center justify-between md:flex-col md:items-start">
         <NavLink
-          to={ROUTES.FEED}
-          className={`${currentRoute.includes('feed') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+          to={ROUTES.HOME}
+          className={`${currentRoute.includes('home') ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
         >
           <HomeIcon className="navbar-icon" />
           <p className="hidden md:block">Home</p>
@@ -42,27 +44,28 @@ function Navbar() {
           <p className="hidden md:block">Explore</p>
         </NavLink>
         <NavLink
-          to={`/profile/${activeUser.uid}`}
-          className={`${currentRoute.includes(`profile/${activeUser.uid}`) ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
+          to={`/profile/${profile.id}`}
+          className={`${currentRoute.includes(`profile/${profile.id}`) ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
         >
           {
-            activeUser.photoUrl === undefined
+            profile.avatarUrl
               ? (
-                <UserCircleIcon className="navbar-icon" />
-              )
-              : (
                 <img
                   className="object-cover rounded-full h-8 w-8"
-                  src={activeUser.photoUrl}
+                  src={profile.avatarUrl}
                   alt="user avatar"
                 />
+              )
+              : (
+                <UserCircleIcon className="navbar-icon" />
+
               )
           }
           <p className="hidden md:block">Profile</p>
         </NavLink>
       </div>
-    </nav>
-  );
+    </div>
+  ) : null;
 }
 
 export default Navbar;

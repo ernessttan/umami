@@ -1,20 +1,26 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { useContext } from 'react';
-import UploadHeader from '../components/Upload/UploadHeader';
-import UploadForm from '../components/Upload/UploadForm';
+import BackButton from '../components/common/BackButton';
+import UploadForm from '../components/Upload/Upload';
 import AuthContext from '../context/AuthContext';
+import useUser from '../hooks/useUser';
 
 function Upload() {
-  const { activeUser } = useContext(AuthContext);
-  return (
-    <div className="container mx-auto max-w-screen-md py-8 px-5">
-      <UploadHeader />
+  const { authUser } = useContext(AuthContext);
+  const { profile } = useUser(authUser.uid);
+
+  return profile ? (
+    <div className="p-5 md:container md:max-w-screen-lg">
+      <div className="py-5">
+        <BackButton />
+      </div>
       <UploadForm
-        avatarUrl={activeUser.photoUrl}
-        id={activeUser.uid}
-        username={activeUser.displayName}
+        avatarUrl={profile.avatarUrl}
+        username={authUser.displayName}
+        id={authUser.uid}
       />
     </div>
-  );
+  ) : null;
 }
 
 export default Upload;

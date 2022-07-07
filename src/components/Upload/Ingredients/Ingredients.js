@@ -1,71 +1,54 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react/no-array-index-key */
+import { useState } from 'react';
+import { PlusIcon } from '@heroicons/react/solid';
 import PropTypes from 'prop-types';
-import AddIngredientModal from './AddIngredientModal';
-import Ingredient from './Ingredient';
+import AddIngredient from './AddIngredient';
 
 function Ingredients({ setRecipe }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [addedIngredients, setAddedIngredients] = useState([]);
+  const [ingredientList, setIngredientList] = useState([{ ingredient: '' }]);
 
-  useEffect(() => {
+  const handleChange = (event, index) => {
+    const { name, value } = event.target;
+    // Spread in existing list
+    const list = [...ingredientList];
+    // Add new ingredient obj at new index
+    list[index][name] = value;
+    setIngredientList(list);
     setRecipe((prevRecipe) => ({
       ...prevRecipe,
-      ingredients: addedIngredients,
+      ingredients: ingredientList,
     }));
-  }, [addedIngredients]);
-
-  const addIngredient = (ingredient) => {
-    setAddedIngredients((prevIngredients) => [...prevIngredients, ingredient]);
   };
 
-  const deleteIngredient = (event) => {
-    const arr = [...addedIngredients];
-    const index = arr.findIndex((ingredient) => ingredient.id === event.currentTarget.value);
-    if (index >= 0) {
-      arr.splice(index, 1);
-      setAddedIngredients(arr);
-    }
+  const handleAddInput = () => {
+    setIngredientList([...ingredientList, { ingredient: '' }]);
   };
 
-  const toggleModal = () => {
-    setModalIsOpen(!modalIsOpen);
+  const handleRemoveInput = (index) => {
+    const list = [...ingredientList];
+    // Remove input
+    list.splice(index, 1);
+    setIngredientList(list);
   };
-
-  const ingredientsEntries = addedIngredients.map((ingredient) => (
-    <Ingredient
-      key={ingredient.id}
-      title={ingredient.title}
-      amount={ingredient.amount}
-      unit={ingredient.unit}
-      deleteIngredient={deleteIngredient}
-      id={ingredient.id}
-    />
-  ));
 
   return (
-    <div className="mt-4 mb-4">
+    <div>
       <h3>Ingredients</h3>
-      <button onClick={toggleModal} type="button" className="flex items-center mt-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          viewBox="0 0 20 20"
-          fill="#EC6C3A"
-        >
-          <path
-            fillRule="evenodd"
-            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-            clipRule="evenodd"
-          />
-        </svg>
+      <button type="button" onClick={handleAddInput} className="flex items-center gap-2 my-2">
+        <PlusIcon className="text-orange-500 h-5 w-5" />
         <p>Add Ingredient</p>
       </button>
-      <AddIngredientModal
-        addIngredient={addIngredient}
-        toggleModal={toggleModal}
-        modalIsOpen={modalIsOpen}
-      />
-      <div className="p-2">{ingredientsEntries}</div>
+      <div className="flex flex-col gap-2">
+        {ingredientList.map((input, index) => (
+          <AddIngredient
+            key={index}
+            index={index}
+            handleChange={handleChange}
+            handleRemoveInput={handleRemoveInput}
+            value={input.ingredient}
+          />
+        )) }
+      </div>
     </div>
   );
 }

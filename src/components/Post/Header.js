@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-function Header({ username, avatarUrl }) {
+function Header({ avatarUrl, username }) {
   const navigate = useNavigate();
 
-  const routeToProfile = () => {
+  const goToProfile = () => {
     navigate(`/profile/${username}`);
   };
 
   return (
-    <button onClick={routeToProfile} type="button" className="flex items-center gap-3 p-3">
-      <img
-        className="object-cover rounded-full h-8 w-8"
-        src={avatarUrl}
-        alt="user profile avatar"
-      />
+    <button type="button" onClick={goToProfile} className="flex items-center gap-2 p-3">
+      <img src={avatarUrl || '/icons/profile.svg'} alt="user avatar" className="rounded-full h-8 w-8" />
       <p>{username}</p>
     </button>
   );
 }
 
 Header.defaultProps = {
-  avatarUrl: '',
+  avatarUrl: '/icons/profile.svg',
 };
 
 Header.propTypes = {

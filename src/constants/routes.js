@@ -1,7 +1,7 @@
 export const WELCOME = '/';
 export const SIGN_UP = '/signup';
 export const LOG_IN = '/login';
-export const FEED = '/feed';
+export const HOME = '/home';
 export const UPLOAD = '/upload';
 export const PROFILE = '/profile/:id';
 export const EDIT_PROFILE = '/editprofile/:id';

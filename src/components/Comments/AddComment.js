@@ -1,60 +1,47 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/forbid-prop-types */
-import PropTypes from 'prop-types';
-import { useContext, useState } from 'react';
 import generateUniqueId from 'generate-unique-id';
-import AuthContext from '../../context/AuthContext';
+import { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import UserProfileContext from '../../context/UserProfileContext';
 import { addComment } from '../../firebase/services';
 
-function AddComment({
-  recipeId, setAllComments, comments,
-}) {
-  const { activeUser } = useContext(AuthContext);
-  const [newComment, setNewComment] = useState({
+function AddComment({ recipeId, setAllComments, comments }) {
+  const { profile: { avatarUrl, username } } = useContext(UserProfileContext);
+  const [comment, setComment] = useState({
+    id: generateUniqueId(3),
     content: '',
+    username: `${username}`,
+    avatarUrl: `${avatarUrl}`,
     dateCreated: Date.now(),
-    username: `${activeUser.displayName}`,
-    avatarUrl: `${activeUser.photoUrl}`,
-    id: generateUniqueId({ length: 2, useLetters: false }),
   });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setNewComment((prevComment) => ({
+    setComment((prevComment) => ({
       ...prevComment,
-      [name]: value,
-      id: generateUniqueId({ length: 2, useLetters: false }),
+      content: event.target.value,
     }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Add comment to db
-    await addComment(newComment, recipeId);
-    // Set all comments state with new comment
-    setAllComments([newComment, ...comments]);
-    setNewComment((prevComment) => ({
-      ...prevComment,
-      content: '',
-    }));
+    setAllComments([comment, ...comments]);
+    await addComment(comment, recipeId)
+      .then(() => {
+        setComment({
+          id: generateUniqueId(3),
+          content: '',
+          username: `${username}`,
+          avatarUrl: `${avatarUrl}`,
+          dateCreated: Date.now(),
+        });
+      });
   };
 
   return (
-    <div className="border py-5 pl-5 pr-5 shadow fixed bottom-0 w-full h-auto">
-      <form onSubmit={handleSubmit} className="flex items-center gap-2 bg-textbox-grey py-3 px-4 rounded">
-        <img className="rounded-full h-8 w-8" src={activeUser.avatarUrl} alt="user avatar" />
-        <input
-          onChange={handleChange}
-          className="border-none bg-transparent grow focus:ring-0"
-          type="text"
-          name="content"
-          value={newComment.content}
-          placeholder="Add a comment..."
-        />
-        <button className="text-orange-500" type="submit">Send</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="w-full bottom-5 absolute bg-textbox-grey rounded flex items-center gap-2 p-3">
+      <img src={avatarUrl} className="h-8 w-8" alt="user avatar" />
+      <input type="text" name="content" value={comment.content} onChange={handleChange} className="bg-transparent grow" />
+      <button className="text-orange-500" type="submit">Send</button>
+    </form>
   );
 }
 

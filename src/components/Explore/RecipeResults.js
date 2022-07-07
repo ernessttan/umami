@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { getAllRecipes } from '../../../firebase/services';
-import RecipeCard from '../../common/RecipeCard';
+import RecipeCard from '../common/RecipeCard';
+import { getAllRecipes } from '../../firebase/services';
 
 function RecipeResults({ searchQuery }) {
   const [recipes, setRecipes] = useState([]);
 
+  // Filter results by search query
   const filterResults = (query, recipeArr) => recipeArr.filter(
     (recipe) => recipe.title.toLowerCase().includes(query),
   );
@@ -32,7 +33,7 @@ function RecipeResults({ searchQuery }) {
   ));
 
   return (
-    <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 py-2">
+    <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4 py-2">
       {recipeList}
     </div>
   );

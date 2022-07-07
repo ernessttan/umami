@@ -1,70 +1,54 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react/no-array-index-key */
+import { useState } from 'react';
+import { PlusIcon } from '@heroicons/react/solid';
 import PropTypes from 'prop-types';
-import AddInstructionModal from './AddInstructionModal';
-import Instruction from './Instruction';
+import AddInstruction from './AddInstruction';
 
 function Instructions({ setRecipe }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [addedInstructions, setAddedInstructions] = useState([]);
+  const [instructionList, setInstructionList] = useState([{ instruction: '' }]);
 
-  useEffect(() => {
+  const handleChange = (event, index) => {
+    const { name, value } = event.target;
+    // Spread in existing list
+    const list = [...instructionList];
+    // Add new instruction obj at new index
+    list[index][name] = value;
+    setInstructionList(list);
     setRecipe((prevRecipe) => ({
       ...prevRecipe,
-      instructions: addedInstructions,
+      instructions: instructionList,
     }));
-  }, [addedInstructions]);
-
-  const addInstruction = (instruction) => {
-    setAddedInstructions((prevInstructions) => [...prevInstructions, instruction]);
   };
 
-  const deleteInstruction = (event) => {
-    const arr = [...addedInstructions];
-    const index = arr.findIndex((instruction) => instruction.id === event.currentTarget.value);
-    if (index >= 0) {
-      arr.splice(index, 1);
-      setAddedInstructions(arr);
-    }
+  const handleAddInput = () => {
+    setInstructionList([...instructionList, { instruction: '' }]);
   };
 
-  const toggleModal = () => {
-    setModalIsOpen(!modalIsOpen);
+  const handleRemoveInput = (index) => {
+    const list = [...instructionList];
+    // Remove input
+    list.splice(index, 1);
+    setInstructionList(list);
   };
-
-  const instructionEntries = addedInstructions.map((instruction, index) => (
-    <Instruction
-      number={index + 1}
-      key={instruction.id}
-      text={instruction.text}
-      deleteInstruction={deleteInstruction}
-      id={instruction.id}
-    />
-  ));
 
   return (
-    <div className="mt-4 mb-4">
+    <div>
       <h3>Instructions</h3>
-      <button onClick={toggleModal} type="button" className="flex items-center mt-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          viewBox="0 0 20 20"
-          fill="#EC6C3A"
-        >
-          <path
-            fillRule="evenodd"
-            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-            clipRule="evenodd"
-          />
-        </svg>
+      <button type="button" onClick={handleAddInput} className="flex items-center gap-2 my-2">
+        <PlusIcon className="text-orange-500 h-5 w-5" />
         <p>Add Instruction</p>
       </button>
-      <AddInstructionModal
-        addInstruction={addInstruction}
-        toggleModal={toggleModal}
-        modalIsOpen={modalIsOpen}
-      />
-      <div className="p-2">{instructionEntries}</div>
+      <div className="flex flex-col gap-2">
+        {instructionList.map((input, index) => (
+          <AddInstruction
+            key={index}
+            index={index}
+            handleChange={handleChange}
+            handleRemoveInput={handleRemoveInput}
+            value={input.instruction}
+          />
+        )) }
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import * as ROUTES from '../constants/routes';
 
 function Welcome() {
   return (
-    <div className="container mx-auto max-w-screen-md h-screen flex items-center">
+    <div className="container mx-auto max-w-screen-md h-screen mt-[30vh]">
       <div className="w-full px-5">
         <img src="logo.svg" alt="brand logo" />
         <h1 className="text-3xl my-5">

@@ -59,18 +59,20 @@
     position: static;
     height: theme(height.full);
     width: theme(width.auto);
+    margin: 0;
+    padding: 0;
     background-color: theme('colors.transparent');
   }
 
-  .app-container {
+  .desktop-screen {
     height: theme(height.full);
     display: flex;
     flex-direction: row;  
   }
 
-  .larger-screen {
-    margin-left: auto;
-    margin-right: auto;
+  .desktop-content {
+    flex-grow: 1;
+    flex-basis: 75%;
   }
 }
 

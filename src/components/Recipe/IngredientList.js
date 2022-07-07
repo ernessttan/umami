@@ -1,18 +1,10 @@
-/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/no-array-index-key */
 import PropTypes from 'prop-types';
 
 function IngredientList({ ingredients }) {
-  const ingredientList = ingredients.map((ingredient) => (
-    <li key={ingredient.id} className="text-lg flex items-center gap-1 py-1">
-      <span>
-        {ingredient.amount}
-      </span>
-      <span>
-        {ingredient.unit}
-      </span>
-      <span>
-        {ingredient.title}
-      </span>
+  const ingredientList = ingredients.map((ingredient, index) => (
+    <li key={index} className="text-lg flex items-center gap-1 py-1">
+      {ingredient.ingredient}
     </li>
   ));
 

@@ -1,56 +1,16 @@
-import { useState } from 'react';
 import AppHeader from '../components/common/AppHeader';
+import Search from '../components/Explore/Search';
 import Navbar from '../components/common/Navbar';
-import SearchBar from '../components/common/SearchBar';
-import SelectSearch from '../components/Explore/SelectSearch';
-import SearchResults from '../components/Explore/SearchResults/SearchResults';
 
 function Explore() {
-  const [isSearching, setIsSearching] = useState(false);
-  const [selected, setSelected] = useState('recipes');
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const startSearch = () => {
-    setIsSearching(true);
-  };
-
-  const closeSearch = () => {
-    setIsSearching(false);
-    setSearchQuery('');
-  };
-
-  const handleClick = (event) => {
-    const { value } = event.target;
-    setSelected(value);
-  };
-
-  const handleChange = (event) => {
-    const { value } = event.target;
-    setSearchQuery(value.toLowerCase());
-  };
-
   return (
-    <>
+    <div className="h-screen py-5 md:px-5 md:container md:max-w-screen-lg">
       <AppHeader />
-      <div className="h-full md:app-container md:container md:max-w-screen-lg">
-        <div className="grow-1 basis-3/4 py-5">
-          <SearchBar
-            searchQuery={searchQuery}
-            isSearching={isSearching}
-            startSearch={startSearch}
-            closeSearch={closeSearch}
-            handleChange={handleChange}
-          />
-          <SelectSearch handleClick={handleClick} selected={selected} />
-          <SearchResults
-            selected={selected}
-            searchQuery={searchQuery}
-          />
-        </div>
-        <Navbar className="mt-full" />
+      <div className="mt-5 md:desktop-screen">
+        <Search />
+        <Navbar />
       </div>
-
-    </>
+    </div>
   );
 }
 

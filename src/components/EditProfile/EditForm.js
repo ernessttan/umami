@@ -1,16 +1,8 @@
 import PropTypes from 'prop-types';
 
 function EditForm({
-  setUserProfile, userProfile,
+  handleChange, userProfile,
 }) {
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserProfile((prevUserProfile) => ({
-      ...prevUserProfile,
-      [name]: value,
-    }));
-  };
-
   return (
     <div className="flex flex-col gap-2">
       <h3>Name</h3>
@@ -39,7 +31,7 @@ function EditForm({
 }
 
 EditForm.propTypes = {
-  setUserProfile: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
   userProfile: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 

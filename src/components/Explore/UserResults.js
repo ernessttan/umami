@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import UserCard from '../../common/UserCard';
-import { getAllUsers } from '../../../firebase/services';
+import UserCard from '../common/UserCard';
+import { getAllUsers } from '../../firebase/services';
 
 function UserResults({ searchQuery }) {
   const [users, setUsers] = useState([]);
@@ -16,6 +16,7 @@ function UserResults({ searchQuery }) {
     getUsers();
   }, []);
 
+  // Filter results by search query
   const filterResults = (query, userArr) => userArr.filter(
     (user) => user.username.toLowerCase().includes(query),
   );
@@ -31,7 +32,7 @@ function UserResults({ searchQuery }) {
   ));
 
   return (
-    <div className="grid p-5 gap-5">
+    <div className="grid py-5 gap-5">
       {userList}
     </div>
   );

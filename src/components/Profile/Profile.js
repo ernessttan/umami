@@ -1,40 +1,39 @@
-/* eslint-disable react/forbid-prop-types */
-import { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import AuthContext from '../../context/AuthContext';
-import Actions from './Actions';
+import { useContext, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import UserProfileContext from '../../context/UserProfileContext';
 import Header from './Header';
-import ProfileFeed from './ProfileFeed';
-import { loadUserPosts } from '../../firebase/services';
+import Feed from './Feed';
+import { getUserPosts } from '../../firebase/services';
 
-function Profile({ profile }) {
-  const { activeUser } = useContext(AuthContext);
-  const [posts, setPosts] = useState();
+function Profile() {
+  const { profile } = useContext(UserProfileContext);
+  const { id } = useParams();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const getPosts = async () => {
-      await loadUserPosts(profile.id)
+      await getUserPosts(id)
         .then((userPosts) => {
           userPosts.sort((a, b) => b.dateCreated - a.dateCreated);
           setPosts(userPosts);
         });
     };
     getPosts();
-  }, [profile.id]);
+  }, [id]);
 
-  return posts ? (
-    <div className="grow-1 basis-3/4 px-5">
-      {activeUser.uid === profile.id ? (
-        <Actions />
-      ) : null}
-      <Header profile={profile} totalPosts={posts.length} />
-      <ProfileFeed posts={posts} />
+  return profile && posts ? (
+    <div className="px-5 md:desktop-content">
+      <Header
+        name={profile.name}
+        avatarUrl={profile.avatarUrl}
+        username={profile.username}
+        totalPosts={posts.length}
+        totalFollowers={profile.followers.length}
+        totalFollowing={profile.following.length}
+      />
+      <Feed posts={posts} />
     </div>
   ) : null;
 }
-
-Profile.propTypes = {
-  profile: PropTypes.objectOf(PropTypes.any).isRequired,
-};
 
 export default Profile;

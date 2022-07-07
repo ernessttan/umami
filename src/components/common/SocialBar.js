@@ -8,20 +8,20 @@ function SocialBar({
   totalComments, totalLikes, userLikedPost, id,
 }) {
   const navigate = useNavigate();
-  const { activeUser } = useContext(AuthContext);
-  const [likes, setTotalLikes] = useState(totalLikes);
+  const { authUser } = useContext(AuthContext);
+  const [likesCount, setLikesCount] = useState(totalLikes);
   const [likedStatus, setLikedStatus] = useState(userLikedPost);
 
   useEffect(() => {
-    toggleLike(activeUser.uid, id, likedStatus);
+    toggleLike(authUser.uid, id, likedStatus);
   }, [likedStatus]);
 
   const handleLike = () => {
     setLikedStatus((prevLikedStatus) => !prevLikedStatus);
-    setTotalLikes((prevTotalLikes) => (likedStatus ? prevTotalLikes - 1 : prevTotalLikes + 1));
+    setLikesCount((prevLikesCount) => (likedStatus ? prevLikesCount - 1 : prevLikesCount + 1));
   };
 
-  const routeToComments = () => {
+  const goToComments = () => {
     navigate(`/comments/${id}`);
   };
 
@@ -44,10 +44,10 @@ function SocialBar({
             />
           </svg>
         </button>
-        <p>{likes}</p>
+        <p>{likesCount}</p>
       </div>
       <div className="flex flex-col items-center">
-        <button onClick={routeToComments} type="button">
+        <button type="button" onClick={goToComments}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
