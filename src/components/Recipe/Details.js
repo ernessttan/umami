@@ -32,7 +32,7 @@ function Details({ instructions, ingredients }) {
         </button>
       </div>
       <div className="border -ml-7 w-screen md:w-full" />
-      <div className="container mx-auto">
+      <div>
         {selected === 'ingredients' ? <IngredientList ingredients={ingredients} /> : null}
         {selected === 'instructions' ? <InstructionList instructions={instructions} /> : null}
       </div>

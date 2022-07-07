@@ -38,7 +38,7 @@ function AddComment({ recipeId, setAllComments, comments }) {
 
   return (
     <form onSubmit={handleSubmit} className="w-full bottom-5 absolute bg-textbox-grey rounded flex items-center gap-2 p-3">
-      <img src={avatarUrl} className="h-8 w-8" alt="user avatar" />
+      <img src={avatarUrl} className="h-8 w-8 rounded-full" alt="user avatar" />
       <input type="text" name="content" value={comment.content} onChange={handleChange} className="bg-transparent grow" />
       <button className="text-orange-500" type="submit">Send</button>
     </form>
