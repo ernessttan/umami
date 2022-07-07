@@ -6,13 +6,15 @@ import Information from './Information';
 import Servings from './Servings';
 import Details from './Details';
 import SocialBar from '../common/SocialBar';
+import BackButton from '../common/BackButton';
 
 function Recipe() {
   const { id } = useParams();
   const recipe = useRecipe(id);
 
   return recipe ? (
-    <div>
+    <div className="md:grow">
+      <BackButton />
       <Title title={recipe.title} />
       <Image imageUrl={recipe.imageUrl} />
       <Information
