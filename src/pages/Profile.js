@@ -1,22 +1,25 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { useContext } from 'react';
-import AuthContext from '../context/AuthContext';
+import { useParams } from 'react-router-dom';
 import UserProfileContext from '../context/UserProfileContext';
 import useUser from '../hooks/useUser';
-import AppHeader from '../components/common/AppHeader';
-import Timeline from '../components/Home/Timeline';
+import UserProfile from '../components/Profile/Profile';
 import Navbar from '../components/common/Navbar';
+import AuthContext from '../context/AuthContext';
+import BackButton from '../components/common/BackButton';
+import SettingsBar from '../components/Profile/SettingsBar';
 
-function Home() {
+function Profile() {
+  const { id } = useParams();
   const { authUser } = useContext(AuthContext);
-  const { profile } = useUser(authUser.uid);
+  const { profile } = useUser(id);
 
-  return authUser ? (
+  return profile ? (
     <div className="h-screen py-5">
-      <AppHeader />
+      {authUser.uid === profile.id ? (<SettingsBar />) : (<BackButton />)}
       <UserProfileContext.Provider value={{ profile }}>
         <div className="mt-5 md:desktop-screen">
-          <Timeline />
+          <UserProfile />
           <Navbar />
         </div>
       </UserProfileContext.Provider>
@@ -24,4 +27,4 @@ function Home() {
   ) : null;
 }
 
-export default Home;
+export default Profile;

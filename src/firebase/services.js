@@ -73,10 +73,10 @@ async function getFollowingPosts(userId, followingArr) {
 
   const followingPosts = await Promise.all(
     posts.map(async (post) => {
-      // By default the active user does not like a post
+      // By default the auth user does not like a post
       let userLikedPost = false;
       if (post.likes.includes(userId)) {
-        // If the active users likes a post flip the status
+        // If the auth users likes a post flip the status
         userLikedPost = true;
       }
       // Return new object with post info and liked status
@@ -87,6 +87,8 @@ async function getFollowingPosts(userId, followingArr) {
   return followingPosts;
 }
 
+// Function to save recipe to db
+// Input: recipe <Object>, imageToStore <File>
 async function saveRecipe(recipe, imageToStore) {
   // Storage Reference
   const spaceRef = ref(recipeImagesRef, `${recipe.id}`);
@@ -100,16 +102,69 @@ async function saveRecipe(recipe, imageToStore) {
   updateDoc(doc(recipesRef, recipe.id), { imageUrl: url });
 }
 
+// Function to get a users posts
+// Input: userId <String>
+async function getUserPosts(userId) {
+  const q = query(recipesRef, where('userId', '==', userId));
+  const result = await getDocs(q);
+
+  const userPosts = result.docs.map((post) => ({
+    ...post.data(),
+  }));
+
+  return userPosts;
+}
+
+// Function to get a recipe by id
+// Input: recipeId <String>, authUserId <String>
+async function getRecipeById(recipeId, authUserId) {
+  const q = query(recipesRef, where('id', '==', recipeId));
+  const result = await getDocs(q);
+  const recipeResult = result.docs.map((recipe) => recipe.data());
+
+  const recipe = await Promise.all(
+    recipeResult.map(async (post) => {
+      let userLikedPost = false;
+      if (post.likes.includes(authUserId)) {
+        userLikedPost = true;
+      }
+      return { ...post, userLikedPost };
+    }),
+  );
+
+  return recipe[0];
+}
+
 /*
     Social functions
 */
 
 // Function to toggle liking a post
+// Input: userId <String>, id <String>, liked <Boolean>
 async function toggleLike(userId, id, liked) {
   const postRef = doc(db, 'recipes', id);
   updateDoc(postRef, { likes: liked ? arrayUnion(userId) : arrayRemove(userId) });
 }
 
+// Function to toggle follow
+// Input: authUserId <String>, userIdToFollow <String>, isFollowingUser <Boolean>
+async function toggleFollow(authUserId, userIdToFollow, isFollowingUser) {
+  const authUserRef = doc(db, 'users', authUserId);
+  const userRef = doc(db, 'users', userIdToFollow);
+  // Update auth users following array
+  updateDoc(authUserRef, {
+    following: isFollowingUser
+      ? arrayRemove(userIdToFollow) : arrayUnion(userIdToFollow),
+  });
+
+  // Update followed user's followers array
+  updateDoc(userRef, {
+    followers: isFollowingUser
+      ? arrayRemove(authUserId) : arrayUnion(authUserId),
+  });
+}
+
 export {
-  addNewUser, getUserById, getFollowingPosts, toggleLike, saveRecipe,
+  addNewUser, getUserById, getFollowingPosts,
+  toggleLike, saveRecipe, getUserPosts, toggleFollow, getRecipeById,
 };

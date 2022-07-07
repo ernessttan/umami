@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import UserProfileContext from '../../context/UserProfileContext';
 import { getFollowingPosts } from '../../firebase/services';
+import Post from '../Post/Post';
 
 function Timeline() {
   const { profile } = useContext(UserProfileContext);
@@ -25,6 +26,8 @@ function Timeline() {
     getTimeline();
   }, [following]);
 
+  console.log(profile);
+
   return (
     <div className="md:order-2 md:grow">
       {following === undefined ? (
@@ -37,7 +40,18 @@ function Timeline() {
         </h1>
       ) : timeline ? (
         timeline.map((post) => (
-          <Post />
+          <Post
+            key={post.id}
+            id={post.id}
+            avatarUrl={post.avatarUrl}
+            username={post.username}
+            imageUrl={post.imageUrl}
+            title={post.title}
+            dateCreated={post.dateCreated}
+            likes={post.likes}
+            comments={post.comments}
+            userLikedPost={post.userLikedPost}
+          />
         ))) : null}
     </div>
   );

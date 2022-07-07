@@ -14,7 +14,9 @@ function LoginForm() {
 
   const handleLogin = async (data) => {
     await signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(navigate(ROUTES.HOME))
+      .then(() => {
+        navigate(ROUTES.HOME);
+      })
       .catch((error) => {
         if (error.code === 'auth/user-not-found') {
           setErrorMessage('Sorry that user does not exist');

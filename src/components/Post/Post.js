@@ -9,7 +9,7 @@ function Post({
   id, avatarUrl, username, imageUrl, title, dateCreated, likes, comments, userLikedPost,
 }) {
   return (
-    <div className="px-5">
+    <>
       <Header
         avatarUrl={avatarUrl}
         username={username}
@@ -18,17 +18,21 @@ function Post({
         <Image
           imageUrl={imageUrl}
         />
+      </Link>
+      <div className="px-5 py-3">
         <Information
           title={title}
           dateCreated={dateCreated}
         />
-      </Link>
-      <SocialBar
-        totalLikes={likes.length}
-        totalComments={comments.length}
-        userLikedPost={userLikedPost}
-      />
-    </div>
+        <SocialBar
+          id={id}
+          totalLikes={likes.length}
+          totalComments={comments.length}
+          userLikedPost={userLikedPost}
+        />
+      </div>
+
+    </>
   );
 }
 
@@ -49,3 +53,5 @@ Post.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string.isRequired,
 };
+
+export default Post;

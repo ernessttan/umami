@@ -1,19 +1,19 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import {
   BookmarkIcon, HomeIcon, SearchIcon, PlusCircleIcon, UserCircleIcon,
 } from '@heroicons/react/outline';
 import { useContext } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import UserProfileContext from '../../context/UserProfileContext';
+import AuthContext from '../../context/AuthContext';
+import useUser from '../../hooks/useUser';
 
 function Navbar() {
-  const profile = useContext(UserProfileContext);
+  const { authUser } = useContext(AuthContext);
+  const { profile } = useUser(authUser.uid);
   const currentRoute = useLocation().pathname;
 
-  return (
-    <div className="bg-navbar-fill py-5 px-4 shadow fixed bottom-0 w-full -mx-5 md:navbar-side md:shadow-none md:basis-1/4">
+  return profile ? (
+    <div className="bg-navbar-fill py-5 px-4 shadow fixed bottom-0 w-full md:navbar-side md:shadow-none md:basis-1/4">
       <div className="flex items-center justify-between md:flex-col md:items-start">
         <NavLink
           to={ROUTES.HOME}
@@ -48,23 +48,24 @@ function Navbar() {
           className={`${currentRoute.includes(`profile/${profile.id}`) ? 'text-orange-500' : 'text-grey-700'} flex items-center md:mt-3 md:mb-3 md:gap-2`}
         >
           {
-            profile.avatarUrl === undefined
+            profile.avatarUrl
               ? (
-                <UserCircleIcon className="navbar-icon" />
-              )
-              : (
                 <img
                   className="object-cover rounded-full h-8 w-8"
                   src={profile.avatarUrl}
                   alt="user avatar"
                 />
               )
+              : (
+                <UserCircleIcon className="navbar-icon" />
+
+              )
           }
           <p className="hidden md:block">Profile</p>
         </NavLink>
       </div>
     </div>
-  );
+  ) : null;
 }
 
 export default Navbar;

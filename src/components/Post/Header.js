@@ -9,8 +9,8 @@ function Header({ avatarUrl, username }) {
   };
 
   return (
-    <button type="button" onClick={goToProfile} className="flex items-center gap-3">
-      <img src={avatarUrl} alt="user avatar" />
+    <button type="button" onClick={goToProfile} className="flex items-center gap-2 px-5">
+      <img src={avatarUrl || '/icons/profile.svg'} alt="user avatar" />
       <p>{username}</p>
     </button>
   );
