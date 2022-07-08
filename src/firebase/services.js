@@ -137,9 +137,20 @@ async function getAllRecipes() {
   return recipeResult;
 }
 
-// Functio to delete recipe
+// Function to delete recipe
 async function deleteRecipe(recipeId) {
   await deleteDoc(doc(recipesRef, recipeId));
+}
+
+// Function to update a recipe
+async function editRecipe(editedRecipe, imageToStore) {
+  const spaceRef = ref(recipeImagesRef, `${editedRecipe.id}`);
+  await updateDoc(doc(recipesRef, editedRecipe.id), editedRecipe);
+  if (imageToStore) {
+    await uploadBytes(spaceRef, imageToStore);
+    const url = await getImageUrl(editedRecipe.id, 'recipes');
+    updateDoc(doc(recipesRef, editedRecipe.id), { imageUrl: url });
+  }
 }
 
 /*
@@ -212,5 +223,5 @@ export {
   addNewUser, getUserById, getFollowingPosts,
   toggleLike, saveRecipe, getUserPosts, toggleFollow,
   getRecipeById, savedEditedProfile, getAllUsers,
-  getAllRecipes, addComment, deleteRecipe,
+  getAllRecipes, addComment, deleteRecipe, editRecipe,
 };

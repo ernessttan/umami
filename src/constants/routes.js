@@ -5,6 +5,7 @@ export const HOME = '/home';
 export const UPLOAD = '/upload';
 export const PROFILE = '/profile/:id';
 export const EDIT_PROFILE = '/editprofile/:id';
+export const EDIT_RECIPE = '/editrecipe/:id';
 export const SETTINGS = '/settings/:username';
 export const RECIPE = '/recipe/:id';
 export const SAVED = '/saved';

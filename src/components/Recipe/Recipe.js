@@ -20,7 +20,7 @@ function Recipe() {
       <div className="px-5 flex items-center justify-between w-full">
         <Title title={recipe.title} username={recipe.username} recipeId={id} />
       </div>
-      <Image imageUrl={recipe.imageUrl} />
+      <Image imageUrl={recipe?.imageUrl} />
       <div className="px-5">
         <Information
           username={recipe.username}

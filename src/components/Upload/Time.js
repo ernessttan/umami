@@ -35,10 +35,15 @@ function Time({ handleChange, prepTime, cookTime }) {
   );
 }
 
+Time.defaultProps = {
+  prepTime: 0,
+  cookTime: 0,
+};
+
 Time.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  prepTime: PropTypes.string.isRequired,
-  cookTime: PropTypes.string.isRequired,
+  prepTime: PropTypes.number,
+  cookTime: PropTypes.number,
 };
 
 export default Time;

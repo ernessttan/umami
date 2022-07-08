@@ -24,8 +24,8 @@ function Upload({ avatarUrl, username, id }) {
     id: generateUniqueId({ length: 6 }),
     title: '',
     imageUrl: '',
-    prepTime: '',
-    cookTime: '',
+    prepTime: 0,
+    cookTime: 0,
     difficulty: '',
     servings: 0,
     ingredients: [],
@@ -52,7 +52,7 @@ function Upload({ avatarUrl, username, id }) {
 
   return (
     <form onSubmit={handleSubmit} className="px-2 flex flex-col gap-3">
-      <Title handleChange={handleChange} />
+      <Title handleChange={handleChange} title={recipe.title} />
       <Image setImageFile={setImageFile} />
       <Servings setRecipe={setRecipe} handleChange={handleChange} servings={recipe.servings} />
       <Time handleChange={handleChange} prepTime={recipe.prepTime} cookTime={recipe.cookTime} />
