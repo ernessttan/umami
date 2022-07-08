@@ -17,6 +17,8 @@ const Explore = lazy(() => import('./pages/Explore'));
 const Comments = lazy(() => import('./pages/CommentsPage'));
 
 function App() {
+  // Top Level provides all pages with authUser details
+  // displayName, uid
   const { authUser } = useAuthUser();
 
   return (

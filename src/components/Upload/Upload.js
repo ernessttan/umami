@@ -20,6 +20,7 @@ function Upload({ avatarUrl, username, id }) {
   const [recipe, setRecipe] = useState({
     avatarUrl: `${avatarUrl}`,
     userId: `${id}`,
+    username: `${username}`,
     id: generateUniqueId({ length: 6 }),
     title: '',
     imageUrl: '',
