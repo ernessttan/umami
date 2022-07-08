@@ -15,7 +15,7 @@ function Recipe() {
   return recipe ? (
     <div className="md:grow">
       <BackButton />
-      <Title title={recipe.title} />
+      <Title title={recipe.title} username={recipe.username} recipeId={id} />
       <Image imageUrl={recipe.imageUrl} />
       <Information
         username={recipe.username}

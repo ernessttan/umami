@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react';
 import * as ROUTES from './constants/routes';
 import AuthContext from './context/AuthContext';
 import useAuthUser from './hooks/useAuthUser';
+import Loader from './components/common/Loader';
 
 const Welcome = lazy(() => import('./pages/Welcome'));
 const SignUp = lazy(() => import('./pages/SignUp'));
@@ -24,7 +25,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ authUser }}>
       <Router>
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path={ROUTES.WELCOME} element={<Welcome />} />
             <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
