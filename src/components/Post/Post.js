@@ -49,7 +49,7 @@ Post.propTypes = {
   title: PropTypes.string.isRequired,
   dateCreated: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
-  likes: PropTypes.arrayOf(PropTypes.object),
+  likes: PropTypes.arrayOf(PropTypes.string),
   comments: PropTypes.arrayOf(PropTypes.object),
   userLikedPost: PropTypes.bool,
   id: PropTypes.string.isRequired,

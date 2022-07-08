@@ -27,7 +27,7 @@ function Timeline() {
   }, [following]);
 
   return (
-    <div className="md:desktop-content">
+    <div className="sm:px-5 md:px-10 md:desktop-content">
       {following === undefined ? (
         <Skeleton count={3} className="w-full h-[35vh] mb-2" />
       ) : following.length === 0 ? (

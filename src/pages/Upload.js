@@ -10,7 +10,7 @@ function Upload() {
   const { profile } = useUser(authUser.uid);
 
   return profile ? (
-    <div className="p-5 md:container md:max-w-screen-lg">
+    <div className="p-5 md:px-20 md:container md:max-w-screen-lg">
       <div className="py-5">
         <BackButton />
       </div>

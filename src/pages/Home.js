@@ -12,10 +12,12 @@ function Home() {
   const { profile } = useUser(authUser.uid);
 
   return authUser ? (
-    <div className="h-screen py-5 md:px-5 md:container md:max-w-screen-lg">
-      <AppHeader />
+    <div className="flex flex-col h-full relative md:px-5 md:container md:max-w-screen-lg">
+      <div className="py-5">
+        <AppHeader />
+      </div>
       <UserProfileContext.Provider value={{ profile }}>
-        <div className="mt-5 md:desktop-screen">
+        <div className="overflow-y-scroll py-5 pb-16 md:desktop-screen">
           <Timeline />
           <Navbar />
         </div>

@@ -4,8 +4,12 @@ import UserProfileContext from '../../context/UserProfileContext';
 import Header from './Header';
 import Feed from './Feed';
 import { getUserPosts } from '../../firebase/services';
+import BackButton from '../common/BackButton';
+import SettingsBar from './SettingsBar';
+import AuthContext from '../../context/AuthContext';
 
 function Profile() {
+  const { authUser } = useContext(AuthContext);
   const { profile } = useContext(UserProfileContext);
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
@@ -23,6 +27,9 @@ function Profile() {
 
   return profile && posts ? (
     <div className="px-5 md:desktop-content">
+      <div className="py-3">
+        {authUser.uid === profile.id ? (<SettingsBar />) : (<BackButton />)}
+      </div>
       <Header
         name={profile.name}
         avatarUrl={profile.avatarUrl}
