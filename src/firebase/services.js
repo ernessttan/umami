@@ -16,6 +16,7 @@ const avatarImagesRef = ref(storage, 'avatars');
 */
 
 // Function to get store image url
+// Input: id <String>, location <String>
 async function getImageUrl(id, location) {
   let result;
   if (location === 'recipes') {
@@ -138,11 +139,13 @@ async function getAllRecipes() {
 }
 
 // Function to delete recipe
+// Input: recipeId <String>
 async function deleteRecipe(recipeId) {
   await deleteDoc(doc(recipesRef, recipeId));
 }
 
 // Function to update a recipe
+// Input: editedRecipe <Object>, imageToStore <File>
 async function editRecipe(editedRecipe, imageToStore) {
   const spaceRef = ref(recipeImagesRef, `${editedRecipe.id}`);
   await updateDoc(doc(recipesRef, editedRecipe.id), editedRecipe);
@@ -215,6 +218,7 @@ async function toggleFollow(authUserId, userIdToFollow, isFollowingUser) {
 }
 
 // Function to add comment
+// Input: comment <Object>, recipeId <String>
 async function addComment(comment, recipeId) {
   updateDoc(doc(recipesRef, recipeId), { comments: arrayUnion(comment) });
 }
