@@ -1,6 +1,6 @@
 import {
   setDoc, doc, collection, getDoc, query, getDocs, where, updateDoc,
-  arrayRemove, arrayUnion, orderBy,
+  arrayRemove, arrayUnion, orderBy, deleteDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from './firebaseConfig';
@@ -137,6 +137,11 @@ async function getAllRecipes() {
   return recipeResult;
 }
 
+// Functio to delete recipe
+async function deleteRecipe(recipeId) {
+  await deleteDoc(doc(recipesRef, recipeId));
+}
+
 /*
     User db functions
 */
@@ -207,5 +212,5 @@ export {
   addNewUser, getUserById, getFollowingPosts,
   toggleLike, saveRecipe, getUserPosts, toggleFollow,
   getRecipeById, savedEditedProfile, getAllUsers,
-  getAllRecipes, addComment,
+  getAllRecipes, addComment, deleteRecipe,
 };

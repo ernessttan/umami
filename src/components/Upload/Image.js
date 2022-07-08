@@ -10,7 +10,7 @@ function Image({ setImageFile }) {
   };
 
   return (
-    <label htmlFor="imageUrl" className="bg-textbox-grey rounded-lg flex items-center justify-center h-80 w-full">
+    <label htmlFor="imageUrl" className="bg-textbox-grey rounded-lg flex items-center justify-center h-80 md:h-96 w-full">
       <input
         type="file"
         accept=".png, .jpg, .jpeg"
