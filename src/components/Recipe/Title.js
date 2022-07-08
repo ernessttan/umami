@@ -24,27 +24,28 @@ function Title({ title, username, recipeId }) {
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <>
       <h1 className="py-3">{title}</h1>
       {authUser.displayName === username ? (
-        <div>
-          <button type="button" onClick={toggleDropDown}>
+        <div className="flex flex-col">
+          <button className="flex justify-end" type="button" onClick={toggleDropDown}>
             <DotsHorizontalIcon className="h-5 w-5 text-grey-700" />
           </button>
-          <div className={`${toggleDrop ? 'block' : 'hidden'} rounded bg-white z-50 p-5 shadow absolute`} id="dropdown">
-            <button type="button" className="flex items-center gap-2">
-              <PencilIcon className="h-5 w-5 text-grey-700" />
-              <p>Edit</p>
-            </button>
-            <button onClick={handleDelete} type="button" className="flex items-center gap-2">
-              <TrashIcon className="h-5 w-5 text-red-500" />
-              <p>Delete</p>
-            </button>
+          <div className="relative">
+            <div className={`${toggleDrop ? 'block' : 'hidden'} rounded bg-white p-5 shadow absolute right-1`}>
+              <button type="button" className="flex items-center gap-2">
+                <PencilIcon className="h-5 w-5 text-grey-700" />
+                <p>Edit</p>
+              </button>
+              <button onClick={handleDelete} type="button" className="flex items-center gap-2">
+                <TrashIcon className="h-5 w-5 text-red-500" />
+                <p>Delete</p>
+              </button>
+            </div>
           </div>
         </div>
       ) : null}
-      {/* Dropdown menu */}
-    </div>
+    </>
   );
 }
 

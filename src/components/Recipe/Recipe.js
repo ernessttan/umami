@@ -14,25 +14,31 @@ function Recipe() {
 
   return recipe ? (
     <div className="md:grow">
-      <BackButton />
-      <Title title={recipe.title} username={recipe.username} recipeId={id} />
+      <div className="px-3">
+        <BackButton />
+      </div>
+      <div className="px-5 flex items-center justify-between w-full">
+        <Title title={recipe.title} username={recipe.username} recipeId={id} />
+      </div>
       <Image imageUrl={recipe.imageUrl} />
-      <Information
-        username={recipe.username}
-        dateCreated={recipe.dateCreated}
-        difficulty={recipe.difficulty}
-        prepTime={recipe.prepTime}
-        cookTime={recipe.cookTime}
-      />
-      <Servings servings={recipe.servings} />
-      <Details instructions={recipe.instructions} ingredients={recipe.ingredients} />
-      <div className="my-5">
-        <SocialBar
-          totalComments={recipe.comments.length}
-          totalLikes={recipe.likes.length}
-          userLikedPost={recipe.userLikedPost}
-          id={recipe.id}
+      <div className="px-5">
+        <Information
+          username={recipe.username}
+          dateCreated={recipe.dateCreated}
+          difficulty={recipe.difficulty}
+          prepTime={recipe.prepTime}
+          cookTime={recipe.cookTime}
         />
+        <Servings servings={recipe.servings} />
+        <Details instructions={recipe.instructions} ingredients={recipe.ingredients} />
+        <div className="my-5">
+          <SocialBar
+            totalComments={recipe.comments.length}
+            totalLikes={recipe.likes.length}
+            userLikedPost={recipe.userLikedPost}
+            id={recipe.id}
+          />
+        </div>
       </div>
 
     </div>
