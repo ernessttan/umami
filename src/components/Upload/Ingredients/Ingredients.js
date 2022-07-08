@@ -1,11 +1,15 @@
 /* eslint-disable react/no-array-index-key */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PlusIcon } from '@heroicons/react/solid';
 import PropTypes from 'prop-types';
 import AddIngredient from './AddIngredient';
 
-function Ingredients({ setRecipe }) {
+function Ingredients({ setRecipe, ingredients }) {
   const [ingredientList, setIngredientList] = useState([{ ingredient: '' }]);
+
+  useEffect(() => {
+    setIngredientList(ingredients);
+  }, [ingredients]);
 
   const handleChange = (event, index) => {
     const { name, value } = event.target;
@@ -53,8 +57,13 @@ function Ingredients({ setRecipe }) {
   );
 }
 
+Ingredients.defaultProps = {
+  ingredients: [],
+};
+
 Ingredients.propTypes = {
   setRecipe: PropTypes.func.isRequired,
+  ingredients: PropTypes.array,
 };
 
 export default Ingredients;

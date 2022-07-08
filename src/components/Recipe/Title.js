@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { DotsHorizontalIcon, TrashIcon, PencilIcon } from '@heroicons/react/solid';
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import { deleteRecipe } from '../../firebase/services';
 
@@ -32,11 +32,11 @@ function Title({ title, username, recipeId }) {
             <DotsHorizontalIcon className="h-5 w-5 text-grey-700" />
           </button>
           <div className="relative">
-            <div className={`${toggleDrop ? 'block' : 'hidden'} rounded bg-white p-5 shadow absolute right-1`}>
-              <button type="button" className="flex items-center gap-2">
+            <div className={`${toggleDrop ? 'block' : 'hidden'} flex flex-col gap-2 rounded bg-white p-5 shadow absolute right-1`}>
+              <Link to={`/editrecipe/${recipeId}`} className="flex items-center gap-2">
                 <PencilIcon className="h-5 w-5 text-grey-700" />
                 <p>Edit</p>
-              </button>
+              </Link>
               <button onClick={handleDelete} type="button" className="flex items-center gap-2">
                 <TrashIcon className="h-5 w-5 text-red-500" />
                 <p>Delete</p>

@@ -1,11 +1,17 @@
 /* eslint-disable react/no-array-index-key */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PlusIcon } from '@heroicons/react/solid';
 import PropTypes from 'prop-types';
 import AddInstruction from './AddInstruction';
 
-function Instructions({ setRecipe }) {
+function Instructions({ setRecipe, instructions }) {
   const [instructionList, setInstructionList] = useState([{ instruction: '' }]);
+
+  useEffect(() => {
+    setInstructionList(instructions);
+  }, [instructions]);
+
+  console.log(instructionList);
 
   const handleChange = (event, index) => {
     const { name, value } = event.target;
@@ -53,8 +59,13 @@ function Instructions({ setRecipe }) {
   );
 }
 
+Instructions.defaultProps = {
+  instructions: [],
+};
+
 Instructions.propTypes = {
   setRecipe: PropTypes.func.isRequired,
+  instructions: PropTypes.array,
 };
 
 export default Instructions;

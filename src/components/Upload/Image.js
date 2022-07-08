@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-function Image({ setImageFile }) {
+function Image({ setImageFile, imageUrl }) {
   const [preview, setPreview] = useState('');
+
+  useEffect(() => {
+    setPreview(imageUrl);
+  }, [imageUrl]);
 
   const handleChange = (event) => {
     setImageFile(event.target.files[0]);
@@ -50,7 +54,12 @@ function Image({ setImageFile }) {
   );
 }
 
+Image.defaultProps = {
+  imageUrl: '',
+};
+
 Image.propTypes = {
+  imageUrl: PropTypes.string,
   setImageFile: PropTypes.func.isRequired,
 };
 

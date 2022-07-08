@@ -36,9 +36,13 @@ function Servings({ servings, handleChange, setRecipe }) {
   );
 }
 
+Servings.defaultProps = {
+  servings: 0,
+};
+
 Servings.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  servings: PropTypes.number.isRequired,
+  servings: PropTypes.number,
   setRecipe: PropTypes.func.isRequired,
 };
 
