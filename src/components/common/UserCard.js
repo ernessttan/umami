@@ -6,7 +6,7 @@ function userCard({
 }) {
   return (
     <Link to={`/profile/${id}`} className="flex items-center gap-2">
-      <img className="object-cover rounded-full h-10 w-10" src={avatarUrl} alt="user avatar" />
+      <img className="object-cover rounded-full h-10 w-10" src={avatarUrl || '/icons/profile.svg'} alt="user avatar" />
       <div>
         <p className="font-semibold">{name}</p>
         <p>{username}</p>
