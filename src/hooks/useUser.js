@@ -11,9 +11,13 @@ function useUser(userId) {
   useEffect(() => {
     async function getUser(id) {
       // Get user object from db
-      await getUserById(id).then((result) => {
-        setUser(result || {});
-      });
+      try {
+        await getUserById(id).then((result) => {
+          setUser(result || {});
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
     if (userId) {
       getUser(userId);
