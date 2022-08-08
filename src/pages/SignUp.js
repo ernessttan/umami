@@ -61,6 +61,8 @@ function Signup() {
               name="email"
               value={signupInfo.email}
               placeholder="gordonramsay@hellskitchen.com"
+              errorMessae="Please enter a valid email address."
+              required
             />
           </label>
           <label>
@@ -71,6 +73,8 @@ function Signup() {
               type="password"
               name="password"
               value={signupInfo.password}
+              errorMessage="Please enter a password."
+              required
             />
           </label>
           <label>
@@ -82,6 +86,9 @@ function Signup() {
               name="username"
               value={signupInfo.username}
               placeholder="thegreatestchefalive123"
+              errorMessage="Please enter a valid username."
+              pattern="^[a-zA-Z0-9]{3,20}$"
+              required
             />
           </label>
           <div className="flex justify-end mt-8">

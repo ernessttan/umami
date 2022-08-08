@@ -9,7 +9,7 @@ import AuthContext from './context/auth';
 
 const Welcome = lazy(() => import('./pages/Welcome'));
 const Signup = lazy(() => import('./pages/Signup'));
-// const Login = lazy(() => import('./pages/Login'));
+const Login = lazy(() => import('./pages/Login'));
 // const Home = lazy(() => import('./pages/Home'));
 // const Upload = lazy(() => import('./pages/Upload'));
 // const Profile = lazy(() => import('./pages/Profile'));
@@ -28,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
             {/* <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
             <Route path={ROUTES.LOG_IN} element={<Login />} />
             <Route path={ROUTES.HOME} element={<Home />} />
