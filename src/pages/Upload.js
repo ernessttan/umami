@@ -1,13 +1,15 @@
 import { useState, useContext, useEffect } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import generateUniqueId from 'generate-unique-id';
-import { collection, setDoc } from 'firebase/firestore';
+import { collection, setDoc, doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/auth';
 import { FirebaseContext } from '../context/firebase';
-import Header from '../components/layout/Header';
+import BackButton from '../components/buttons/BackButton';
 import Image from '../components/upload/Image';
 import MobileNav from '../components/layout/MobileNav';
 import Title from '../components/upload/Title';
+import Description from '../components/upload/Description';
 import Servings from '../components/upload/Servings';
 import Time from '../components/upload/Time';
 import Difficulty from '../components/upload/Difficulty';
@@ -15,13 +17,14 @@ import Ingredients from '../components/upload/ingredients/Ingredients';
 import Instructions from '../components/upload/instructions/Instructions';
 
 function Upload() {
+  const navigate = useNavigate();
   const { storage, db } = useContext(FirebaseContext);
   const { authUser } = useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [newRecipe, setNewRecipe] = useState({
     id: generateUniqueId({ length: 10 }),
     title: '',
-    description: '',
+    caption: '',
     ingredients: [],
     instructions: [],
     image: '',
@@ -50,8 +53,6 @@ function Upload() {
     });
   };
 
-  console.log(image);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -60,15 +61,16 @@ function Upload() {
       await uploadBytes(imageRef, image, { contentType: `${image.type}` })
         .then(async (snapshot) => {
           const url = await getDownloadURL(ref(storage, snapshot.ref.fullPath));
-          console.log(url);
           setNewRecipe({
             ...newRecipe,
             image: url,
           });
         })
         .then(async () => {
-          console.log(newRecipe);
-          await setDoc(collection(db, 'recipes'), newRecipe.id, newRecipe);
+          await setDoc(doc(collection(db, 'recipes'), newRecipe.id), newRecipe)
+            .then(() => {
+              navigate('/home');
+            });
         });
     } catch (error) {
       console.log(error.message);
@@ -76,10 +78,13 @@ function Upload() {
   };
 
   return (
-    <>
-      <Header />
-      <form onSubmit={handleSubmit} className="p-3 flex flex-col gap-5">
-        <Title handleChange={handleChange} newRecipe={newRecipe} />
+    <div className="p-3">
+      <div className="flex items-center justify-between">
+        <BackButton />
+      </div>
+      <form onSubmit={handleSubmit} className="py-10 flex flex-col gap-5 container mx-auto max-w-2xl">
+        <Title handleChange={handleChange} title={newRecipe.title} />
+        <Description handleChange={handleChange} caption={newRecipe.caption} />
         <Image setImage={setImage} />
         <Servings
           servings={newRecipe.servings}
@@ -99,7 +104,7 @@ function Upload() {
         </div>
       </form>
       <MobileNav />
-    </>
+    </div>
   );
 }
 

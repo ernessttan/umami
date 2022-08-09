@@ -24,7 +24,7 @@ function Timeline() {
   }, [profile.following]);
 
   return followingPosts && (
-    <div className="py-5">
+    <div className="py-5 md:grow md:max-w-md h-screen">
         {followingPosts.map((post) => (
           <Post
             key={post.id}

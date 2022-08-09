@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import {
-  HomeIcon, SearchIcon, BookmarkIcon, PlusCircleIcon,
+  HomeIcon, SearchIcon, BookmarkIcon, PlusCircleIcon, UserCircleIcon,
 } from '@heroicons/react/outline';
 import { NavLink } from 'react-router-dom';
 import AuthContext from '../../context/auth';
@@ -24,7 +24,7 @@ function MobileNav() {
           <BookmarkIcon className="text-grey-500 w-8 h-8" />
         </NavLink>
         <NavLink to={`/profile/${authUser.uid}`}>
-          <BookmarkIcon className="text-grey-500 w-8 h-8" />
+          <UserCircleIcon className="text-grey-500 w-8 h-8" />
         </NavLink>
       </div>
     </nav>

@@ -13,4 +13,14 @@
     font-weight: theme(fontWeight.semibold);
     font-size: theme(fontSize.3xl);
   }
+
+  h2 {
+    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize.2xl);
+  }
+
+  h3 {
+    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize.xl);
+  }
 }

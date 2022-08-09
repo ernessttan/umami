@@ -11,13 +11,12 @@ function Post({
         {avatarUrl !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatarUrl} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
       </div>
-      <img className="h-2/3 w-full object-cover" src={imageUrl} alt="recipe" />
+      <img className="h-2/3 w-full object-cover md:rounded-md " src={imageUrl} alt="recipe" />
       <div className="px-3">
         <h3 className="font-semibold">{title}</h3>
         <p>{description}</p>
       </div>
     </div>
-
   );
 }
 

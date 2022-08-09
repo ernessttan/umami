@@ -12,6 +12,8 @@ const Signup = lazy(() => import('./pages/onboarding/Signup'));
 const Login = lazy(() => import('./pages/onboarding/Login'));
 const Home = lazy(() => import('./pages/Home'));
 const Upload = lazy(() => import('./pages/Upload'));
+const Profile = lazy(() => import('./pages/Profile'));
+const EditProfile = lazy(() => import('./pages/EditProfile'));
 // const Profile = lazy(() => import('./pages/Profile'));
 // const Recipe = lazy(() => import('./pages/RecipePage'));
 // const EditProfile = lazy(() => import('./pages/EditProfile'));
@@ -31,6 +33,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/upload" element={<Upload />} />
+            <Route path="/profile/:uid" element={<Profile />} />
+            <Route path="/editprofile/:uid" element={<EditProfile />} />
             {/* <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
             <Route path={ROUTES.LOG_IN} element={<Login />} />
             <Route path={ROUTES.HOME} element={<Home />} />

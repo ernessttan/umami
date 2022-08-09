@@ -36,4 +36,16 @@ async function getFollowingPosts(followingArr) {
   return posts;
 }
 
-export { addNewUser, getUserById, getFollowingPosts };
+async function getUserPosts(uid) {
+  const response = await getDocs(query(recipesRef, where('uid', '==', uid)));
+
+  const posts = response.docs.map((post) => ({
+    ...post.data(),
+  }));
+
+  return posts;
+}
+
+export {
+  addNewUser, getUserById, getFollowingPosts, getUserPosts,
+};

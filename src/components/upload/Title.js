@@ -1,23 +1,22 @@
 import PropTypes from 'prop-types';
 
-function Title({ handleChange, newRecipe }) {
+function Title({ handleChange, title }) {
   return (
     <input
       className="border-none text-3xl"
       type="text"
       name="title"
-      value={newRecipe.title}
+      value={title}
       placeholder="Name your recipe..."
       onChange={handleChange}
+      required
     />
   );
 }
 
 Title.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  newRecipe: PropTypes.shape({
-    title: PropTypes.string,
-  }).isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Title;

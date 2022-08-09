@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
 import Modal from 'react-modal';
 import Proptypes from 'prop-types';
 import Cropper from 'react-easy-crop';
@@ -18,7 +16,7 @@ function ImageCropper({
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const handleCropComplete = useCallback(async () => {
+  const handleCropComplete = async () => {
     try {
       const cropImage = await getCroppedImg(image, croppedAreaPixels);
       setPreview(URL.createObjectURL(cropImage));
@@ -27,48 +25,42 @@ function ImageCropper({
     } catch (error) {
       console.log(error);
     }
-  }, [image, crop, zoom]);
+  };
 
   return image && (
-    <Modal
-      isOpen={modalIsOpen}
-      appElement={document.getElementById('root')}
-      style={{
-        content: {
-          inset: '0',
-          padding: '0',
-        },
-      }}
-    >
-      <div className="w-full flex flex-col items-center gap-8 mt-24">
-        <button onClick={handleCropComplete} className="flex justify-end w-full px-5 text-orange-500" type="button">Done</button>
-        <div className="relative w-96 h-96">
-          <Cropper
-            image={image}
-            crop={crop}
-            zoom={zoom}
-            aspect={4 / 3}
-            onCropChange={setCrop}
-            onZoomChange={setZoom}
-            onCropComplete={onCropComplete}
-            objectFit="horizontal-cover"
-          />
-        </div>
-        <div className="mt-22">
-          <Input
-            type="range"
-            value={zoom}
-            min={1}
-            max={10}
-            step={0.1}
-            onChange={(e) => {
-              setZoom(e.target.value);
-            }}
-          />
-        </div>
-
+  <Modal
+    isOpen={modalIsOpen}
+    appElement={document.getElementById('root')}
+    className="z-10 max-w-4xl h-[75vh] p-4 mx-5 mt-16 bg-white border rounded-lg shadow-xl md:mx-auto border-grey-300 md:p-8"
+  >
+    <div className="w-full h-full flex flex-col items-center justify-center gap-8">
+      <button onClick={handleCropComplete} className="flex justify-end w-full px-5 text-orange-500" type="button">Done</button>
+      <div className="relative h-full w-full">
+        <Cropper
+          image={image}
+          crop={crop}
+          zoom={zoom}
+          aspect={4 / 3}
+          onCropChange={setCrop}
+          onZoomChange={setZoom}
+          onCropComplete={onCropComplete}
+        />
       </div>
-    </Modal>
+      <div className="mt-22">
+        <Input
+          type="range"
+          value={zoom}
+          min={1}
+          max={10}
+          step={0.1}
+          onChange={(e) => {
+            setZoom(e.target.value);
+          }}
+        />
+      </div>
+
+    </div>
+  </Modal>
   );
 }
 
