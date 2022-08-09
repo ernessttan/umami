@@ -42,7 +42,7 @@ function ImageCropper({
     >
       <div className="w-full flex flex-col items-center gap-8 mt-24">
         <button onClick={handleCropComplete} className="flex justify-end w-full px-5 text-orange-500" type="button">Done</button>
-        <div className="relative w-full h-96">
+        <div className="relative w-96 h-96">
           <Cropper
             image={image}
             crop={crop}
@@ -51,6 +51,7 @@ function ImageCropper({
             onCropChange={setCrop}
             onZoomChange={setZoom}
             onCropComplete={onCropComplete}
+            objectFit="horizontal-cover"
           />
         </div>
         <div className="mt-22">

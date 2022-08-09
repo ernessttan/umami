@@ -25,11 +25,9 @@ function Image({ setImage }) {
     }
   };
 
-  console.log(imageSrc);
-
   return (
     <>
-      <label htmlFor="image" className="bg-textbox-grey rounded-lg flex items-center justify-center h-64 md:h-96 w-full">
+      <label htmlFor="image" className="relative bg-textbox-grey rounded-lg flex items-center justify-center h-72 md:h-96 w-full">
         <Input
           type="file"
           accept="image/*"
@@ -41,7 +39,7 @@ function Image({ setImage }) {
         <img
           src={preview}
           alt="preview"
-          className={`${preview ? 'block' : 'hidden'} rounded-lg object-cover h-full w-full`}
+          className={`${preview ? 'block' : 'hidden'} rounded-lg h-full w-full`}
         />
         <div className={`flex flex-col items-center ${preview ? 'hidden' : 'block'}`}>
           <svg

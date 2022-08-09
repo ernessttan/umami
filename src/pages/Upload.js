@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import generateUniqueId from 'generate-unique-id';
+import { collection, setDoc } from 'firebase/firestore';
 import AuthContext from '../context/auth';
 import { FirebaseContext } from '../context/firebase';
 import Header from '../components/layout/Header';
@@ -14,7 +15,7 @@ import Ingredients from '../components/upload/ingredients/Ingredients';
 import Instructions from '../components/upload/instructions/Instructions';
 
 function Upload() {
-  const { storage } = useContext(FirebaseContext);
+  const { storage, db } = useContext(FirebaseContext);
   const { authUser } = useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [newRecipe, setNewRecipe] = useState({
@@ -53,20 +54,26 @@ function Upload() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(image);
 
     const imageRef = ref(storage, `recipes/${newRecipe.id}`);
-    await uploadBytes(imageRef, image, { contentType: `${image.type}` })
-      .then(async (snapshot) => {
-        const url = await getDownloadURL(ref(storage, snapshot.ref.fullPath));
-        setNewRecipe({
-          ...newRecipe,
-          image: url,
+    try {
+      await uploadBytes(imageRef, image, { contentType: `${image.type}` })
+        .then(async (snapshot) => {
+          const url = await getDownloadURL(ref(storage, snapshot.ref.fullPath));
+          console.log(url);
+          setNewRecipe({
+            ...newRecipe,
+            image: url,
+          });
+        })
+        .then(async () => {
+          console.log(newRecipe);
+          await setDoc(collection(db, 'recipes'), newRecipe.id, newRecipe);
         });
-      });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-
-  console.log(image);
 
   return (
     <>
@@ -79,7 +86,6 @@ function Upload() {
           handleChange={handleChange}
           setNewRecipe={setNewRecipe}
         />
-        <img src={newRecipe.image} alt="fasf" />
         <Time
           prepTime={newRecipe.prepTime}
           cookTime={newRecipe.cookTime}
