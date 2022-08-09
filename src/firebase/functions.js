@@ -6,6 +6,7 @@ import {
 import { db } from './firebaseConfig';
 
 const usersRef = collection(db, 'users');
+const recipesRef = collection(db, 'recipes');
 
 async function addNewUser(user) {
   await setDoc(doc(usersRef, user.uid), {
@@ -19,4 +20,20 @@ async function addNewUser(user) {
   });
 }
 
-export { addNewUser };
+async function getUserById(uid) {
+  const user = await getDoc(doc(usersRef, uid));
+  return user.data();
+}
+
+async function getFollowingPosts(followingArr) {
+  // Get all the posts of the users that the current user is following
+  const response = await getDocs(query(recipesRef, where('uid', 'in', followingArr)));
+
+  const posts = response.docs.map((post) => ({
+    ...post.data(),
+  }));
+
+  return posts;
+}
+
+export { addNewUser, getUserById, getFollowingPosts };

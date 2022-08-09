@@ -18,7 +18,7 @@ function Input({
   };
 
   return (
-    <div className="">
+    <>
       <input
         type={type}
         name={name}
@@ -31,7 +31,7 @@ function Input({
         {...inputProps}
       />
       {focused && <span className="error-msg">{errorMessage}</span>}
-    </div>
+    </>
   );
 }
 

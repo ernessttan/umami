@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import BackButton from '../components/buttons/BackButton';
-import Input from '../components/forms/Input';
-import { FirebaseContext } from '../context/firebase';
-import { addNewUser } from '../firebase/functions';
+import BackButton from '../../components/buttons/BackButton';
+import Input from '../../components/forms/Input';
+import { FirebaseContext } from '../../context/firebase';
+import { addNewUser } from '../../firebase/functions';
 
 function Signup() {
   const navigate = useNavigate();

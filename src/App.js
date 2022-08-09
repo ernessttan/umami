@@ -7,11 +7,11 @@ import { lazy, Suspense } from 'react';
 import useAuthListener from './hooks/useAuthListener';
 import AuthContext from './context/auth';
 
-const Welcome = lazy(() => import('./pages/Welcome'));
-const Signup = lazy(() => import('./pages/Signup'));
-const Login = lazy(() => import('./pages/Login'));
-// const Home = lazy(() => import('./pages/Home'));
-// const Upload = lazy(() => import('./pages/Upload'));
+const Welcome = lazy(() => import('./pages/onboarding/Welcome'));
+const Signup = lazy(() => import('./pages/onboarding/Signup'));
+const Login = lazy(() => import('./pages/onboarding/Login'));
+const Home = lazy(() => import('./pages/Home'));
+const Upload = lazy(() => import('./pages/Upload'));
 // const Profile = lazy(() => import('./pages/Profile'));
 // const Recipe = lazy(() => import('./pages/RecipePage'));
 // const EditProfile = lazy(() => import('./pages/EditProfile'));
@@ -29,6 +29,8 @@ function App() {
             <Route path="/" element={<Welcome />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/upload" element={<Upload />} />
             {/* <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
             <Route path={ROUTES.LOG_IN} element={<Login />} />
             <Route path={ROUTES.HOME} element={<Home />} />

@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { FirebaseContext } from '../context/firebase';
-import Input from '../components/forms/Input';
-import BackButton from '../components/buttons/BackButton';
+import { FirebaseContext } from '../../context/firebase';
+import Input from '../../components/forms/Input';
+import BackButton from '../../components/buttons/BackButton';
 
 function Login() {
   const navigate = useNavigate();
