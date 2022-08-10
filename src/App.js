@@ -6,18 +6,22 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import useAuthListener from './hooks/useAuthListener';
 import AuthContext from './context/auth';
+import Loader from './components/layout/Loader';
 
 const Welcome = lazy(() => import('./pages/onboarding/Welcome'));
 const Signup = lazy(() => import('./pages/onboarding/Signup'));
 const Login = lazy(() => import('./pages/onboarding/Login'));
 const Home = lazy(() => import('./pages/Home'));
 const Upload = lazy(() => import('./pages/Upload'));
-const Profile = lazy(() => import('./pages/Profile'));
-const EditProfile = lazy(() => import('./pages/EditProfile'));
+const Profile = lazy(() => import('./pages/profile/Profile'));
+const EditProfile = lazy(() => import('./pages/profile/EditProfile'));
+const Explore = lazy(() => import('./pages/Explore'));
+const Recipe = lazy(() => import('./pages/recipe/Recipe'));
+const EditRecipe = lazy(() => import('./pages/recipe/EditRecipe'));
 // const Profile = lazy(() => import('./pages/Profile'));
-// const Recipe = lazy(() => import('./pages/RecipePage'));
+
 // const EditProfile = lazy(() => import('./pages/EditProfile'));
-// const Explore = lazy(() => import('./pages/Explore'));
+
 // const Comments = lazy(() => import('./pages/CommentsPage'));
 
 function App() {
@@ -26,7 +30,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ authUser }}>
       <Router>
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/signup" element={<Signup />} />
@@ -35,6 +39,9 @@ function App() {
             <Route path="/upload" element={<Upload />} />
             <Route path="/profile/:uid" element={<Profile />} />
             <Route path="/editprofile/:uid" element={<EditProfile />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/recipe/:rid" element={<Recipe />} />
+            <Route path="/editrecipe/:rid" element={<EditRecipe />} />
             {/* <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
             <Route path={ROUTES.LOG_IN} element={<Login />} />
             <Route path={ROUTES.HOME} element={<Home />} />

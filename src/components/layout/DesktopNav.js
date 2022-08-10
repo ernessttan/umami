@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import {
   HomeIcon, SearchIcon, BookmarkIcon, UserCircleIcon, PlusCircleIcon,
 } from '@heroicons/react/outline';
@@ -7,28 +7,25 @@ import AuthContext from '../../context/auth';
 
 function DesktopNav() {
   const { authUser } = useContext(AuthContext);
+  const currentRoute = useLocation().pathname;
+
   return (
     <nav className="hidden md:block">
       <div className="flex items-center justify-between gap-8">
-        <NavLink to="/home" className="text-grey-500 flex items-center gap-2">
-          <HomeIcon className="w-8 h-8" />
-          {/* <p className="text-sm">Home</p> */}
+        <NavLink to="/home">
+          <HomeIcon className={`${currentRoute.includes('home') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
-        <NavLink to="/explore" className="text-grey-500 flex items-center gap-2">
-          <SearchIcon className="w-8 h-8" />
-          {/* <p className="text-sm">Explore</p> */}
+        <NavLink to="/explore">
+          <SearchIcon className={`${currentRoute.includes('explore') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
-        <NavLink to="/upload" className="text-grey-500 flex items-center gap-2">
-          <PlusCircleIcon className="w-8 h-8" />
-          {/* <p className="text-sm">Upload</p> */}
+        <NavLink to="/upload">
+          <PlusCircleIcon className={`${currentRoute.includes('upload') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
-        <NavLink to="/saved" className="text-grey-500 flex items-center gap-2">
-          <BookmarkIcon className="w-8 h-8" />
-          {/* <p className="text-sm">Saved</p> */}
+        <NavLink to="/saved">
+          <BookmarkIcon className={`${currentRoute.includes('saved') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
-        <NavLink to={`/profile/${authUser.uid}`} className="text-grey-500  flex items-center gap-2">
-          <UserCircleIcon className="w-8 h-8" />
-          {/* <p className="text-sm">Profile</p> */}
+        <NavLink to={`/profile/${authUser.uid}`}>
+          <UserCircleIcon className={`${currentRoute.includes('profile') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
       </div>
     </nav>

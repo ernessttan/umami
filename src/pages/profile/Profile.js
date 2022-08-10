@@ -1,13 +1,14 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { signOut } from 'firebase/auth';
-import { FirebaseContext } from '../context/firebase';
-import UserContext from '../context/user';
-import useUserProfile from '../hooks/useUserProfile';
-import { getUserPosts } from '../firebase/functions';
-import RecipeCard from '../components/RecipeCard';
-import MobileNav from '../components/layout/MobileNav';
-import Header from '../components/layout/Header';
+import Header from '../../components/layout/Header';
+import { FirebaseContext } from '../../context/firebase';
+import UserContext from '../../context/user';
+import useUserProfile from '../../hooks/useUserProfile';
+import { getUserPosts } from '../../firebase/functions';
+import RecipeCard from '../../components/RecipeCard';
+import MobileNav from '../../components/layout/MobileNav';
+import MainLayout from '../../components/layout/MainLayout';
 
 function Profile() {
   const navigate = useNavigate();
@@ -46,14 +47,14 @@ function Profile() {
       <div className="hidden md:block">
         <Header />
       </div>
-      <div className="p-3 h-screen md:container md:max-w-4xl">
+      <MainLayout>
         <div className="flex items-center justify-end py-3">
           <button onClick={handleLogout} className="text-orange-500" type="button">
             Logout
           </button>
         </div>
         <div className="flex items-center">
-          <img src={profile.avatarUrl} alt={profile.username} className="rounded-full h-16 w-16" />
+          <img src={profile.avatar} alt={profile.username} className="rounded-full h-16 w-16 border border-grey-100" />
           <div className="ml-4">
             <p className="font-semibold">{profile.name}</p>
             <p className="text-grey-700">{`@ ${profile.username}`}</p>
@@ -99,14 +100,14 @@ function Profile() {
                   <RecipeCard
                     key={post.id}
                     title={post.title}
-                    image={post.imageUrl}
+                    image={post.image}
                     id={post.id}
                   />
                 ))}
             </div>
           )}
         </div>
-      </div>
+      </MainLayout>
       <MobileNav />
     </UserContext.Provider>
   );

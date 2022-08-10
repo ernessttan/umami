@@ -46,6 +46,11 @@ async function getUserPosts(uid) {
   return posts;
 }
 
+async function getRecipeById(rid) {
+  const recipe = await getDoc(doc(recipesRef, rid));
+  return recipe.data();
+}
+
 export {
-  addNewUser, getUserById, getFollowingPosts, getUserPosts,
+  addNewUser, getUserById, getFollowingPosts, getUserPosts, getRecipeById,
 };

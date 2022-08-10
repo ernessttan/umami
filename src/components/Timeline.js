@@ -1,17 +1,19 @@
-import { useContext, useState, useEffect } from 'react';
-import UserContext from '../context/user';
+/* eslint-disable no-nested-ternary */
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { getFollowingPosts } from '../firebase/functions';
 import Post from './post/Post';
 
-function Timeline() {
-  const { profile } = useContext(UserContext);
-  const [followingPosts, setFollowingPosts] = useState([]);
+function Timeline({ following }) {
+  const [followingPosts, setFollowingPosts] = useState();
 
   useEffect(() => {
     const fetchFollowingPosts = async () => {
-      if (profile.following.length > 0) {
+      if (following.length > 0) {
         try {
-          await getFollowingPosts(profile.following)
+          await getFollowingPosts(following)
             .then((posts) => {
               setFollowingPosts(posts);
             });
@@ -21,24 +23,37 @@ function Timeline() {
       }
     };
     fetchFollowingPosts();
-  }, [profile.following]);
+  }, [following]);
 
-  return followingPosts && (
+  console.log(followingPosts);
+
+  return (
     <div className="py-5 md:grow md:max-w-md h-screen">
-        {followingPosts.map((post) => (
+      { followingPosts === undefined ? (
+        <Skeleton count={3} className="w-full h-[35vh] mb-2" />
+      ) : followingPosts.length === 0 ? (
+        <p>No posts to show</p>
+      ) : followingPosts ? (
+        followingPosts.map((post) => (
           <Post
             key={post.id}
             title={post.title}
             description={post.description}
-            imageUrl={post.imageUrl}
+            image={post.image}
             uid={post.uid}
             id={post.id}
             username={post.username}
             avatarUrl={post.avatarUrl}
           />
-        ))}
+        ))
+      ) : null}
     </div>
+
   );
 }
+
+Timeline.propTypes = {
+  following: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Timeline;

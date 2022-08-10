@@ -6,6 +6,7 @@ import UserContext from '../context/user';
 import useUserProfile from '../hooks/useUserProfile';
 import Timeline from '../components/Timeline';
 import SuggestedUsers from '../components/layout/SuggestedUsers';
+import MainLayout from '../components/layout/MainLayout';
 
 function Home() {
   const { authUser } = useContext(AuthContext);
@@ -14,10 +15,10 @@ function Home() {
   return profile && (
     <UserContext.Provider value={{ profile }}>
       <Header />
-      <div className="gap-12 py-5 md:flex md:px-3 md:container md:max-w-4xl">
-        <Timeline />
+      <MainLayout className="gap-12 py-5 md:flex">
+        <Timeline following={profile.following} />
         <SuggestedUsers />
-      </div>
+      </MainLayout>
       <MobileNav />
     </UserContext.Provider>
   );

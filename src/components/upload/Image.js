@@ -5,7 +5,7 @@ import Proptypes from 'prop-types';
 import Input from '../forms/Input';
 import ImageCropper from './imageCropper/ImageCropper';
 
-function Image({ setImage }) {
+function Image({ setImage, image }) {
   const [preview, setPreview] = useState();
   const [imageSrc, setImageSrc] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -37,11 +37,11 @@ function Image({ setImage }) {
           className="hidden"
         />
         <img
-          src={preview}
+          src={preview || image}
           alt="preview"
-          className={`${preview ? 'block' : 'hidden'} rounded-lg h-full w-full`}
+          className={`${preview || image ? 'block' : 'hidden'} rounded-lg h-full w-full`}
         />
-        <div className={`flex flex-col items-center ${preview ? 'hidden' : 'block'}`}>
+        <div className={`flex flex-col items-center ${preview || image ? 'hidden' : 'block'}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-12 w-12"
@@ -64,13 +64,18 @@ function Image({ setImage }) {
           <p>Upload a photo of your dish</p>
         </div>
       </label>
-      <ImageCropper image={imageSrc} setImage={setImage} setPreview={setPreview} modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
+      <ImageCropper image={imageSrc} setImage={setImage} setPreview={setPreview} modalIsOpen={modalIsOpen} toggleModal={toggleModal} aspect={4 / 3} />
     </>
   );
 }
 
+Image.defaultProps = {
+  image: '',
+};
+
 Image.propTypes = {
   setImage: Proptypes.func.isRequired,
+  image: Proptypes.string,
 };
 
 export default Image;

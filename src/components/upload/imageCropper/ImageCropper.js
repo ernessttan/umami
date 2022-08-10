@@ -6,7 +6,7 @@ import getCroppedImg from './canvasUtils';
 import Input from '../../forms/Input';
 
 function ImageCropper({
-  image, setPreview, modalIsOpen, toggleModal, setImage,
+  image, setPreview, modalIsOpen, toggleModal, setImage, aspect, cropShape,
 }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -40,10 +40,11 @@ function ImageCropper({
           image={image}
           crop={crop}
           zoom={zoom}
-          aspect={4 / 3}
+          aspect={aspect}
           onCropChange={setCrop}
           onZoomChange={setZoom}
           onCropComplete={onCropComplete}
+          cropShape={cropShape}
         />
       </div>
       <div className="mt-22">
@@ -64,12 +65,18 @@ function ImageCropper({
   );
 }
 
+ImageCropper.defaultProps = {
+  cropShape: '',
+};
+
 ImageCropper.propTypes = {
   image: Proptypes.string.isRequired,
   setPreview: Proptypes.func.isRequired,
   modalIsOpen: Proptypes.bool.isRequired,
   toggleModal: Proptypes.func.isRequired,
   setImage: Proptypes.func.isRequired,
+  aspect: Proptypes.string.isRequired,
+  cropShape: Proptypes.string,
 };
 
 export default ImageCropper;
