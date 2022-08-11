@@ -84,7 +84,7 @@ function Upload() {
       <div className="hidden md:block">
         <Header />
       </div>
-      <MainLayout className="py-5">
+      <MainLayout className="p-3 py-5">
         <div className="flex items-center justify-between">
           <BackButton />
         </div>

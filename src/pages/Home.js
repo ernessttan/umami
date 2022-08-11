@@ -16,7 +16,7 @@ function Home() {
     <UserContext.Provider value={{ profile }}>
       <Header />
       <MainLayout className="gap-12 py-5 md:flex">
-        <Timeline following={profile.following} />
+        <Timeline />
         <SuggestedUsers />
       </MainLayout>
       <MobileNav />

@@ -25,7 +25,8 @@ function DesktopNav() {
           <BookmarkIcon className={`${currentRoute.includes('saved') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
         <NavLink to={`/profile/${authUser.uid}`}>
-          <UserCircleIcon className={`${currentRoute.includes('profile') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
+          {authUser.photoUrl !== null ? (<img src={authUser.photoURL} alt={authUser.displayName} className="rounded-full h-9 w-9 border border-grey-100" />)
+            : (<UserCircleIcon className={`${currentRoute.includes(`/profile/${authUser.uid}`) ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />)}
         </NavLink>
       </div>
     </nav>

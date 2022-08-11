@@ -1,38 +1,47 @@
 /* eslint-disable no-unused-vars */
 import Proptypes from 'prop-types';
 import { UserCircleIcon } from '@heroicons/react/outline';
+import { Link } from 'react-router-dom';
+import Actions from './Actions';
 
 function Post({
-  username, title, description, image, uid, id, avatarUrl,
+  username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked,
 }) {
   return (
     <div className="h-[50vh] flex flex-col gap-2">
       <div className="flex items-center gap-3 px-3">
-        {avatarUrl !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatarUrl} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
+        {avatar !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
       </div>
-      <img className="h-2/3 w-full object-cover md:rounded-md " src={image} alt="recipe" />
+      <Link to={`/recipe/${rid}`} className="h-2/3">
+        <img className="w-full h-full object-cover md:rounded-md" src={image} alt="recipe" />
+      </Link>
       <div className="px-3">
         <h3 className="font-semibold">{title}</h3>
-        <p>{description}</p>
+        <p>{caption}</p>
       </div>
+      <Actions likes={likes} comments={comments} authUserLiked={authUserLiked} rid={rid} />
     </div>
   );
 }
 
 Post.defaultProps = {
-  avatarUrl: '',
+  avatar: '',
+  likes: [],
+  comments: [],
 };
 
 Post.propTypes = {
-  id: Proptypes.string.isRequired,
+  rid: Proptypes.string.isRequired,
   username: Proptypes.string.isRequired,
   title: Proptypes.string.isRequired,
-  description: Proptypes.string.isRequired,
+  caption: Proptypes.string.isRequired,
   image: Proptypes.string.isRequired,
   uid: Proptypes.string.isRequired,
-  avatarUrl: Proptypes.string,
-
+  avatar: Proptypes.string,
+  likes: Proptypes.arrayOf(Proptypes.string),
+  comments: Proptypes.arrayOf(Proptypes.string),
+  authUserLiked: Proptypes.bool.isRequired,
 };
 
 export default Post;

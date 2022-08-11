@@ -1,19 +1,20 @@
 /* eslint-disable no-nested-ternary */
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { getFollowingPosts } from '../firebase/functions';
 import Post from './post/Post';
+import UserContext from '../context/user';
 
-function Timeline({ following }) {
+function Timeline() {
+  const { profile } = useContext(UserContext);
   const [followingPosts, setFollowingPosts] = useState();
 
   useEffect(() => {
     const fetchFollowingPosts = async () => {
-      if (following.length > 0) {
+      if (profile.following.length > 0) {
         try {
-          await getFollowingPosts(following)
+          await getFollowingPosts(profile.uid, profile.following)
             .then((posts) => {
               setFollowingPosts(posts);
             });
@@ -23,27 +24,28 @@ function Timeline({ following }) {
       }
     };
     fetchFollowingPosts();
-  }, [following]);
-
-  console.log(followingPosts);
+  }, [profile.following]);
 
   return (
     <div className="py-5 md:grow md:max-w-md h-screen">
       { followingPosts === undefined ? (
-        <Skeleton count={3} className="w-full h-[35vh] mb-2" />
+        <Skeleton count={2} className="w-full h-[35vh] mb-2" />
       ) : followingPosts.length === 0 ? (
         <p>No posts to show</p>
       ) : followingPosts ? (
         followingPosts.map((post) => (
           <Post
-            key={post.id}
+            key={post.uid}
             title={post.title}
-            description={post.description}
+            caption={post.caption}
             image={post.image}
             uid={post.uid}
-            id={post.id}
+            rid={post.rid}
             username={post.username}
-            avatarUrl={post.avatarUrl}
+            avatar={post.avatar}
+            likes={post.likes}
+            authUserLiked={post.authUserLiked}
+            comments={post.comments}
           />
         ))
       ) : null}
@@ -51,9 +53,5 @@ function Timeline({ following }) {
 
   );
 }
-
-Timeline.propTypes = {
-  following: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
 
 export default Timeline;

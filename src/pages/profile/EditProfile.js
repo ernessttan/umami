@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { collection, doc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { UserCircleIcon } from '@heroicons/react/outline';
+import { updateProfile } from 'firebase/auth';
 import { FirebaseContext } from '../../context/firebase';
 import Input from '../../components/forms/Input';
 import { getUserById } from '../../firebase/functions';
@@ -12,7 +13,7 @@ import BackButton from '../../components/buttons/BackButton';
 import ImageCropper from '../../components/upload/imageCropper/ImageCropper';
 
 function EditProfile() {
-  const { db, storage } = useContext(FirebaseContext);
+  const { db, storage, auth } = useContext(FirebaseContext);
   const { uid } = useParams();
   const [preview, setPreview] = useState();
   const [imageSrc, setImageSrc] = useState('');
@@ -80,6 +81,9 @@ function EditProfile() {
             .then(async () => {
               const url = await getDownloadURL(ref(storage, `avatars/${uid}`));
               await updateDoc(doc(db, 'users', uid), { avatar: url });
+              await updateProfile(auth.currentUser, {
+                photoURL: url,
+              });
             });
         });
     } catch (error) {

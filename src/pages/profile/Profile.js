@@ -1,34 +1,36 @@
+/* eslint-disable no-unused-vars */
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { signOut } from 'firebase/auth';
+import { UserCircleIcon } from '@heroicons/react/outline';
 import Header from '../../components/layout/Header';
 import { FirebaseContext } from '../../context/firebase';
 import UserContext from '../../context/user';
 import useUserProfile from '../../hooks/useUserProfile';
-import { getUserPosts } from '../../firebase/functions';
-import RecipeCard from '../../components/RecipeCard';
+import { isAuthUserFollowing, toggleFollow } from '../../firebase/functions';
 import MobileNav from '../../components/layout/MobileNav';
 import MainLayout from '../../components/layout/MainLayout';
+import UserPosts from './UserPosts';
 
 function Profile() {
   const navigate = useNavigate();
   const { auth } = useContext(FirebaseContext);
   const { uid } = useParams();
   const { profile } = useUserProfile(uid);
-  const [userPosts, setUserPosts] = useState([]);
+  const [isFollowing, setIsFollowing] = useState(null);
 
   useEffect(() => {
-    const fetchUserPosts = async () => {
+    const setFollowing = async () => {
       try {
-        await getUserPosts(uid)
-          .then((posts) => {
-            setUserPosts(posts);
+        await isAuthUserFollowing(auth.currentUser.uid, uid)
+          .then((isFollowing) => {
+            setIsFollowing(isFollowing);
           });
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     };
-    fetchUserPosts();
+    setFollowing();
   }, [uid]);
 
   const handleLogout = async () => {
@@ -42,19 +44,34 @@ function Profile() {
     }
   };
 
+  const handleFollow = async (e) => {
+    e.preventDefault();
+    try {
+      await toggleFollow(auth.currentUser.uid, uid)
+        .then(() => {
+          setIsFollowing(!isFollowing);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return profile && (
     <UserContext.Provider value={{ profile }}>
       <div className="hidden md:block">
         <Header />
       </div>
-      <MainLayout>
+      <MainLayout className="p-3">
         <div className="flex items-center justify-end py-3">
+          {auth.currentUser.uid === uid && (
           <button onClick={handleLogout} className="text-orange-500" type="button">
             Logout
           </button>
+          )}
         </div>
-        <div className="flex items-center">
-          <img src={profile.avatar} alt={profile.username} className="rounded-full h-16 w-16 border border-grey-100" />
+        <div className="flex items-center px-2">
+          {profile.avatar ? (<img src={profile.avatar} alt={profile.username} className="rounded-full h-16 w-16 border border-grey-100" />)
+            : (<UserCircleIcon className="h-16 w-16" />)}
           <div className="ml-4">
             <p className="font-semibold">{profile.name}</p>
             <p className="text-grey-700">{`@ ${profile.username}`}</p>
@@ -63,7 +80,7 @@ function Profile() {
         <div className="p-3">
           <div className="flex items-center gap-5 w-full">
             <p className="text-black">
-              <span className="font-semibold">{userPosts.length}</span>
+              <span className="font-semibold">{profile.posts.length}</span>
               {' '}
               Posts
             </p>
@@ -89,24 +106,13 @@ function Profile() {
                 Edit Profile
               </Link>
             ) : (
-              <button type="button" value={profile.id} className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full">
-                {/* {isFollowingUser ? 'Unfollow' : 'Follow'} */}
+              <button onClick={handleFollow} type="button" value={profile.id} className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full">
+                {isFollowing ? 'Unfollow' : 'Follow'}
               </button>
             )}
           </div>
-          {userPosts && (
-            <div className="grid grid-cols-2 gap-8 py-5 md:grid-cols-3">
-                {userPosts.map((post) => (
-                  <RecipeCard
-                    key={post.id}
-                    title={post.title}
-                    image={post.image}
-                    id={post.id}
-                  />
-                ))}
-            </div>
-          )}
         </div>
+        <UserPosts uid={uid} />
       </MainLayout>
       <MobileNav />
     </UserContext.Provider>

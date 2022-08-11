@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 function MainLayout({ children, className }) {
   return (
-    <main className={`p-3 md:px-3 md:container md:max-w-4xl ${className}`}>
+    <main className={`md:px-3 md:container md:max-w-4xl ${className}`}>
       {children}
     </main>
   );

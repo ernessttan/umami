@@ -30,7 +30,7 @@ function SuggestedUsers() {
       <div className="grid py-5 gap-5">
         {users.map((user) => (
           <UserCard
-            key={user.id}
+            key={user.uid}
             uid={user.uid}
             avatar={user.avatarUrl}
             username={user.username}

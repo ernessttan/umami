@@ -5,7 +5,7 @@ function Time({ handleChange, prepTime, cookTime }) {
     <div className="flex items-center gap-3">
       <div className="w-1/2">
         <h3>Prep Time</h3>
-        <div className="flex items-center bg-textbox-grey rounded-lg px-4 py-3">
+        <div className="flex items-center justify-between bg-textbox-grey rounded-lg px-4 py-3">
           <input
             type="number"
             name="prepTime"
@@ -18,7 +18,7 @@ function Time({ handleChange, prepTime, cookTime }) {
       </div>
       <div className="w-1/2">
         <h3>Cook Time</h3>
-        <div className="flex items-center bg-textbox-grey rounded-lg px-4 py-3">
+        <div className="flex items-center justify-between bg-textbox-grey rounded-lg px-4 py-3">
           <input
             type="number"
             name="cookTime"
