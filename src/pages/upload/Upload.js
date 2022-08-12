@@ -48,7 +48,7 @@ function Upload() {
       ...newRecipe,
       uid: authUser.uid,
       username: authUser.displayName,
-      avatarUrl: authUser.photoURL,
+      avatar: authUser.photoURL,
     });
   }, [authUser]);
 

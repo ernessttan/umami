@@ -10,8 +10,6 @@ function DesktopNav() {
   const { authUser } = useContext(AuthContext);
   const currentRoute = useLocation().pathname;
 
-  console.log(authUser);
-
   return (
     <nav className="hidden md:block">
       <div className="flex items-center justify-between gap-8">

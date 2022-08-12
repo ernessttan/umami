@@ -7,10 +7,11 @@ import Actions from './Actions';
 function Post({
   username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked,
 }) {
+  console.log(avatar);
   return (
     <div className="h-1/2 flex flex-col gap-2">
       <div className="flex items-center gap-3 px-3">
-        {avatar !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
+        {avatar.length !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
       </div>
       <Link to={`/recipe/${rid}`} className="h-2/3">
