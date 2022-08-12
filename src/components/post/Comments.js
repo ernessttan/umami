@@ -80,11 +80,15 @@ function Comments({
         <div className="px-3 text-sm">
           <p>{`${commentsData.length} Comments`}</p>
         </div>
-        <div className="h-full overflow-y-scroll p-3">
+        <div className="h-full overflow-y-scroll p-3 md:no-scrollbar">
           {commentsData.map((comment) => (
             <div key={comment.cid} className="border-b border-grey-300 py-2">
               <div className="flex items-center gap-2">
-                <img src={comment.avatar} alt={comment.username} className="rounded-full h-8 w-8 object-cover" />
+                {
+                  comment.avatar ? (<img src={comment.avatar} alt={comment.username} className="rounded-full h-8 w-8 object-cover" />) : (
+                    <UserCircleIcon className="h-8 w-8 object-cover" />
+                  )
+                }
                 <p>{comment.username}</p>
               </div>
               <p className="p-1">{comment.comment}</p>
