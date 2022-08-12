@@ -15,6 +15,8 @@ import BackButton from '../../components/buttons/BackButton';
 import { getRecipeById } from '../../firebase/functions';
 import { FirebaseContext } from '../../context/firebase';
 import AuthContext from '../../context/auth';
+import MainLayout from '../../components/layout/MainLayout';
+import Header from '../../components/layout/Header';
 
 function EditRecipe() {
   const navigate = useNavigate();
@@ -70,33 +72,39 @@ function EditRecipe() {
   };
 
   return editedRecipe && (
-    <div className="p-3">
-      <div className="flex items-center justify-between">
-        <BackButton />
+    <>
+      <div className="hidden md:block">
+        <Header />
       </div>
-      <form onSubmit={handleSubmit} className="py-10 flex flex-col gap-5 container mx-auto max-w-2xl">
-        <Title handleChange={handleChange} title={editedRecipe.title} />
-        <Description handleChange={handleChange} caption={editedRecipe.caption} />
-        <Image setImage={setImage} image={editedRecipe.image} />
-        <Servings
-          servings={editedRecipe.servings}
-          handleChange={handleChange}
-          setNewRecipe={setEditedRecipe}
-        />
-        <Time
-          prepTime={editedRecipe.prepTime}
-          cookTime={editedRecipe.cookTime}
-          handleChange={handleChange}
-        />
-        <Difficulty setNewRecipe={setEditedRecipe} />
-        <Ingredients ingredients={editedRecipe.ingredients} setNewRecipe={setEditedRecipe} />
-        <Instructions instructions={editedRecipe.instructions} setNewRecipe={setEditedRecipe} />
-        <div className="flex justify-end">
-          <button className="rounded-full bg-orange-500 text-white py-3 px-8" type="submit">Submit</button>
+      <MainLayout className="p-3 py-5">
+        <div className="flex items-center justify-between">
+          <BackButton />
         </div>
-      </form>
+        <form onSubmit={handleSubmit} className="py-10 flex flex-col gap-5">
+          <Title handleChange={handleChange} title={editedRecipe.title} />
+          <Description handleChange={handleChange} caption={editedRecipe.caption} />
+          <Image setImage={setImage} image={editedRecipe.image} />
+          <Servings
+            servings={editedRecipe.servings}
+            handleChange={handleChange}
+            setNewRecipe={setEditedRecipe}
+          />
+          <Time
+            prepTime={editedRecipe.prepTime}
+            cookTime={editedRecipe.cookTime}
+            handleChange={handleChange}
+          />
+          <Difficulty setNewRecipe={setEditedRecipe} />
+          <Ingredients ingredients={editedRecipe.ingredients} setNewRecipe={setEditedRecipe} />
+          <Instructions instructions={editedRecipe.instructions} setNewRecipe={setEditedRecipe} />
+          <div className="flex justify-end">
+            <button className="rounded-full bg-orange-500 text-white py-3 px-8" type="submit">Submit</button>
+          </div>
+        </form>
+      </MainLayout>
+
       <MobileNav />
-    </div>
+    </>
   );
 }
 

@@ -11,7 +11,7 @@ function OptionsMenu({ isOptionsOpen, item, itemId }) {
     >
       <Link
         to={`/edit${item}/${itemId}`}
-        className="flex items-center w-full gap-2 py-2 text-black hover:bg-orange-100"
+        className="flex items-center w-full gap-2 py-2 text-black rounded-md hover:bg-grey-100"
       >
         <PencilIcon className="w-5 h-5" />
         <p>
@@ -21,7 +21,7 @@ function OptionsMenu({ isOptionsOpen, item, itemId }) {
       </Link>
       <button
         type="button"
-        className="flex items-center w-full gap-2 py-2 text-black hover:bg-orange-100"
+        className="flex items-center w-full gap-2 py-2 text-black rounded-md hover:bg-grey-100"
       >
         <TrashIcon className="w-5 h-5 fill-red-500" />
         <p>
