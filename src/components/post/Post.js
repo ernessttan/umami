@@ -10,10 +10,10 @@ function Post({
   console.log(avatar);
   return (
     <div className="h-1/2 flex flex-col gap-2">
-      <div className="flex items-center gap-3 px-3">
+      <Link to={`/profile/${uid}`} className="flex items-center gap-3 px-3">
         {avatar.length !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
-      </div>
+      </Link>
       <Link to={`/recipe/${rid}`} className="h-2/3">
         <img className="w-full h-full object-cover md:rounded-md" src={image} alt="recipe" />
       </Link>
