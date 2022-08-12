@@ -44,7 +44,7 @@ function Recipe() {
       <MainLayout className="p-3">
         <div className="flex items-center justify-between py-3">
           <BackButton />
-          {authUser.uid === recipe.uid && (<OptionsButton item="recipe" itemId={recipe.id} />)}
+          {authUser.uid === recipe.uid && (<OptionsButton item="recipe" itemId={recipe.rid} />)}
         </div>
         <h1>{recipe.title}</h1>
         <div className="-mx-3 h-64 md:h-96">

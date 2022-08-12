@@ -14,9 +14,11 @@ import MobileNav from '../../components/layout/MobileNav';
 import BackButton from '../../components/buttons/BackButton';
 import { getRecipeById } from '../../firebase/functions';
 import { FirebaseContext } from '../../context/firebase';
+import AuthContext from '../../context/auth';
 
 function EditRecipe() {
   const navigate = useNavigate();
+  const { authUser } = useContext(AuthContext);
   const { storage, db } = useContext(FirebaseContext);
   const { rid } = useParams();
   const [image, setImage] = useState(null);
@@ -25,7 +27,7 @@ function EditRecipe() {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        await getRecipeById(rid)
+        await getRecipeById(authUser.uid, rid)
           .then((recipe) => {
             setEditedRecipe(recipe);
           });
@@ -47,13 +49,13 @@ function EditRecipe() {
     e.preventDefault();
     const imageRef = ref(storage, `recipes/${editedRecipe.id}`);
     try {
-      await updateDoc(doc(collection(db, 'recipes'), editedRecipe.id), editedRecipe)
+      await updateDoc(doc(collection(db, 'recipes'), editedRecipe.rid), editedRecipe)
         .then(async () => {
           if (image) {
             await uploadBytes(imageRef, image, { contentType: `${image.type}` })
               .then(async () => {
                 const url = await getDownloadURL(ref(storage, `recipes/${editedRecipe.id}`));
-                await updateDoc(doc(collection(db, 'recipes'), editedRecipe.id), { image: url })
+                await updateDoc(doc(collection(db, 'recipes'), editedRecipe.rid), { image: url })
                   .then(() => {
                     navigate(-1);
                   });
