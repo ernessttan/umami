@@ -5,20 +5,20 @@ import {
   collection, setDoc, doc, updateDoc,
 } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../context/auth';
-import { FirebaseContext } from '../context/firebase';
-import BackButton from '../components/buttons/BackButton';
-import Image from '../components/upload/Image';
-import MobileNav from '../components/layout/MobileNav';
-import Title from '../components/upload/Title';
-import Description from '../components/upload/Description';
-import Servings from '../components/upload/Servings';
-import Time from '../components/upload/Time';
-import Difficulty from '../components/upload/Difficulty';
-import Ingredients from '../components/upload/ingredients/Ingredients';
-import Instructions from '../components/upload/instructions/Instructions';
-import MainLayout from '../components/layout/MainLayout';
-import Header from '../components/layout/Header';
+import AuthContext from '../../context/auth';
+import { FirebaseContext } from '../../context/firebase';
+import BackButton from '../../components/buttons/BackButton';
+import Image from './Image';
+import Header from '../../components/layout/Header';
+import MobileNav from '../../components/layout/MobileNav';
+import Title from './Title';
+import Description from './Description';
+import Servings from './Servings';
+import Time from './Time';
+import Difficulty from './Difficulty';
+import Ingredients from './ingredients/Ingredients';
+import Instructions from './instructions/Instructions';
+import MainLayout from '../../components/layout/MainLayout';
 
 function Upload() {
   const navigate = useNavigate();
@@ -26,11 +26,12 @@ function Upload() {
   const { authUser } = useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [newRecipe, setNewRecipe] = useState({
-    id: generateUniqueId({ length: 10 }),
+    rid: generateUniqueId({ length: 10 }),
     title: '',
     caption: '',
     ingredients: [],
     instructions: [],
+    likes: [],
     image: '',
     uid: '',
     username: '',

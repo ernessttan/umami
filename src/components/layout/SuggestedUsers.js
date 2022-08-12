@@ -6,7 +6,7 @@ import { FirebaseContext } from '../../context/firebase';
 import UserCard from '../UserCard';
 
 function SuggestedUsers() {
-  const { db } = useContext(FirebaseContext);
+  const { db, auth } = useContext(FirebaseContext);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function SuggestedUsers() {
         await getDocs(q)
           .then((users) => {
             const userData = users.docs.map((user) => user.data());
-            setUsers(userData);
+            setUsers(userData.filter((user) => user.uid !== auth.currentUser.uid));
           });
       } catch (error) {
         console.log(error.message);
@@ -32,7 +32,7 @@ function SuggestedUsers() {
           <UserCard
             key={user.uid}
             uid={user.uid}
-            avatar={user.avatarUrl}
+            avatar={user.avatar}
             username={user.username}
             name={user.name}
           />

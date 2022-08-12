@@ -10,6 +10,7 @@ import Header from '../../components/layout/Header';
 import BackButton from '../../components/buttons/BackButton';
 import OptionsButton from '../../components/buttons/OptionsButton';
 import AuthContext from '../../context/auth';
+import Actions from '../../components/post/Actions';
 
 function Recipe() {
   const { authUser } = useContext(AuthContext);
@@ -20,7 +21,7 @@ function Recipe() {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        await getRecipeById(rid)
+        await getRecipeById(authUser.uid, rid)
           .then((recipe) => {
             setRecipe(recipe);
           });
@@ -35,12 +36,14 @@ function Recipe() {
     setSelected(e.target.value);
   };
 
+  console.log(recipe);
+
   return recipe && (
     <>
       <div className="hidden md:block">
         <Header />
       </div>
-      <MainLayout>
+      <MainLayout className="p-3">
         <div className="flex items-center justify-between py-3">
           <BackButton />
           {authUser.uid === recipe.uid && (<OptionsButton item="recipe" itemId={recipe.id} />)}
@@ -84,6 +87,12 @@ function Recipe() {
           {selected === 'ingredients' ? <IngredientList ingredients={recipe.ingredients} /> : null}
           {selected === 'instructions' ? <InstructionList instructions={recipe.instructions} /> : null}
         </div>
+        <Actions
+          authUserLiked={recipe.authUserLiked}
+          rid={recipe.rid}
+          likes={recipe.likes}
+          comments={recipe.comments}
+        />
       </MainLayout>
     </>
 

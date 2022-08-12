@@ -2,8 +2,8 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import Proptypes from 'prop-types';
-import Input from '../forms/Input';
-import ImageCropper from './imageCropper/ImageCropper';
+import Input from '../../components/forms/Input';
+import ImageCropper from '../../components/imageCropper/ImageCropper';
 
 function Image({ setImage, image }) {
   const [preview, setPreview] = useState();

@@ -1,7 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable no-undef */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import useAuthListener from './hooks/useAuthListener';
@@ -11,18 +7,14 @@ import Loader from './components/layout/Loader';
 const Welcome = lazy(() => import('./pages/onboarding/Welcome'));
 const Signup = lazy(() => import('./pages/onboarding/Signup'));
 const Login = lazy(() => import('./pages/onboarding/Login'));
-const Home = lazy(() => import('./pages/Home'));
-const Upload = lazy(() => import('./pages/Upload'));
+const Home = lazy(() => import('./pages/home/Home'));
+const Upload = lazy(() => import('./pages/upload/Upload'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
-const EditProfile = lazy(() => import('./pages/profile/EditProfile'));
+const EditProfile = lazy(() => import('./pages/editprofile/EditProfile'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Recipe = lazy(() => import('./pages/recipe/Recipe'));
 const EditRecipe = lazy(() => import('./pages/recipe/EditRecipe'));
-// const Profile = lazy(() => import('./pages/Profile'));
-
-// const EditProfile = lazy(() => import('./pages/EditProfile'));
-
-// const Comments = lazy(() => import('./pages/CommentsPage'));
+const Saved = lazy(() => import('./pages/Saved'));
 
 function App() {
   const { authUser } = useAuthListener();
@@ -42,15 +34,7 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/recipe/:rid" element={<Recipe />} />
             <Route path="/editrecipe/:rid" element={<EditRecipe />} />
-            {/* <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
-            <Route path={ROUTES.LOG_IN} element={<Login />} />
-            <Route path={ROUTES.HOME} element={<Home />} />
-            <Route path={ROUTES.UPLOAD} element={<Upload />} />
-            <Route path={ROUTES.PROFILE} element={<Profile />} />
-            <Route path={ROUTES.RECIPE} element={<Recipe />} />
-            <Route path={ROUTES.EDIT_PROFILE} element={<EditProfile />} />
-            <Route path={ROUTES.EXPLORE} element={<Explore />} />
-            <Route path={ROUTES.COMMENTS} element={<Comments />} /> */}
+            <Route path="/saved" element={<Saved />} />
           </Routes>
         </Suspense>
       </Router>

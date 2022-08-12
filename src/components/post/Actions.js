@@ -27,7 +27,7 @@ function Actions({
   };
 
   return (
-    <div className="flex items-center gap-3 px-3">
+    <div className="flex items-center gap-3">
       <div className="flex flex-col items-center">
         <button onClick={handleToggleLike} type="button">
           <ThumbUpIcon className={`h-6 w-6 ${isLiked ? 'fill-orange-100' : ''}`} />
@@ -57,7 +57,12 @@ Actions.defaultProps = {
 
 Actions.propTypes = {
   likes: PropTypes.arrayOf(PropTypes.string),
-  comments: PropTypes.arrayOf(PropTypes.string),
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    cid: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
+  })),
   authUserLiked: PropTypes.bool.isRequired,
   rid: PropTypes.string.isRequired,
 };

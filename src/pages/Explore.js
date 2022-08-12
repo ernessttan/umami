@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import RecipeResults from '../components/explore/RecipeResults';
 import UserResults from '../components/explore/UserResults';

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useState, useEffect } from 'react';
 import {
   getDocs, query, collection, orderBy,
@@ -10,11 +9,11 @@ import UserCard from '../UserCard';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 function UserResults({ searchQuery }) {
-  const { db } = useContext(FirebaseContext);
-  const [users, setUsers] = useState();
+  const { db, auth } = useContext(FirebaseContext);
+  const [users, setUsers] = useState([]);
 
   const filterResults = (query, userArr) => userArr.filter(
-    (user) => user.username.toLowerCase().includes(query),
+    (user) => user.username.toLowerCase().includes(query) && user.uid !== auth.currentUser.uid,
   );
 
   useEffect(() => {
@@ -25,6 +24,7 @@ function UserResults({ searchQuery }) {
           .then((users) => {
             const userData = users.docs.map((user) => user.data());
             const filteredUsers = filterResults(searchQuery, userData);
+            console.log(filteredUsers);
             setUsers(filteredUsers);
           });
       } catch (error) {
@@ -32,7 +32,7 @@ function UserResults({ searchQuery }) {
       }
     };
     getUsers();
-  }, []);
+  }, [searchQuery]);
 
   return (
     <div className="grid py-5 gap-5">
@@ -46,7 +46,7 @@ function UserResults({ searchQuery }) {
           <UserCard
             key={user.id}
             uid={user.uid}
-            avatar={user.avatarUrl}
+            avatar={user.avatar}
             username={user.username}
             name={user.name}
           />

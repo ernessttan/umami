@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
@@ -8,6 +9,8 @@ import AuthContext from '../../context/auth';
 function DesktopNav() {
   const { authUser } = useContext(AuthContext);
   const currentRoute = useLocation().pathname;
+
+  console.log(authUser);
 
   return (
     <nav className="hidden md:block">
@@ -25,8 +28,11 @@ function DesktopNav() {
           <BookmarkIcon className={`${currentRoute.includes('saved') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
         <NavLink to={`/profile/${authUser.uid}`}>
-          {authUser.photoUrl !== null ? (<img src={authUser.photoURL} alt={authUser.displayName} className="rounded-full h-9 w-9 border border-grey-100" />)
-            : (<UserCircleIcon className={`${currentRoute.includes(`/profile/${authUser.uid}`) ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />)}
+          {authUser.photoURL === null
+            ? (<UserCircleIcon className={`${currentRoute.includes(`/profile/${authUser.uid}`) ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />)
+            : authUser.photoURL !== undefined ? (<img src={authUser.photoURL} alt={authUser.displayName} className="rounded-full h-9 w-9 border border-grey-100" />)
+              : null}
+
         </NavLink>
       </div>
     </nav>

@@ -14,9 +14,11 @@ async function addNewUser(user) {
     email: user.email,
     uid: user.uid,
     bio: '',
-    avatarUrl: '',
+    avatar: '',
     followers: [],
     following: [],
+    posts: [],
+    name: '',
   });
 }
 
@@ -54,9 +56,15 @@ async function getUserPosts(uid) {
   return posts;
 }
 
-async function getRecipeById(rid) {
-  const recipe = await getDoc(doc(recipesRef, rid));
-  return recipe.data();
+async function getRecipeById(authUserId, rid) {
+  const response = await getDoc(doc(recipesRef, rid));
+  const recipe = response.data();
+
+  let authUserLiked = false;
+  if (recipe.likes.includes(authUserId)) {
+    authUserLiked = true;
+  }
+  return { ...recipe, authUserLiked };
 }
 
 async function toggleFollow(authUserId, uid, isFollowingUser) {

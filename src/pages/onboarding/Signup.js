@@ -61,7 +61,7 @@ function Signup() {
               name="email"
               value={signupInfo.email}
               placeholder="gordonramsay@hellskitchen.com"
-              errorMessae="Please enter a valid email address."
+              errorMessage="Please enter a valid email address."
               required
             />
           </label>

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useContext } from 'react';
 import {
   HomeIcon, SearchIcon, BookmarkIcon, PlusCircleIcon, UserCircleIcon,
@@ -8,8 +9,6 @@ import AuthContext from '../../context/auth';
 function MobileNav() {
   const { authUser } = useContext(AuthContext);
   const currentRoute = useLocation().pathname;
-
-  console.log(authUser.photoURL);
 
   return (
     <nav className="p-3 w-full sticky bottom-0 z-30 shadow-xl bg-navbar-fill border-t border-grey-300 md:hidden">
@@ -27,8 +26,10 @@ function MobileNav() {
           <BookmarkIcon className={`${currentRoute.includes('saved') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
         </NavLink>
         <NavLink to={`/profile/${authUser.uid}`}>
-          {authUser.photoUrl !== null ? (<img src={authUser.photoURL} alt={authUser.displayName} className="rounded-full h-9 w-9 border border-grey-100" />)
-            : (<UserCircleIcon className={`${currentRoute.includes(`/profile/${authUser.uid}`) ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />)}
+          {authUser.photoURL === null
+            ? (<UserCircleIcon className={`${currentRoute.includes(`/profile/${authUser.uid}`) ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />)
+            : authUser.photoURL !== undefined ? (<img src={authUser.photoURL} alt={authUser.displayName} className="rounded-full h-9 w-9 border border-grey-100" />)
+              : null}
         </NavLink>
       </div>
     </nav>

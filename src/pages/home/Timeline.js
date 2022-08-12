@@ -2,9 +2,10 @@
 import { useState, useEffect, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { getFollowingPosts } from '../firebase/functions';
-import Post from './post/Post';
-import UserContext from '../context/user';
+import { Link } from 'react-router-dom';
+import { getFollowingPosts } from '../../firebase/functions';
+import Post from '../../components/post/Post';
+import UserContext from '../../context/user';
 
 function Timeline() {
   const { profile } = useContext(UserContext);
@@ -21,17 +22,29 @@ function Timeline() {
         } catch (error) {
           console.log(error);
         }
+      } else {
+        setTimeout(
+          () => {
+            setFollowingPosts([]);
+          },
+          1000,
+        );
       }
     };
     fetchFollowingPosts();
-  }, [profile.following]);
+  }, []);
 
   return (
-    <div className="py-5 md:grow md:max-w-md h-screen">
+    <div className="flex flex-col gap-16 py-5 md:grow md:max-w-md h-screen overflow-y-scroll">
       { followingPosts === undefined ? (
         <Skeleton count={2} className="w-full h-[35vh] mb-2" />
       ) : followingPosts.length === 0 ? (
-        <p>No posts to show</p>
+        <div className="flex flex-col items-center">
+          <h1 className="text-grey-500">No Posts To Show</h1>
+          <Link to="/explore" className="text-orange-500 font-semibold py-3 hover:underline decoration-2">
+            Try Following Someone
+          </Link>
+        </div>
       ) : followingPosts ? (
         followingPosts.map((post) => (
           <Post

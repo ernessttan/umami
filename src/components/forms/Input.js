@@ -30,7 +30,7 @@ function Input({
         className={className}
         {...inputProps}
       />
-      {focused && <span className="error-msg">{errorMessage}</span>}
+      {focused && <span className="text-red-500">{errorMessage}</span>}
     </>
   );
 }

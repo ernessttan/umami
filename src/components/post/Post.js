@@ -8,7 +8,7 @@ function Post({
   username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked,
 }) {
   return (
-    <div className="h-[50vh] flex flex-col gap-2">
+    <div className="h-1/2 flex flex-col gap-2">
       <div className="flex items-center gap-3 px-3">
         {avatar !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
@@ -20,7 +20,9 @@ function Post({
         <h3 className="font-semibold">{title}</h3>
         <p>{caption}</p>
       </div>
-      <Actions likes={likes} comments={comments} authUserLiked={authUserLiked} rid={rid} />
+      <div className="px-3">
+        <Actions likes={likes} comments={comments} authUserLiked={authUserLiked} rid={rid} />
+      </div>
     </div>
   );
 }
@@ -40,7 +42,12 @@ Post.propTypes = {
   uid: Proptypes.string.isRequired,
   avatar: Proptypes.string,
   likes: Proptypes.arrayOf(Proptypes.string),
-  comments: Proptypes.arrayOf(Proptypes.string),
+  comments: Proptypes.arrayOf(Proptypes.shape({
+    cid: Proptypes.string.isRequired,
+    username: Proptypes.string.isRequired,
+    avatar: Proptypes.string.isRequired,
+    comment: Proptypes.string.isRequired,
+  })),
   authUserLiked: Proptypes.bool.isRequired,
 };
 

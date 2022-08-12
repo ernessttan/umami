@@ -3,7 +3,7 @@ import Proptypes from 'prop-types';
 import Cropper from 'react-easy-crop';
 import { useCallback, useState } from 'react';
 import getCroppedImg from './canvasUtils';
-import Input from '../../forms/Input';
+import Input from '../forms/Input';
 
 function ImageCropper({
   image, setPreview, modalIsOpen, toggleModal, setImage, aspect, cropShape,
@@ -31,6 +31,7 @@ function ImageCropper({
   <Modal
     isOpen={modalIsOpen}
     appElement={document.getElementById('root')}
+    onRequestClose={toggleModal}
     className="z-10 max-w-4xl h-[75vh] p-4 mx-5 mt-16 bg-white border rounded-lg shadow-xl md:mx-auto border-grey-300 md:p-8"
   >
     <div className="w-full h-full flex flex-col items-center justify-center gap-8">
