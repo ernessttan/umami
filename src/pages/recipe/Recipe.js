@@ -36,8 +36,6 @@ function Recipe() {
     setSelected(e.target.value);
   };
 
-  console.log(recipe);
-
   return recipe && (
     <>
       <div className="hidden md:block">

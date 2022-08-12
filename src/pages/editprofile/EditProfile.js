@@ -107,7 +107,7 @@ function EditProfile() {
             Save
           </button>
         </div>
-        <label htmlFor="image" className="flex justify-center pt-5">
+        <label htmlFor="image" className="flex flex-col items-center pt-5">
           <Input
             type="file"
             accept="image/*"
@@ -131,6 +131,7 @@ function EditProfile() {
           ) : (
             <UserCircleIcon className="text-grey-500 h-24 w-24" />
           )}
+          <p className="text-orange-500 font-semibold">Edit Profile Picture</p>
         </label>
         <ImageCropper
           image={imageSrc}

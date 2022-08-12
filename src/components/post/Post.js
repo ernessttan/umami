@@ -45,7 +45,7 @@ Post.propTypes = {
   comments: Proptypes.arrayOf(Proptypes.shape({
     cid: Proptypes.string.isRequired,
     username: Proptypes.string.isRequired,
-    avatar: Proptypes.string.isRequired,
+    avatar: Proptypes.string,
     comment: Proptypes.string.isRequired,
   })),
   authUserLiked: Proptypes.bool.isRequired,

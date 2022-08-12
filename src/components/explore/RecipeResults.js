@@ -35,8 +35,6 @@ function RecipeResults({ searchQuery }) {
     getRecipes();
   }, [searchQuery]);
 
-  console.log(recipes);
-
   return (
     <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4 py-2">
       { recipes === undefined ? (

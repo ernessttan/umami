@@ -60,7 +60,7 @@ Actions.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     cid: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
+    avatar: PropTypes.string,
     comment: PropTypes.string.isRequired,
   })),
   authUserLiked: PropTypes.bool.isRequired,

@@ -61,8 +61,6 @@ function Comments({
     }
   };
 
-  console.log(authUser);
-
   return commentsData && (
     <Modal
       isOpen={modalIsOpen}
@@ -122,7 +120,7 @@ Comments.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     cid: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
+    avatar: PropTypes.string,
     comment: PropTypes.string.isRequired,
   })),
 };

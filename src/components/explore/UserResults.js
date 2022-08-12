@@ -24,7 +24,6 @@ function UserResults({ searchQuery }) {
           .then((users) => {
             const userData = users.docs.map((user) => user.data());
             const filteredUsers = filterResults(searchQuery, userData);
-            console.log(filteredUsers);
             setUsers(filteredUsers);
           });
       } catch (error) {
@@ -44,7 +43,7 @@ function UserResults({ searchQuery }) {
       ) : (
         filterResults(searchQuery, users).map((user) => (
           <UserCard
-            key={user.id}
+            key={user.uid}
             uid={user.uid}
             avatar={user.avatar}
             username={user.username}

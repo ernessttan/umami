@@ -21,7 +21,6 @@ Title.defaultProps = {
 Title.propTypes = {
   title: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
 };
 
 export default Title;
