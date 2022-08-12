@@ -3,76 +3,35 @@
 @tailwind utilities;
 
 @layer base {
-  html {
+  html, body, #root, main {
+    min-height: 100vh;
     font-family: 'Jost', sans-serif;
   }
 
-  body {
-    min-height: 100vh;
-  }
-
-  #root {
-    min-height: 100vh;
-  }
- 
   /* Typography */
   h1 {
-    @apply font-semibold;
-    @apply text-2xl;
+    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize.3xl);
   }
 
   h2 {
-    @apply text-xl;
-    @apply font-semibold;
+    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize.2xl);
   }
 
   h3 {
-    @apply font-semibold;
-  }
-
-  input:focus {
-    outline: none;
-  }
-
-}
-
-@layer components {
-  .input-grey {
-    background-color: theme('colors.textbox-grey');
-    border-radius: theme('borderRadius.DEFAULT');
-    padding: theme('spacing.2');
-    padding-top: theme('spacing.3');
-    padding-bottom: theme('spacing.3');
-    width: theme('width.full');
-  }
-
-
-  .navbar-icon {
-    width: theme(width.7);
-    height: theme(height.7);
-  }
-  .navbar-icon:active {
-    color: theme('colors.orange-500');
-  }
-
-  .navbar-side {
-    position: static;
-    height: theme(height.full);
-    width: theme(width.auto);
-    margin: 0;
-    padding: 0;
-    background-color: theme('colors.transparent');
-  }
-
-  .desktop-screen {
-    height: theme(height.full);
-    display: flex;
-    flex-direction: row;  
-  }
-
-  .desktop-content {
-    flex-grow: 1;
-    flex-basis: 75%;
+    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize.xl);
   }
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
