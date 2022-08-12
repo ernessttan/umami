@@ -7,7 +7,6 @@ import Actions from './Actions';
 function Post({
   username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked,
 }) {
-  console.log(avatar);
   return (
     <div className="h-1/2 flex flex-col gap-2">
       <Link to={`/profile/${uid}`} className="flex items-center gap-3 px-3">

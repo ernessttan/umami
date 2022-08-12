@@ -6,6 +6,7 @@ import {
   arrayUnion, collection, doc, updateDoc,
 } from 'firebase/firestore';
 import { XIcon } from '@heroicons/react/solid';
+import { UserCircleIcon } from '@heroicons/react/outline';
 import { FirebaseContext } from '../../context/firebase';
 import AuthContext from '../../context/auth';
 import Input from '../forms/Input';
@@ -60,6 +61,8 @@ function Comments({
     }
   };
 
+  console.log(authUser);
+
   return commentsData && (
     <Modal
       isOpen={modalIsOpen}
@@ -91,7 +94,7 @@ function Comments({
         <div className="sticky p-3 py-5 bg-white border-t border-grey-300 shadow-lg bottom-0 -mx-4">
           <form className="bg-grey-100 w-full flex items-center justify-between p-2 rounded-md">
             <div className="flex items-center gap-3 w-full">
-              <img src={authUser.photoURL} className="w-8 h-8 rounded-full" alt={authUser.displayName} />
+              {authUser.photoURL !== null ? (<img className="rounded-full h-8 w-8 object-cover" src={authUser.photoURL} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
               <Input onChange={handleChange} type="text" name="comment" value={comment.comment} className="bg-transparent outline-none w-full" maxLength="50" required />
             </div>
             <button onClick={handleSendComment} className="text-orange-500" type="submit">
