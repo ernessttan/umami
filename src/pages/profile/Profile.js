@@ -11,45 +11,19 @@ import { isAuthUserFollowing, toggleFollow } from '../../firebase/functions';
 import MobileNav from '../../components/layout/MobileNav';
 import MainLayout from '../../components/layout/MainLayout';
 import UserPosts from './UserPosts';
+import Actions from './Actions';
 
 function Profile() {
   const navigate = useNavigate();
   const { auth } = useContext(FirebaseContext);
   const { uid } = useParams();
   const { profile } = useUserProfile(uid);
-  const [isFollowing, setIsFollowing] = useState(null);
-
-  useEffect(() => {
-    const setFollowing = async () => {
-      try {
-        await isAuthUserFollowing(auth.currentUser.uid, uid)
-          .then((isFollowing) => {
-            setIsFollowing(isFollowing);
-          });
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    setFollowing();
-  }, [uid]);
 
   const handleLogout = async () => {
     try {
       await signOut(auth)
         .then(() => {
           navigate('/');
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleFollow = async (e) => {
-    e.preventDefault();
-    try {
-      await toggleFollow(auth.currentUser.uid, uid)
-        .then(() => {
-          setIsFollowing(!isFollowing);
         });
     } catch (error) {
       console.log(error);
@@ -96,21 +70,7 @@ function Profile() {
             </p>
           </div>
           <p className="py-3">{profile.bio}</p>
-          <div className="py-4">
-            {auth.currentUser.uid === profile.uid ? (
-              <Link
-                to={`/editprofile/${auth.currentUser.uid}`}
-                type="button"
-                className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full"
-              >
-                Edit Profile
-              </Link>
-            ) : (
-              <button onClick={handleFollow} type="button" value={profile.id} className="w-full md:w-1/2 bg-orange-500 text-white flex justify-center p-3 rounded-full">
-                {isFollowing ? 'Unfollow' : 'Follow'}
-              </button>
-            )}
-          </div>
+          <Actions currentUser={auth.currentUser} profile={profile} uid={uid} />
         </div>
         <UserPosts uid={uid} />
       </MainLayout>

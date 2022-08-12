@@ -33,10 +33,11 @@ function UserPosts({ uid }) {
       ) : (
         userPosts.map((post) => (
           <RecipeCard
-            key={post.id}
+            key={post.rid}
             title={post.title}
             image={post.image}
-            id={post.id}
+            rid={post.rid}
+            likes={post.likes}
           />
         ))
       )}
