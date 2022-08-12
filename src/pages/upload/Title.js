@@ -14,7 +14,12 @@ function Title({ handleChange, title }) {
   );
 }
 
+Title.defaultProps = {
+  title: '',
+};
+
 Title.propTypes = {
+  title: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };
