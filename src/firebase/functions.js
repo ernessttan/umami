@@ -1,7 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 import {
-  getDoc, where, doc, collection, getDocs, query, setDoc, updateDoc, arrayRemove, arrayUnion,
+  getDoc, where, doc, collection, getDocs, query, setDoc, updateDoc, arrayRemove,
+  arrayUnion, deleteDoc,
 } from 'firebase/firestore';
 import { db } from './firebaseConfig';
 
@@ -131,8 +132,13 @@ async function toggleSave(authUserId, rid, isSaved) {
   updateDoc(authUserRef, { savedPosts: isSaved ? arrayRemove(rid) : arrayUnion(rid) });
 }
 
+async function deleteRecipe(rid) {
+  const recipeRef = doc(db, 'recipes', rid);
+  await deleteDoc(recipeRef);
+}
+
 export {
   addNewUser, getUserById, getFollowingPosts, getUserPosts,
   getRecipeById, toggleFollow, isAuthUserFollowing, toggleLike,
-  didAuthUserSave, toggleSave, getSavedPosts,
+  didAuthUserSave, toggleSave, getSavedPosts, deleteRecipe,
 };

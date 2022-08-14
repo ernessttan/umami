@@ -39,7 +39,7 @@ function Image({ setImage, image }) {
         <img
           src={preview || image}
           alt="preview"
-          className={`${preview || image ? 'block' : 'hidden'} rounded-lg h-full w-full`}
+          className={`${preview || image ? 'block' : 'hidden'} rounded-lg h-full w-full object-cover`}
         />
         <div className={`flex flex-col items-center ${preview || image ? 'hidden' : 'block'}`}>
           <svg
