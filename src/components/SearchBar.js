@@ -1,11 +1,23 @@
 import { SearchIcon, ChevronLeftIcon } from '@heroicons/react/outline';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 function SearchBar({
-  handleChange, startSearch, isSearching, closeSearch, searchQuery,
+  handleChange, searchQuery, setSearchQuery,
 }) {
+  const [isSearching, setIsSearching] = useState(false);
+
+  const startSearch = () => {
+    setIsSearching(true);
+  };
+
+  const closeSearch = () => {
+    setIsSearching(false);
+    setSearchQuery('');
+  };
+
   return (
-    <div className="p-4 mx-5 bg-textbox-grey rounded flex items-center">
+    <div className="p-4 bg-textbox-grey rounded flex items-center">
       <div className="flex items-center gap-2 w-full">
         {isSearching ? <ChevronLeftIcon className="w-5 h-5" onClick={closeSearch} /> : <SearchIcon className="w-5 h-5" />}
         <input
@@ -28,10 +40,8 @@ SearchBar.defaultProps = {
 
 SearchBar.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  startSearch: PropTypes.func.isRequired,
-  isSearching: PropTypes.bool.isRequired,
-  closeSearch: PropTypes.func.isRequired,
   searchQuery: PropTypes.string,
+  setSearchQuery: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

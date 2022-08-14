@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { getUserPosts } from '../../firebase/functions';
 import RecipeCard from '../../components/RecipeCard';
+import CardGrid from '../../components/CardGrid';
 
 function UserPosts({ uid }) {
   const [userPosts, setUserPosts] = useState();
@@ -24,7 +25,7 @@ function UserPosts({ uid }) {
   }, [uid]);
 
   return (
-    <div className="px-3 grid grid-cols-2 gap-5 md:grid-cols-3">
+    <CardGrid>
       {userPosts === undefined ? (
         <>
           <Skeleton count={2} className="w-full h-36" />
@@ -41,7 +42,7 @@ function UserPosts({ uid }) {
           />
         ))
       )}
-    </div>
+    </CardGrid>
   );
 }
 

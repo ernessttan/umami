@@ -5,7 +5,7 @@ import MobileNav from '../../components/layout/MobileNav';
 import UserContext from '../../context/user';
 import useUserProfile from '../../hooks/useUserProfile';
 import Timeline from './Timeline';
-import SuggestedUsers from '../../components/layout/SuggestedUsers';
+import SuggestedUsers from './SuggestedUsers';
 import MainLayout from '../../components/layout/MainLayout';
 
 function Home() {

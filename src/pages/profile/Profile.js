@@ -35,7 +35,7 @@ function Profile() {
       <div className="hidden md:block">
         <Header />
       </div>
-      <MainLayout className="p-3">
+      <MainLayout className="p-5">
         <div className="flex items-center justify-end py-3">
           {auth.currentUser.uid === uid && (
           <button onClick={handleLogout} className="text-orange-500" type="button">
@@ -43,7 +43,7 @@ function Profile() {
           </button>
           )}
         </div>
-        <div className="flex items-center px-2">
+        <div className="flex items-center">
           {profile.avatar ? (<img src={profile.avatar} alt={profile.username} className="rounded-full h-16 w-16 border border-grey-100" />)
             : (<UserCircleIcon className="h-16 w-16" />)}
           <div className="ml-4">
@@ -51,7 +51,7 @@ function Profile() {
             <p className="text-grey-700">{`@ ${profile.username}`}</p>
           </div>
         </div>
-        <div className="p-3">
+        <div className="py-3">
           <div className="flex items-center gap-5 w-full">
             <p className="text-black">
               <span className="font-semibold">{profile.posts.length}</span>

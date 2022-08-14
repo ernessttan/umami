@@ -18,8 +18,17 @@ async function addNewUser(user) {
     followers: [],
     following: [],
     posts: [],
+    savedPosts: [],
     name: '',
   });
+}
+
+async function didAuthUserSave(authUserId, rid) {
+  const authUserRef = doc(db, 'users', authUserId);
+  const authUser = await getDoc(authUserRef);
+  const authUserSavedPosts = authUser.data().savedPosts;
+
+  return authUserSavedPosts.includes(rid);
 }
 
 async function getUserById(uid) {
@@ -36,11 +45,31 @@ async function getFollowingPosts(authUserId, followingArr) {
   }));
 
   const postsWithLikes = await Promise.all(posts.map(async (post) => {
+    const authUserSaved = await didAuthUserSave(authUserId, post.rid);
     let authUserLiked = false;
     if (post.likes.includes(authUserId)) {
       authUserLiked = true;
     }
-    return { ...post, authUserLiked };
+    return { ...post, authUserLiked, authUserSaved };
+  }));
+
+  return postsWithLikes;
+}
+
+async function getSavedPosts(authUserId, savedIdsArr) {
+  const response = await getDocs(query(recipesRef, where('rid', 'in', savedIdsArr)));
+
+  const posts = response.docs.map((post) => ({
+    ...post.data(),
+  }));
+
+  const postsWithLikes = await Promise.all(posts.map(async (post) => {
+    const authUserSaved = await didAuthUserSave(authUserId, post.rid);
+    let authUserLiked = false;
+    if (post.likes.includes(authUserId)) {
+      authUserLiked = true;
+    }
+    return { ...post, authUserLiked, authUserSaved };
   }));
 
   return postsWithLikes;
@@ -60,11 +89,12 @@ async function getRecipeById(authUserId, rid) {
   const response = await getDoc(doc(recipesRef, rid));
   const recipe = response.data();
 
+  const authUserSaved = await didAuthUserSave(authUserId, rid);
   let authUserLiked = false;
   if (recipe.likes.includes(authUserId)) {
     authUserLiked = true;
   }
-  return { ...recipe, authUserLiked };
+  return { ...recipe, authUserLiked, authUserSaved };
 }
 
 async function toggleFollow(authUserId, uid, isFollowingUser) {
@@ -96,7 +126,13 @@ async function toggleLike(userId, rid, isLiked) {
   updateDoc(postRef, { likes: isLiked ? arrayRemove(userId) : arrayUnion(userId) });
 }
 
+async function toggleSave(authUserId, rid, isSaved) {
+  const authUserRef = doc(db, 'users', authUserId);
+  updateDoc(authUserRef, { savedPosts: isSaved ? arrayRemove(rid) : arrayUnion(rid) });
+}
+
 export {
   addNewUser, getUserById, getFollowingPosts, getUserPosts,
   getRecipeById, toggleFollow, isAuthUserFollowing, toggleLike,
+  didAuthUserSave, toggleSave, getSavedPosts,
 };

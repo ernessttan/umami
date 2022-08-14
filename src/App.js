@@ -14,7 +14,7 @@ const EditProfile = lazy(() => import('./pages/editprofile/EditProfile'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Recipe = lazy(() => import('./pages/recipe/Recipe'));
 const EditRecipe = lazy(() => import('./pages/recipe/EditRecipe'));
-const Saved = lazy(() => import('./pages/Saved'));
+const Saved = lazy(() => import('./pages/saved/Saved'));
 
 function App() {
   const { authUser } = useAuthListener();

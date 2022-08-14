@@ -11,7 +11,7 @@ import RecipeCard from '../RecipeCard';
 
 function RecipeResults({ searchQuery }) {
   const { db, auth } = useContext(FirebaseContext);
-  const [recipes, setRecipes] = useState(undefined);
+  const [recipes, setRecipes] = useState();
 
   // Filter results by search query
   const filterResults = (query, recipeArr) => recipeArr.filter(
@@ -36,22 +36,27 @@ function RecipeResults({ searchQuery }) {
   }, [searchQuery]);
 
   return (
-    <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4 py-2">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 py-5">
       { recipes === undefined ? (
         <>
-          <Skeleton count={3} className="w-full h-36" />
-          <Skeleton count={3} className="w-full h-36" />
+          <Skeleton count={10} height={130} width="100%" />
+          <Skeleton count={10} height={130} width="100%" />
+          <Skeleton count={10} height={130} width="100%" />
         </>
       ) : (
-        recipes.map((recipe) => (
-          <RecipeCard
-            key={recipe.rid}
-            rid={recipe.rid}
-            title={recipe.title}
-            image={recipe.image}
-            likes={recipe.likes}
-          />
-        ))
+        <>
+          {
+          recipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.rid}
+              rid={recipe.rid}
+              title={recipe.title}
+              image={recipe.image}
+              likes={recipe.likes}
+            />
+          ))
+        }
+        </>
       )}
     </div>
   );

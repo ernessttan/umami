@@ -3,7 +3,7 @@ import {
   getDocs, query, collection, orderBy, limit,
 } from 'firebase/firestore';
 import { FirebaseContext } from '../../context/firebase';
-import UserCard from '../UserCard';
+import UserCard from '../../components/UserCard';
 
 function SuggestedUsers() {
   const { db, auth } = useContext(FirebaseContext);

@@ -87,6 +87,7 @@ function Recipe() {
         </div>
         <Actions
           authUserLiked={recipe.authUserLiked}
+          authUserSaved={recipe.authUserSaved}
           rid={recipe.rid}
           likes={recipe.likes}
           comments={recipe.comments}

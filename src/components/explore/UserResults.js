@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState, useEffect } from 'react';
 import {
   getDocs, query, collection, orderBy,
@@ -10,7 +11,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 function UserResults({ searchQuery }) {
   const { db, auth } = useContext(FirebaseContext);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState();
 
   const filterResults = (query, userArr) => userArr.filter(
     (user) => user.username.toLowerCase().includes(query) && user.uid !== auth.currentUser.uid,
@@ -34,24 +35,29 @@ function UserResults({ searchQuery }) {
   }, [searchQuery]);
 
   return (
-    <div className="grid py-5 gap-5">
+    <div>
       { users === undefined ? (
-        <div className="flex items-center gap-3">
-          <Skeleton count={5} circle height={50} width={50} className="my-2" />
-          <Skeleton count={5} height={50} width={290} className="my-2" />
+        <div className="flex items-center w-full py-5">
+          <Skeleton count={10} circle height={50} width={50} className="my-2" containerClassName="basis-1/6 md:basis-1/12" />
+          <Skeleton count={10} height={50} width="100%" className="my-2" containerClassName="basis-5/6 md:basis-11/12" />
         </div>
       ) : (
-        filterResults(searchQuery, users).map((user) => (
-          <UserCard
-            key={user.uid}
-            uid={user.uid}
-            avatar={user.avatar}
-            username={user.username}
-            name={user.name}
-          />
-        ))
+        <div className="grid py-5 gap-5">
+          {
+             filterResults(searchQuery, users).map((user) => (
+               <UserCard
+                 key={user.uid}
+                 uid={user.uid}
+                 avatar={user.avatar}
+                 username={user.username}
+                 name={user.name}
+               />
+             ))
+          }
+        </div>
       )}
     </div>
+
   );
 }
 
