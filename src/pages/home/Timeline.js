@@ -58,6 +58,7 @@ function Timeline() {
             avatar={post.avatar}
             likes={post.likes}
             authUserLiked={post.authUserLiked}
+            authUserSaved={post.authUserSaved}
             comments={post.comments}
           />
         ))

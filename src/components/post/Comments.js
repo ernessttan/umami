@@ -12,7 +12,7 @@ import AuthContext from '../../context/auth';
 import Input from '../forms/Input';
 
 function Comments({
-  rid, toggleComments, modalIsOpen, comments,
+  rid, toggleComments, modalIsOpen, comments, setCommentsCount,
 }) {
   const { db } = useContext(FirebaseContext);
   const { authUser } = useContext(AuthContext);
@@ -55,6 +55,7 @@ function Comments({
             uid: '',
           });
           setCommentsData((prevComments) => [...prevComments, comment]);
+          setCommentsCount((prevCommentsCount) => prevCommentsCount + 1);
         });
     } catch (error) {
       console.log(error);
@@ -116,6 +117,7 @@ Comments.defaultProps = {
 Comments.propTypes = {
   modalIsOpen: PropTypes.bool.isRequired,
   toggleComments: PropTypes.func.isRequired,
+  setCommentsCount: PropTypes.func.isRequired,
   rid: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
     cid: PropTypes.string.isRequired,

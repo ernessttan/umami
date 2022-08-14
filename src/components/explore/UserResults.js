@@ -54,7 +54,6 @@ function UserResults({ searchQuery }) {
                />
              ))
           }
-
         </div>
       )}
     </div>

@@ -7,17 +7,8 @@ import MobileNav from '../components/layout/MobileNav';
 import MainLayout from '../components/layout/MainLayout';
 
 function Explore() {
-  const [isSearching, setIsSearching] = useState(false);
   const [selected, setSelected] = useState('recipes');
   const [searchQuery, setSearchQuery] = useState('');
-  const startSearch = () => {
-    setIsSearching(true);
-  };
-
-  const closeSearch = () => {
-    setIsSearching(false);
-    setSearchQuery('');
-  };
 
   const handleClick = (event) => {
     const { value } = event.target;
@@ -28,18 +19,17 @@ function Explore() {
     const { value } = event.target;
     setSearchQuery(value.toLowerCase());
   };
+
   return (
     <div>
       <Header />
-      <MainLayout className="py-5">
+      <MainLayout className="p-5">
         <SearchBar
           searchQuery={searchQuery}
-          isSearching={isSearching}
-          closeSearch={closeSearch}
-          startSearch={startSearch}
+          setSearchQuery={setSearchQuery}
           handleChange={handleChange}
         />
-        <div className="flex items-center gap-5 px-5 mt-2">
+        <div className="flex items-center gap-5 mt-2">
           <button
             onClick={handleClick}
             type="button"
@@ -57,7 +47,7 @@ function Explore() {
             Users
           </button>
         </div>
-        <div className="mx-5">
+        <div>
           {`${selected}` === 'recipes' ? (
             <RecipeResults searchQuery={searchQuery} />
           ) : (

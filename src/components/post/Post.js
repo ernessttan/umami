@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Actions from './Actions';
 
 function Post({
-  username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked,
+  username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked, authUserSaved,
 }) {
   return (
     <div className="h-1/2 flex flex-col gap-2">
@@ -21,7 +21,13 @@ function Post({
         <p>{caption}</p>
       </div>
       <div className="px-3">
-        <Actions likes={likes} comments={comments} authUserLiked={authUserLiked} rid={rid} />
+        <Actions
+          likes={likes}
+          comments={comments}
+          authUserLiked={authUserLiked}
+          authUserSaved={authUserSaved}
+          rid={rid}
+        />
       </div>
     </div>
   );
@@ -49,6 +55,7 @@ Post.propTypes = {
     comment: Proptypes.string.isRequired,
   })),
   authUserLiked: Proptypes.bool.isRequired,
+  authUserSaved: Proptypes.bool.isRequired,
 };
 
 export default Post;
