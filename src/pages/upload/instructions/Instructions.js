@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/no-array-index-key */
 import { useState, useEffect } from 'react';
 import { PlusIcon } from '@heroicons/react/solid';
@@ -28,10 +29,11 @@ function Instructions({ setNewRecipe, instructions }) {
     setInstructionList([...instructionList, { instruction: '' }]);
   };
 
-  const handleRemoveInput = (index) => {
+  const handleRemoveInput = (e) => {
+    e.preventDefault();
     const list = [...instructionList];
     // Remove input
-    list.splice(index, 1);
+    list.splice(e.currentTarget.value, 1);
     setInstructionList(list);
   };
 
@@ -49,7 +51,7 @@ function Instructions({ setNewRecipe, instructions }) {
             index={index}
             handleChange={handleChange}
             handleRemoveInput={handleRemoveInput}
-            value={input.instruction}
+            instruction={input.instruction}
           />
         )) }
       </div>

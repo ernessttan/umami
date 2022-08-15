@@ -1,9 +1,11 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 import {
-  getDoc, where, doc, collection, getDocs, query, setDoc, updateDoc, arrayRemove, arrayUnion,
+  getDoc, where, doc, collection, getDocs, query, setDoc, updateDoc, arrayRemove,
+  arrayUnion, deleteDoc,
 } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { deleteObject, ref } from 'firebase/storage';
+import { db, storage } from './firebaseConfig';
 
 const usersRef = collection(db, 'users');
 const recipesRef = collection(db, 'recipes');
@@ -98,6 +100,7 @@ async function getRecipeById(authUserId, rid) {
 }
 
 async function toggleFollow(authUserId, uid, isFollowingUser) {
+  console.log(isFollowingUser);
   const authUserRef = doc(db, 'users', authUserId);
   const userRef = doc(db, 'users', uid);
   // Update auth users following array
@@ -131,8 +134,27 @@ async function toggleSave(authUserId, rid, isSaved) {
   updateDoc(authUserRef, { savedPosts: isSaved ? arrayRemove(rid) : arrayUnion(rid) });
 }
 
+async function deleteRecipe(rid) {
+  const recipeRef = doc(db, 'recipes', rid);
+  const imageRef = ref(storage, `recipes/${rid}`);
+
+  await deleteDoc(recipeRef);
+  await deleteObject(imageRef);
+}
+
+async function getProfiles(idArr) {
+  const response = await getDocs(query(usersRef, where('uid', 'in', idArr)));
+
+  const users = response.docs.map((user) => ({
+    ...user.data(),
+  }));
+
+  return users;
+}
+
 export {
   addNewUser, getUserById, getFollowingPosts, getUserPosts,
   getRecipeById, toggleFollow, isAuthUserFollowing, toggleLike,
-  didAuthUserSave, toggleSave, getSavedPosts,
+  didAuthUserSave, toggleSave, getSavedPosts, deleteRecipe,
+  getProfiles,
 };

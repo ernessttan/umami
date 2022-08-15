@@ -6,7 +6,7 @@ import {
 import Proptypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import { FirebaseContext } from '../../context/firebase';
-import UserCard from '../UserCard';
+import UserCard from '../../components/cards/UserCard';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 function UserResults({ searchQuery }) {

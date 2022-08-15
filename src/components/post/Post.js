@@ -8,13 +8,13 @@ function Post({
   username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked, authUserSaved,
 }) {
   return (
-    <div className="h-1/2 flex flex-col gap-2">
+    <div className="flex flex-col gap-2 mb-5">
       <Link to={`/profile/${uid}`} className="flex items-center gap-3 px-3">
-        {avatar.length !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
+        {avatar.length !== '' ? (<img className="rounded-full h-8 w-8 object-cover border-grey-100 border" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
       </Link>
-      <Link to={`/recipe/${rid}`} className="h-2/3">
-        <img className="w-full h-full object-cover md:rounded-md" src={image} alt="recipe" />
+      <Link to={`/recipe/${rid}`}>
+        <img src={image} className="w-full h-72 object-cover md:h-80 md:rounded-md" alt="recipe" />
       </Link>
       <div className="px-3">
         <h3 className="font-semibold">{title}</h3>

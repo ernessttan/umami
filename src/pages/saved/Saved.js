@@ -1,17 +1,15 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/jsx-no-undef */
 import { useEffect, useContext, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth';
 import useUserProfile from '../../hooks/useUserProfile';
-import Header from '../../components/layout/Header';
+import Header from '../../components/navigation/Header';
 import MainLayout from '../../components/layout/MainLayout';
-import MobileNav from '../../components/layout/MobileNav';
-import SearchBar from '../../components/SearchBar';
+import MobileNav from '../../components/navigation/MobileNav';
+import SearchBar from '../../components/layout/SearchBar';
 import { getSavedPosts } from '../../firebase/functions';
-import CardGrid from '../../components/CardGrid';
-import RecipeCard from '../../components/RecipeCard';
+import CardGrid from '../../components/layout/CardGrid';
+import RecipeCard from '../../components/cards/RecipeCard';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 function Saved() {

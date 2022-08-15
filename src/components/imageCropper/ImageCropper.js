@@ -76,7 +76,7 @@ ImageCropper.propTypes = {
   modalIsOpen: Proptypes.bool.isRequired,
   toggleModal: Proptypes.func.isRequired,
   setImage: Proptypes.func.isRequired,
-  aspect: Proptypes.string.isRequired,
+  aspect: Proptypes.number.isRequired,
   cropShape: Proptypes.string,
 };
 

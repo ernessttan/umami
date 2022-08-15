@@ -3,7 +3,7 @@ import {
   getDocs, query, collection, orderBy, limit,
 } from 'firebase/firestore';
 import { FirebaseContext } from '../../context/firebase';
-import UserCard from '../../components/UserCard';
+import UserCard from '../../components/cards/UserCard';
 
 function SuggestedUsers() {
   const { db, auth } = useContext(FirebaseContext);
@@ -25,7 +25,7 @@ function SuggestedUsers() {
     getUsers();
   }, []);
   return (
-    <div className="hidden md:block basis-1/3">
+    <div className="hidden md:block md:col-span-1">
       <h3 className="text-grey-700">Suggested Users</h3>
       <div className="grid py-5 gap-5">
         {users.map((user) => (

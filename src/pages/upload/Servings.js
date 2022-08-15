@@ -23,7 +23,7 @@ function Servings({ servings, handleChange, setNewRecipe }) {
         <MinusIcon />
       </button>
       <input
-        className="border-none flex flex-col items-center bg-textbox-grey rounded w-10 h-8 px-3"
+        className="border-none flex items-center justify-center bg-textbox-grey rounded w-8 h-8"
         type="number"
         name="servings"
         value={servings}

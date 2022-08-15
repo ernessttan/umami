@@ -35,7 +35,7 @@ function Timeline() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-16 py-5 md:grow md:max-w-md h-screen overflow-y-scroll md:no-scrollbar">
+    <div className="col-span-2 overflow-y-scroll md:no-scrollbar">
       { followingPosts === undefined ? (
         <Skeleton count={2} className="w-full h-[35vh] mb-2" />
       ) : followingPosts.length === 0 ? (
@@ -48,7 +48,7 @@ function Timeline() {
       ) : followingPosts ? (
         followingPosts.map((post) => (
           <Post
-            key={post.uid}
+            key={post.rid}
             title={post.title}
             caption={post.caption}
             image={post.image}

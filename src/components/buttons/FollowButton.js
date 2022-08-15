@@ -21,7 +21,7 @@ function FollowButton({ uid }) {
   const handleFollow = async (e) => {
     e.preventDefault();
     try {
-      await toggleFollow(auth.currentUser.uid, uid)
+      await toggleFollow(auth.currentUser.uid, uid, isFollowing)
         .then(() => {
           setIsFollowing(!isFollowing);
         });

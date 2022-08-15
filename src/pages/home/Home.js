@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import AuthContext from '../../context/auth';
-import Header from '../../components/layout/Header';
-import MobileNav from '../../components/layout/MobileNav';
+import Header from '../../components/navigation/Header';
+import MobileNav from '../../components/navigation/MobileNav';
 import UserContext from '../../context/user';
 import useUserProfile from '../../hooks/useUserProfile';
 import Timeline from './Timeline';
@@ -15,7 +15,7 @@ function Home() {
   return profile && (
     <UserContext.Provider value={{ profile }}>
       <Header />
-      <MainLayout className="gap-12 py-5 md:flex">
+      <MainLayout className="grid grid-cols-1 gap-10 py-8 md:grid-cols-2 xl:grid-cols-3">
         <Timeline />
         <SuggestedUsers />
       </MainLayout>

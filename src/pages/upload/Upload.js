@@ -9,8 +9,8 @@ import AuthContext from '../../context/auth';
 import { FirebaseContext } from '../../context/firebase';
 import BackButton from '../../components/buttons/BackButton';
 import Image from './Image';
-import Header from '../../components/layout/Header';
-import MobileNav from '../../components/layout/MobileNav';
+import Header from '../../components/navigation/Header';
+import MobileNav from '../../components/navigation/MobileNav';
 import Title from './Title';
 import Description from './Description';
 import Servings from './Servings';
@@ -62,14 +62,15 @@ function Upload() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const imageRef = ref(storage, `recipes/${newRecipe.id}`);
+    const imageRef = ref(storage, `recipes/${newRecipe.rid}`);
+    const recipesRef = collection(db, 'recipes');
     try {
-      await setDoc(doc(collection(db, 'recipes'), newRecipe.id), newRecipe)
+      await setDoc(doc(recipesRef, newRecipe.rid), newRecipe)
         .then(async () => {
           await uploadBytes(imageRef, image, { contentType: `${image.type}` })
             .then(async () => {
-              const url = await getDownloadURL(ref(storage, `recipes/${newRecipe.id}`));
-              await updateDoc(doc(db, 'recipes', newRecipe.id), { image: url })
+              const url = await getDownloadURL(ref(storage, `recipes/${newRecipe.rid}`));
+              await updateDoc(doc(db, 'recipes', newRecipe.rid), { image: url })
                 .then(() => {
                   navigate('/home');
                 });

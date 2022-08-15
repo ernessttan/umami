@@ -7,7 +7,7 @@ import { useEffect, useState, useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { FirebaseContext } from '../../context/firebase';
-import RecipeCard from '../RecipeCard';
+import RecipeCard from '../../components/cards/RecipeCard';
 
 function RecipeResults({ searchQuery }) {
   const { db, auth } = useContext(FirebaseContext);

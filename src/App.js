@@ -11,7 +11,7 @@ const Home = lazy(() => import('./pages/home/Home'));
 const Upload = lazy(() => import('./pages/upload/Upload'));
 const Profile = lazy(() => import('./pages/profile/Profile'));
 const EditProfile = lazy(() => import('./pages/editprofile/EditProfile'));
-const Explore = lazy(() => import('./pages/Explore'));
+const Explore = lazy(() => import('./pages/explore/Explore'));
 const Recipe = lazy(() => import('./pages/recipe/Recipe'));
 const EditRecipe = lazy(() => import('./pages/recipe/EditRecipe'));
 const Saved = lazy(() => import('./pages/saved/Saved'));
