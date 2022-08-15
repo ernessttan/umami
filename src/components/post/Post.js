@@ -8,7 +8,7 @@ function Post({
   username, title, caption, image, uid, rid, avatar, likes, comments, authUserLiked, authUserSaved,
 }) {
   return (
-    <div className="h-1/2 flex flex-col gap-2">
+    <div className="h-96 w-full flex flex-col gap-2 my-2  ">
       <Link to={`/profile/${uid}`} className="flex items-center gap-3 px-3">
         {avatar.length !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
