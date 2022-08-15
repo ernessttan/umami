@@ -11,7 +11,7 @@ function MobileNav() {
   const currentRoute = useLocation().pathname;
 
   return (
-    <nav className="p-3 w-full sticky bottom-0 z-30 shadow-xl bg-navbar-fill border-t border-grey-300 md:hidden">
+    <nav className="p-3 w-full sticky bottom-0 z-5 shadow-xl bg-navbar-fill border-t border-grey-300 md:hidden">
       <div className="flex items-center justify-between px-3">
         <NavLink to="/home">
           <HomeIcon className={`${currentRoute.includes('home') ? 'text-orange-500' : 'text-grey-700'} w-8 h-8`} />
