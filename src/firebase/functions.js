@@ -100,6 +100,7 @@ async function getRecipeById(authUserId, rid) {
 }
 
 async function toggleFollow(authUserId, uid, isFollowingUser) {
+  console.log(isFollowingUser);
   const authUserRef = doc(db, 'users', authUserId);
   const userRef = doc(db, 'users', uid);
   // Update auth users following array

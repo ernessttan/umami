@@ -1,7 +1,7 @@
 import { DotsHorizontalIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import OptionsMenu from '../OptionsMenu';
+import OptionsMenu from '../menus/OptionsMenu';
 
 function OptionsButton({ item, itemId }) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);

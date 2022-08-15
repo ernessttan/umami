@@ -6,10 +6,10 @@ import useUserProfile from '../../hooks/useUserProfile';
 import Header from '../../components/layout/Header';
 import MainLayout from '../../components/layout/MainLayout';
 import MobileNav from '../../components/layout/MobileNav';
-import SearchBar from '../../components/SearchBar';
+import SearchBar from '../../components/layout/SearchBar';
 import { getSavedPosts } from '../../firebase/functions';
-import CardGrid from '../../components/CardGrid';
-import RecipeCard from '../../components/RecipeCard';
+import CardGrid from '../../components/layout/CardGrid';
+import RecipeCard from '../../components/cards/RecipeCard';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 function Saved() {

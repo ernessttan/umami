@@ -1,7 +1,7 @@
 import Proptypes from 'prop-types';
 import { PencilIcon, TrashIcon } from '@heroicons/react/solid';
 import { Link, useNavigate } from 'react-router-dom';
-import { deleteRecipe } from '../firebase/functions';
+import { deleteRecipe } from '../../firebase/functions';
 
 function OptionsMenu({ isOptionsOpen, item, itemId }) {
   const navigate = useNavigate();

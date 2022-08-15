@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import RecipeResults from '../components/explore/RecipeResults';
-import UserResults from '../components/explore/UserResults';
-import Header from '../components/layout/Header';
-import SearchBar from '../components/SearchBar';
-import MobileNav from '../components/layout/MobileNav';
-import MainLayout from '../components/layout/MainLayout';
+import RecipeResults from './RecipeResults';
+import UserResults from './UserResults';
+import Header from '../../components/layout/Header';
+import SearchBar from '../../components/layout/SearchBar';
+import MobileNav from '../../components/layout/MobileNav';
+import MainLayout from '../../components/layout/MainLayout';
 
 function Explore() {
   const [selected, setSelected] = useState('recipes');

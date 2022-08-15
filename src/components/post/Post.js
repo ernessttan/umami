@@ -10,7 +10,7 @@ function Post({
   return (
     <div className="flex flex-col gap-2 mb-5">
       <Link to={`/profile/${uid}`} className="flex items-center gap-3 px-3">
-        {avatar.length !== '' ? (<img className="rounded-full h-8 w-8 object-cover" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
+        {avatar.length !== '' ? (<img className="rounded-full h-8 w-8 object-cover border-grey-100 border" src={avatar} alt="avatar" />) : (<UserCircleIcon className="w-8 h-8" />)}
         <p>{username}</p>
       </Link>
       <Link to={`/recipe/${rid}`}>

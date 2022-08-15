@@ -4,8 +4,8 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { Link } from 'react-router-dom';
 import { getUserPosts } from '../../firebase/functions';
-import RecipeCard from '../../components/RecipeCard';
-import CardGrid from '../../components/CardGrid';
+import RecipeCard from '../../components/cards/RecipeCard';
+import CardGrid from '../../components/layout/CardGrid';
 
 function UserPosts({ uid }) {
   const [userPosts, setUserPosts] = useState();

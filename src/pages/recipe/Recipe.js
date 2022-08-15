@@ -3,8 +3,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { getRecipeById } from '../../firebase/functions';
-import IngredientList from '../../components/recipe/IngredientList';
-import InstructionList from '../../components/recipe/InstructionList';
+import IngredientList from './IngredientList';
+import InstructionList from './InstructionList';
 import MainLayout from '../../components/layout/MainLayout';
 import Header from '../../components/layout/Header';
 import BackButton from '../../components/buttons/BackButton';

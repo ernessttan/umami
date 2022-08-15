@@ -1,7 +1,7 @@
 import { UserCircleIcon } from '@heroicons/react/outline';
 import Proptypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import FollowButton from './buttons/FollowButton';
+import FollowButton from '../buttons/FollowButton';
 
 function UserCard({
   uid, avatar, username, name,
