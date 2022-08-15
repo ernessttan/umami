@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 function Difficulty({ setNewRecipe }) {
+  const [selected, setSelected] = useState('');
+
   // Function to handle difficulty selection
   const handleDifficulty = (event) => {
     event.preventDefault();
+    setSelected(event.target.value);
     const { value } = event.target;
     setNewRecipe((prevRecipe) => ({
       ...prevRecipe,
@@ -16,7 +20,9 @@ function Difficulty({ setNewRecipe }) {
       <h3 className="mb-2">Difficulty</h3>
       <div className="flex gap-3">
         <button
-          className="flex rounded-full border border-orange-100 text-orange-500 focus:bg-orange-500 focus:text-white font-semibold py-2 px-5"
+          className={`flex rounded-full border font-semibold py-2 px-5 ${
+            selected === 'Easy' ? 'bg-orange-500 text-white' : ' border-orange-100 text-orange-500 '
+          }`}
           type="button"
           value="Easy"
           onClick={handleDifficulty}
@@ -24,7 +30,9 @@ function Difficulty({ setNewRecipe }) {
           Easy
         </button>
         <button
-          className="flex rounded-full border border-orange-100 text-orange-500 focus:bg-orange-500 focus:text-white font-semibold py-2 px-5"
+          className={`flex rounded-full border font-semibold py-2 px-5 ${
+            selected === 'Intermediate' ? 'bg-orange-500 text-white' : 'border-orange-100 text-orange-500'
+          }`}
           type="button"
           value="Intermediate"
           onClick={handleDifficulty}
@@ -32,7 +40,9 @@ function Difficulty({ setNewRecipe }) {
           Intermediate
         </button>
         <button
-          className="flex rounded-full border border-orange-100 text-orange-500 focus:bg-orange-500 focus:text-white font-semibold py-2 px-5"
+          className={`flex rounded-full border font-semibold py-2 px-5 ${
+            selected === 'Hard' ? 'bg-orange-500 text-white' : 'text-orange-500 border-orange-100'
+          }`}
           type="button"
           value="Hard"
           onClick={handleDifficulty}

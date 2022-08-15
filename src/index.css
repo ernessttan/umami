@@ -23,6 +23,11 @@
     font-weight: theme(fontWeight.semibold);
     font-size: theme(fontSize.xl);
   }
+
+  h4 {
+    font-weight: theme(fontWeight.semibold);
+    font-size: theme(fontSize.base);
+  }
 }
 
 @layer utilities {
