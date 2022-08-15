@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import RecipeResults from './RecipeResults';
 import UserResults from './UserResults';
-import Header from '../../components/layout/Header';
+import Header from '../../components/navigation/Header';
 import SearchBar from '../../components/layout/SearchBar';
-import MobileNav from '../../components/layout/MobileNav';
+import MobileNav from '../../components/navigation/MobileNav';
 import MainLayout from '../../components/layout/MainLayout';
 
 function Explore() {

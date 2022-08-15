@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import AuthContext from '../../context/auth';
-import Header from '../../components/layout/Header';
-import MobileNav from '../../components/layout/MobileNav';
+import Header from '../../components/navigation/Header';
+import MobileNav from '../../components/navigation/MobileNav';
 import UserContext from '../../context/user';
 import useUserProfile from '../../hooks/useUserProfile';
 import Timeline from './Timeline';

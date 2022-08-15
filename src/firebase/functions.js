@@ -142,8 +142,19 @@ async function deleteRecipe(rid) {
   await deleteObject(imageRef);
 }
 
+async function getProfiles(idArr) {
+  const response = await getDocs(query(usersRef, where('uid', 'in', idArr)));
+
+  const users = response.docs.map((user) => ({
+    ...user.data(),
+  }));
+
+  return users;
+}
+
 export {
   addNewUser, getUserById, getFollowingPosts, getUserPosts,
   getRecipeById, toggleFollow, isAuthUserFollowing, toggleLike,
   didAuthUserSave, toggleSave, getSavedPosts, deleteRecipe,
+  getProfiles,
 };

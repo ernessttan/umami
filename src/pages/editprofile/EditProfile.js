@@ -9,7 +9,7 @@ import { updateProfile } from 'firebase/auth';
 import { FirebaseContext } from '../../context/firebase';
 import Input from '../../components/forms/Input';
 import { getUserById } from '../../firebase/functions';
-import Header from '../../components/layout/Header';
+import Header from '../../components/navigation/Header';
 import BackButton from '../../components/buttons/BackButton';
 import ImageCropper from '../../components/imageCropper/ImageCropper';
 

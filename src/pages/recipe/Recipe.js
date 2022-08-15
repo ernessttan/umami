@@ -6,7 +6,7 @@ import { getRecipeById } from '../../firebase/functions';
 import IngredientList from './IngredientList';
 import InstructionList from './InstructionList';
 import MainLayout from '../../components/layout/MainLayout';
-import Header from '../../components/layout/Header';
+import Header from '../../components/navigation/Header';
 import BackButton from '../../components/buttons/BackButton';
 import OptionsButton from '../../components/buttons/OptionsButton';
 import AuthContext from '../../context/auth';

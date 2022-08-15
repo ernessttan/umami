@@ -48,7 +48,7 @@ function Timeline() {
       ) : followingPosts ? (
         followingPosts.map((post) => (
           <Post
-            key={post.uid}
+            key={post.rid}
             title={post.title}
             caption={post.caption}
             image={post.image}

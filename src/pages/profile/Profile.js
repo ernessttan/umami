@@ -1,23 +1,28 @@
-/* eslint-disable no-unused-vars */
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { UserCircleIcon } from '@heroicons/react/outline';
-import Header from '../../components/layout/Header';
+import Header from '../../components/navigation/Header';
 import { FirebaseContext } from '../../context/firebase';
 import UserContext from '../../context/user';
 import useUserProfile from '../../hooks/useUserProfile';
-import { isAuthUserFollowing, toggleFollow } from '../../firebase/functions';
-import MobileNav from '../../components/layout/MobileNav';
+import MobileNav from '../../components/navigation/MobileNav';
 import MainLayout from '../../components/layout/MainLayout';
 import UserPosts from './UserPosts';
 import Actions from './Actions';
+import Followers from './Followers';
+import Following from './Following';
 
 function Profile() {
   const navigate = useNavigate();
   const { auth } = useContext(FirebaseContext);
   const { uid } = useParams();
   const { profile } = useUserProfile(uid);
+  const [isFollowersModalOpen, setIsFollowersModalOpen] = useState(false);
+  const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
+
+  const toggleFollowers = () => setIsFollowersModalOpen(!isFollowersModalOpen);
+  const toggleFollowing = () => setIsFollowingModalOpen(!isFollowingModalOpen);
 
   const handleLogout = async () => {
     try {
@@ -58,16 +63,26 @@ function Profile() {
               {' '}
               Posts
             </p>
-            <p className="text-black">
+            <button type="button" onClick={toggleFollowers} className="text-black">
               <span className="font-semibold">{profile.followers.length}</span>
               {' '}
               Followers
-            </p>
-            <p className="text-black">
+            </button>
+            <Followers
+              toggleFollowers={toggleFollowers}
+              isModalOpen={isFollowersModalOpen}
+              followers={profile.followers}
+            />
+            <button type="button" onClick={toggleFollowing} className="text-black">
               <span className="font-semibold">{profile.following.length}</span>
               {' '}
               Following
-            </p>
+            </button>
+            <Following
+              following={profile.following}
+              toggleFollowing={toggleFollowing}
+              isModalOpen={isFollowingModalOpen}
+            />
           </div>
           <p className="py-3">{profile.bio}</p>
           <Actions currentUser={auth.currentUser} profile={profile} uid={uid} />

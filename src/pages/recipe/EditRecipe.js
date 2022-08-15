@@ -10,13 +10,13 @@ import Time from '../upload/Time';
 import Difficulty from '../upload/Difficulty';
 import Ingredients from '../upload/ingredients/Ingredients';
 import Instructions from '../upload/instructions/Instructions';
-import MobileNav from '../../components/layout/MobileNav';
+import MobileNav from '../../components/navigation/MobileNav';
 import BackButton from '../../components/buttons/BackButton';
 import { getRecipeById } from '../../firebase/functions';
 import { FirebaseContext } from '../../context/firebase';
 import AuthContext from '../../context/auth';
 import MainLayout from '../../components/layout/MainLayout';
-import Header from '../../components/layout/Header';
+import Header from '../../components/navigation/Header';
 
 function EditRecipe() {
   const navigate = useNavigate();
