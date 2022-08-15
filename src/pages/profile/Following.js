@@ -27,7 +27,7 @@ function Following({ following, toggleFollowing, isModalOpen }) {
       isOpen={isModalOpen}
       appElement={document.getElementById('root')}
       onRequestClose={toggleFollowing}
-      className="z-10 max-w-lg h-52 mx-5 bg-white mt-24 border rounded-lg shadow-xl md:mx-auto border-grey-300"
+      className="z-10 max-w-lg h-72 mx-5 bg-white mt-24 border rounded-lg shadow-xl md:mx-auto border-grey-300"
     >
       <div className="h-full flex flex-col">
         <div className="flex items-center justify-between p-3 border-b-1 border-grey-100">
