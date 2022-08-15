@@ -62,15 +62,14 @@ function Upload() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const imageRef = ref(storage, `recipes/${newRecipe.id}`);
+    const imageRef = ref(storage, `recipes/${newRecipe.rid}`);
     const recipesRef = collection(db, 'recipes');
-    console.log(newRecipe.rid);
     try {
       await setDoc(doc(recipesRef, newRecipe.rid), newRecipe)
         .then(async () => {
           await uploadBytes(imageRef, image, { contentType: `${image.type}` })
             .then(async () => {
-              const url = await getDownloadURL(ref(storage, `recipes/${newRecipe.id}`));
+              const url = await getDownloadURL(ref(storage, `recipes/${newRecipe.rid}`));
               await updateDoc(doc(db, 'recipes', newRecipe.rid), { image: url })
                 .then(() => {
                   navigate('/home');

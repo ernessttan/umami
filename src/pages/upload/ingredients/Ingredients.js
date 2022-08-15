@@ -28,10 +28,11 @@ function Ingredients({ setNewRecipe, ingredients }) {
     setIngredientList([...ingredientList, { ingredient: '' }]);
   };
 
-  const handleRemoveInput = (index) => {
+  const handleRemoveInput = (e) => {
+    e.preventDefault();
     const list = [...ingredientList];
     // Remove input
-    list.splice(index, 1);
+    list.splice(e.currentTarget.value, 1);
     setIngredientList(list);
   };
 
@@ -49,7 +50,7 @@ function Ingredients({ setNewRecipe, ingredients }) {
             index={index}
             handleChange={handleChange}
             handleRemoveInput={handleRemoveInput}
-            value={input.ingredient}
+            ingredient={input.ingredient}
           />
         )) }
       </div>

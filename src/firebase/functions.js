@@ -4,7 +4,8 @@ import {
   getDoc, where, doc, collection, getDocs, query, setDoc, updateDoc, arrayRemove,
   arrayUnion, deleteDoc,
 } from 'firebase/firestore';
-import { db } from './firebaseConfig';
+import { deleteObject, ref } from 'firebase/storage';
+import { db, storage } from './firebaseConfig';
 
 const usersRef = collection(db, 'users');
 const recipesRef = collection(db, 'recipes');
@@ -134,7 +135,10 @@ async function toggleSave(authUserId, rid, isSaved) {
 
 async function deleteRecipe(rid) {
   const recipeRef = doc(db, 'recipes', rid);
+  const imageRef = ref(storage, `recipes/${rid}`);
+
   await deleteDoc(recipeRef);
+  await deleteObject(imageRef);
 }
 
 export {
