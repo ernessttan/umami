@@ -104,8 +104,8 @@ function EditProfile() {
       <div className="hidden md:block">
         <Header />
       </div>
-      <div className={`${displaySuccess ? 'container fixed flex justify-center mt-10 z-30' : 'hidden'}`}>
-        <p className="bg-green-500 text-white font-bold rounded-md p-2 px-8">Successfuly Saved!</p>
+      <div className={`${displaySuccess ? 'fixed w-full flex justify-center mt-10' : 'hidden'}`}>
+        <p className="bg-green-500 text-white font-bold rounded-md p-2 px-8 z-30">Successfuly Saved!</p>
       </div>
       <form onSubmit={handleSubmit} className="px-8 py-12 container mx-auto max-w-3xl">
         <div className="flex items-center justify-between">
