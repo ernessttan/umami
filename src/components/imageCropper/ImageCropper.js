@@ -3,7 +3,6 @@ import Proptypes from 'prop-types';
 import Cropper from 'react-easy-crop';
 import { useCallback, useState } from 'react';
 import getCroppedImg from './canvasUtils';
-import Input from '../forms/Input';
 
 function ImageCropper({
   image, setPreview, modalIsOpen, toggleModal, setImage, aspect, cropShape,
@@ -19,11 +18,13 @@ function ImageCropper({
   const handleCropComplete = async () => {
     try {
       const cropImage = await getCroppedImg(image, croppedAreaPixels);
+      console.log(cropImage);
       setPreview(URL.createObjectURL(cropImage));
       setImage(cropImage);
       toggleModal();
     } catch (error) {
       console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -49,7 +50,7 @@ function ImageCropper({
         />
       </div>
       <div className="mt-22">
-        <Input
+        <input
           type="range"
           value={zoom}
           min={1}

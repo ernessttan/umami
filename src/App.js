@@ -24,7 +24,7 @@ function App() {
       <Router>
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route path="/" element={authUser ? <Home /> : <Welcome />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
             <Route path="/home" element={<Home />} />
