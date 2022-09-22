@@ -1,7 +1,7 @@
 ![Logo](public/logo.svg)
 
 # Umami
-Umami is a social network application centered around food content. The idea for Umami came to me when I was scrolling through Instagram/Tiktok for recipes. I noticed that these apps lack the features  of a traditional recipe app but traditonal recipe apps lack the features of a social media app. So I thought to myself that why not have the best of both worlds?
+Umami is a social network application that allows users to post food content, save recipes, and automatically create shopping lists from their recipes. The idea for Umami came to me when I was scrolling through Instagram/Tiktok for recipes. I noticed that these apps lack the features of a traditional recipe app as it was hard to share and save recipes. However, traditional recipe apps lack the features of a social media app. So I thought to myself: why not have the best of both worlds?
 
 [Live Application](https://umami-ae4ad.web.app/)
 ## Features
